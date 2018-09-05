@@ -1,53 +1,66 @@
-import { IRunMode } from './services/runMode/IRunMode';
 import { ILogger } from './services/logger/ILogger';
 import { injectable, inject } from 'inversify';
 import { Types } from './IoC/Types';
 import { IStartupArgs } from './services/environment/IStartupArgs';
 import * as express from 'express';
-import * as fs from 'fs';
 import { Exe } from './services/exe/Exe';
+import { IRouterConfig } from './services/config/IRouterConfig';
+import { Route } from './services/config/Route';
 
-interface Route {
-    url: string;
-    action: string;
+function Replace(str, params)
+{
+    const keys = Object.keys(params);
+
+    keys.forEach(k =>
+    {
+        const regex = new RegExp("\{" + k + "\}");
+
+        str = str.replace(regex, params[k]);
+    });
+
+    return str;
 }
 
-
-
 @injectable()
-export class Main {
+export class Main
+{
     constructor(
         @inject(Types.IStartupArgs) private _args: IStartupArgs,
-        @inject(Types.ILogger) private _log: ILogger,
-        @inject(Types.IRunMode) private _runMode: IRunMode) { }
+        @inject(Types.IRouterConfig) private _config: IRouterConfig,
+        @inject(Types.ILogger) private _log: ILogger)
+    { }
 
-    public async Run(): Promise<void> {
-        this._log.Info('Main.Run', 'Starting in "' + this._runMode.Current + '" mode with args:', this._args.Args); // Don't Try it with "npm run run --foo bar" or "npm run run -- --foo bar", it won't work! Call script directly: "tsc || /bin/startup.js --foo bar"
-
+    public async Run(): Promise<void>
+    {
+        this._log.Info('Main.Run', 'Start args:', this._args.Args); // Don't Try it with "npm run run --foo bar" or "npm run run -- --foo bar", it won't work! Call script directly: "tsc || /bin/startup.js --foo bar"
 
         const exe = new Exe();
-        const res = await exe.Exe('dir');
-        console.log(res);
-
-        const content = fs.readFileSync('./config.json', 'utf8');
-        const obj = JSON.parse(content);
-        const routes: Route[] = obj;
-
-        console.log(routes[0]);
 
         const server = express();
 
-        
-
-        routes.forEach(r => server.all(r.url, async (req, res) => 
+        this._config.Routes.forEach((r: Route) => 
         {
-            console.log(req.params);
-            console.log(Object.keys(req.params));
-            r.action.replace(, )
-            // const result = await exe.Exe(action);
-            // res.send(result);
-            res.send("...");
-        }));
+            server.all(r.url, async (req, res) => 
+            {
+                const action = Replace(r.action, req.params);
+
+                try
+                {
+                    const result = await exe.Exe(action);
+
+                    res.status(200).send(result);
+                }
+                catch (error)
+                {
+                    res.status(500).send(error);
+                }
+            });
+        });
+
+        server.use((req, res, next) =>
+        {
+            res.sendStatus(404);
+        });
 
         server.listen(3000, () => console.log('RDY'));
     }

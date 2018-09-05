@@ -14,6 +14,8 @@ import { ISample } from '../services/_samples/ISample';
 import { SampleService } from './../services/_samples/SampleService';
 import { IStartupArgs } from '../services/environment/IStartupArgs';
 import { StartupArgs } from '../services/environment/StartupArgs';
+import { IRouterConfig } from '../services/config/IRouterConfig';
+import { RouterConfig } from '../services/config/RouterConfig';
 
 const IoC = new Container();
 
@@ -26,6 +28,7 @@ try
     IoC.bind<ILogger>(Types.ILogger).to(Logger).inSingletonScope().whenTargetIsDefault();
     IoC.bind<Main>(Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind<IStartupArgs>(Types.IStartupArgs).to(StartupArgs).inSingletonScope().whenTargetIsDefault();
+    IoC.bind<IRouterConfig>(Types.IRouterConfig).to(RouterConfig).inSingletonScope().whenTargetIsDefault();
 }
 catch (ex)
 {

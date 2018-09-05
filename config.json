@@ -1,5 +1,8 @@
 [
-    { "url": "/ping", "action": "dir" },
+    { "url": "/ping", "action": "echo pong" },
+    { "url": "/test/:test", "action": "echo test ok {test}" },
     { "url": "/:ioName", "action": "./core --io {ioName}"},
-    { "url": "/:ioName/:value", "action": "./core --io {ioName} --value {value}"}
+    { "url": "/:ioName/:field/:value", "action": "./core --io {ioName} --field {field} --value {value}"},
+    { "url": "/config/:key", "action": "./core --config {key}"},
+    { "url": "/config/:key/:value", "action": "./core --config {key} --value {value}"}
 ]

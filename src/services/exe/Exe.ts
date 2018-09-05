@@ -6,21 +6,25 @@ export class Exe
     {
         return new Promise<string>((resolve, reject) => 
         {
-            const args = cmd.split(' ').splice(1);
-            console.log(args);
-            const ls = spawn(cmd, args);
+            const chunks = cmd.split(' ');
+            const app = chunks[0];
+            const args = chunks.splice(1);
 
-            ls.stdout.on('data', (data) => {
+            const process = spawn(app, args);
+
+            process.stdout.on('data', (data) =>
+            {
                 resolve(data.toString());
             });
 
-            ls.stderr.on('data', (data) => {
-                resolve(data.toString());
+            process.stderr.on('data', (data) =>
+            {
+                reject(data.toString());
             });
 
-            ls.on('close', (code) => {
-                console.log(`child process exited with code ${code}`);
-                reject(code);
+            process.on('error', (error: Error) =>
+            {
+                reject(error.toString());
             });
         });
     };
