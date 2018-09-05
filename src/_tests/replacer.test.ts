@@ -2,7 +2,7 @@ function Repl(str, params) {
     const keys = Object.keys(params);
 
     keys.forEach(k => {
-        const regex = new RegExp("\{" + k + "\}");
+        const regex = new RegExp("\{" + k + " \}");
         str = str.replace(regex, params[k]);
     });
 
