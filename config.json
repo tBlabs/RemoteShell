@@ -1,0 +1,5 @@
+[
+    { "url": "/ping", "action": "dir" },
+    { "url": "/:ioName", "action": "./core --io {ioName}"},
+    { "url": "/:ioName/:value", "action": "./core --io {ioName} --value {value}"}
+]
