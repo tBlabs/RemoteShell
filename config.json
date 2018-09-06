@@ -1,8 +1,11 @@
-[
-    { "url": "/ping", "action": "echo pong" },
-    { "url": "/test/:test", "action": "echo test ok {test}" },
-    { "url": "/:ioName", "action": "./core --io {ioName}"},
-    { "url": "/:ioName/:field/:value", "action": "./core --io {ioName} --field {field} --value {value}"},
-    { "url": "/config/:key", "action": "./core --config {key}"},
-    { "url": "/config/:key/:value", "action": "./core --config {key} --value {value}"}
-]
+{
+    "serverPort": 3000,
+    "routes": [
+        { "url": "/ping", "action": "echo pong" },
+        { "url": "/test/:test", "action": "echo test ok {test}" },
+        { "url": "/shell/:cmd", "action": "{cmd}" }
+    ],
+    "statics": [
+        { "url": "/files", "dir": "./shared" }
+    ]
+}

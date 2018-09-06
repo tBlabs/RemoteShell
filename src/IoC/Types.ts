@@ -5,5 +5,6 @@ export const Types =
     ILogger: Symbol('ILogger'),
     IRunMode: Symbol('IRunMode'),
     IStartupArgs: Symbol('IStartupArgs'),
-    IRouterConfig: Symbol('IRouterConfig')
+    IConfig: Symbol('IRouterConfig'),
+    IExecutor: Symbol('IExecutor')
 };

@@ -1,42 +1,29 @@
-import { ILogger } from './services/logger/ILogger';
+import { Replace } from "./utils/Replace";
 import { injectable, inject } from 'inversify';
 import { Types } from './IoC/Types';
-import { IStartupArgs } from './services/environment/IStartupArgs';
 import * as express from 'express';
-import { Exe } from './services/exe/Exe';
-import { IRouterConfig } from './services/config/IRouterConfig';
-import { Route } from './services/config/Route';
-
-function Replace(str, params)
-{
-    const keys = Object.keys(params);
-
-    keys.forEach(k =>
-    {
-        const regex = new RegExp("\{" + k + "\}");
-
-        str = str.replace(regex, params[k]);
-    });
-
-    return str;
-}
+import { Route, StaticRoute } from './services/config/Route';
+import { IConfig } from "./services/config/IConfig";
+import { IExecutor } from "./services/exe/IExecutor";
 
 @injectable()
 export class Main
 {
     constructor(
-        @inject(Types.IStartupArgs) private _args: IStartupArgs,
-        @inject(Types.IRouterConfig) private _config: IRouterConfig,
-        @inject(Types.ILogger) private _log: ILogger)
-    { }
+        @inject(Types.IConfig) private _config: IConfig,
+        @inject(Types.IExecutor) private _exe: IExecutor)
+    { } 
 
     public async Run(): Promise<void>
     {
-        this._log.Info('Main.Run', 'Start args:', this._args.Args); // Don't Try it with "npm run run --foo bar" or "npm run run -- --foo bar", it won't work! Call script directly: "tsc || /bin/startup.js --foo bar"
-
-        const exe = new Exe();
-
         const server = express();
+
+
+        this._config.Statics.forEach((r: StaticRoute) => 
+        {
+            server.use(r.url, express.static(r.dir));
+        });
+
 
         this._config.Routes.forEach((r: Route) => 
         {
@@ -46,7 +33,7 @@ export class Main
 
                 try
                 {
-                    const result = await exe.Exe(action);
+                    const result = await this._exe.Exe(action);
 
                     res.status(200).send(result);
                 }
@@ -57,11 +44,13 @@ export class Main
             });
         });
 
+
         server.use((req, res, next) =>
         {
             res.sendStatus(404);
         });
 
-        server.listen(3000, () => console.log('RDY'));
+
+        server.listen(this._config.ServerPort, () => console.log('Server started at port', this._config.ServerPort));
     }
 }

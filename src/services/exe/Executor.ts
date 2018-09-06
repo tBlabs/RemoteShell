@@ -1,6 +1,10 @@
+import { IExecutor } from "./IExecutor";
 import { spawn } from 'child_process';
+import { injectable } from "inversify";
+import 'reflect-metadata';
 
-export class Exe
+@injectable()
+export class Executor implements IExecutor
 {
     public async Exe(cmd: string): Promise<string> 
     {

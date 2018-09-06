@@ -6,16 +6,18 @@ import { Container } from 'inversify';
 import { ILogger } from './../services/logger/ILogger';
 import { IRunMode } from './../services/runMode/IRunMode';
 import { RunMode } from './../services/runMode/RunMode';
-import { IEnvironment } from './../services/environment/IEnvironment';
-import { Environment } from './../services/environment/Environment';
+import { IEnvironment } from './../services/env/IEnvironment';
+import { Environment } from './../services/env/Environment';
 import { Logger } from '../services/logger/Logger';
 import { Main } from '../Main';
 import { ISample } from '../services/_samples/ISample';
 import { SampleService } from './../services/_samples/SampleService';
-import { IStartupArgs } from '../services/environment/IStartupArgs';
-import { StartupArgs } from '../services/environment/StartupArgs';
-import { IRouterConfig } from '../services/config/IRouterConfig';
-import { RouterConfig } from '../services/config/RouterConfig';
+import { IStartupArgs } from '../services/env/IStartupArgs';
+import { StartupArgs } from '../services/env/StartupArgs';
+import { Config } from '../services/config/Config';
+import { IExecutor } from '../services/exe/IExecutor';
+import { Executor } from '../services/exe/Executor';
+import { IConfig } from '../services/config/IConfig';
 
 const IoC = new Container();
 
@@ -28,7 +30,8 @@ try
     IoC.bind<ILogger>(Types.ILogger).to(Logger).inSingletonScope().whenTargetIsDefault();
     IoC.bind<Main>(Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind<IStartupArgs>(Types.IStartupArgs).to(StartupArgs).inSingletonScope().whenTargetIsDefault();
-    IoC.bind<IRouterConfig>(Types.IRouterConfig).to(RouterConfig).inSingletonScope().whenTargetIsDefault();
+    IoC.bind<IConfig>(Types.IConfig).to(Config).inSingletonScope().whenTargetIsDefault();
+    IoC.bind<IExecutor>(Types.IExecutor).to(Executor).whenTargetIsDefault();
 }
 catch (ex)
 {
