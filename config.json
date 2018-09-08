@@ -6,6 +6,6 @@
         { "url": "/shell/:cmd", "action": "{cmd}" }
     ],
     "statics": [
-        { "url": "/files", "dir": "./shared" }
+        { "url": "/files", "dir": "./shared_files" }
     ]
 }
