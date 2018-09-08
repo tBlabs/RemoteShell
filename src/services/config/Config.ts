@@ -25,11 +25,6 @@ export class Config implements IConfig
         return this.config.serverPort || this._args.Args.port || 3000;
     }
 
-    public get StaticFilesDir(): string
-    {
-        return this.config.staticFilesDir || this._args.Args.static || './files';
-    }
-
     public get Routes(): Route[]
     {
         return this.config.routes;  
