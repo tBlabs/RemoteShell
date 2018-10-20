@@ -47,8 +47,9 @@ You should see `pong` response.
 Hit `http://localhost:3000/shell/ls` to see list of files in this program folder (`bin`, `config.json`, `package.json` etc).
 As you may noticed call with spaces, pipes or apostrophes may be not possible. `.../shell/ls -l | grep "foo"` will not work from browser or curl. So there is only one way to solve this problem. Define entry like that:
 
-> { "url": "/ListOfFilesContainingFoo", "action": "ls -l | grep \"foo\"" }
-
+```
+ { "url": "/ListOfFilesContainingFoo", "action": "ls -l | grep \"foo\"" }
+```
 And then call `http://localhost:3000/ListOfFilesContainingFoo` (This should respond with `EXIT: 1` and this is valid answer because `grep` returning no lines returns `1` exit code).
 
 ### Static files
