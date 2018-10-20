@@ -9,7 +9,7 @@ Support for static files in indicated paths.
 
 ## Run
 
-`npm start` to start without rebuild. `npm run run` for rebuild.
+`npm start` to start without rebuild (if `/bin` is included). `npm run run` for rebuild.
 
 Port number can be determined in `config.json` in `serverPort` key or as input arg (`npm start -- --port 3000` // those `--` are very important!).
 
