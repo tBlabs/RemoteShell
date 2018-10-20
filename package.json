@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "node.ts boilerplate",
     "main": "./bin/startup.js",
+    "bin": "./bin/startup.js",
     "author": "tB",
     "license": "beerware",
     "engines": {
@@ -21,36 +22,32 @@
         "build": "tsc -p .",
         "clean": "rm ./bin -rf",
         "autofix": "tslint --fix --project .",
-        "publish": "git push origin master"
+        "publish": "git push origin master",
+        "deploy": "rsync -r ./ pi@raspberry:HttpToCli"
     },
     "devDependencies": {
-        "@types/axios": "^0.14.0",
         "@types/dotenv": "^4.0.0",
         "@types/express": "^4.16.0",
         "@types/jasmine": "^2.6.3",
         "@types/jest": "^21.1.6",
         "@types/lodash": "^4.14.92",
         "@types/node": "^7.0.18",
-        "@types/uuid": "^2.0.30",
         "jest": "^21.2.1",
-        "nodemon": "^1.12.1",
-        "npm-check-updates": "^2.14.0",
+        "nodemon": "^1.18.4",
+        "npm-check-updates": "^2.14.2",
         "npm-run-all": "^4.1.2",
         "ts-jest": "^21.2.1",
         "typescript": "^2.6.2"
     },
     "dependencies": {
         "async-delay": "^1.0.3",
-        "asyncawait": "^1.0.6",
-        "axios": "^0.17.1",
+        "asyncawait": "^1.0.7",
         "dotenv": "^4.0.0",
         "express": "^4.16.3",
-        "git-rev": "^0.2.1",
         "inversify": "^4.1.0",
         "jasmine-core": "^2.6.1",
         "minimist": "^1.2.0",
         "os": "^0.1.1",
-        "reflect-metadata": "^0.1.10",
-        "uuid": "^3.1.0"
+        "reflect-metadata": "^0.1.10"
     }
 }

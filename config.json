@@ -1,11 +1,31 @@
 {
     "serverPort": 3000,
     "routes": [
-        { "url": "/ping", "action": "echo pong" },
-        { "url": "/test/:test", "action": "echo test ok {test}" },
-        { "url": "/shell/:cmd", "action": "{cmd}" }
+        {
+            "url": "/ping",
+            "command": "echo pong"
+        },
+        {
+            "url": "/test/:test",
+            "command": "echo test ok {test}"
+        },
+        {
+            "url": "/shell/:cmd",
+            "command": "{cmd}"
+        },
+        {
+            "url": "/ListOfFilesContainingPackage",
+            "command": "ls -l | grep \"package\""
+        },
+        {
+            "url": "/ListOfFilesContainingFoo",
+            "command": "ls -l | grep \"foo\""
+        }
     ],
     "statics": [
-        { "url": "/files", "dir": "./shared_files" }
+        {
+            "url": "/files",
+            "dir": "./shared_files"
+        }
     ]
 }

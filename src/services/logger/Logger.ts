@@ -9,11 +9,6 @@ export class Logger implements ILogger
 {
     private config: LoggerConfig = new LoggerConfig();
 
-    constructor()
-    {
-        this.config.output = (entry: LogEntry) => console.log(entry.message);
-    }
-
     public Config(config: LoggerConfig)
     {
         this.config = config;

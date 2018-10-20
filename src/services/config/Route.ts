@@ -1,7 +1,7 @@
 export interface Route
 {
     url: string;
-    action: string;
+    command: string;
 }
 
 export interface StaticRoute

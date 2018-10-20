@@ -1,13 +1,13 @@
-export function Replace(str, params)
+export function ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, requestKeys)
 {
-    const keys = Object.keys(params);
+    const keys = Object.keys(requestKeys);
 
-    keys.forEach(k => 
+    keys.forEach(key => 
     {
-        const regex = new RegExp("\{" + k + "\}");
+        const regex = new RegExp("\{" + key + "\}");
         
-        str = str.replace(regex, params[k]);
+        rawCommand = rawCommand.replace(regex, requestKeys[key]);
     });
 
-    return str;
+    return rawCommand;
 }

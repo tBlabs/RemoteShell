@@ -13,7 +13,7 @@ export class Config implements IConfig
     
     constructor(@inject(Types.IStartupArgs) private _args: IStartupArgs)
     {
-        const configFileDir = this._args.Args.config || './config.json'; // TODO: default value should come from StartupArgs
+        const configFileDir = this._args.Args.config || './config.json';
 
         const configFileContent = fs.readFileSync(configFileDir, 'utf8');
         
@@ -22,7 +22,7 @@ export class Config implements IConfig
 
     public get ServerPort(): number
     {
-        return this.config.serverPort || this._args.Args.port || 3000;
+        return this._args.Args.port || this.config.serverPort || 3000;
     }
 
     public get Routes(): Route[]

@@ -1,7 +1,7 @@
-import { Replace } from "./utils/Replace";
 import { injectable, inject } from 'inversify';
 import { Types } from './IoC/Types';
 import * as express from 'express';
+import { ChangeRawCommandPlaceholdersToRequestKeys } from "./utils/Replace";
 import { Route, StaticRoute } from './services/config/Route';
 import { IConfig } from "./services/config/IConfig";
 import { IExecutor } from "./services/exe/IExecutor";
@@ -12,11 +12,13 @@ export class Main
     constructor(
         @inject(Types.IConfig) private _config: IConfig,
         @inject(Types.IExecutor) private _exe: IExecutor)
-    { } 
+    { }
 
     public async Run(): Promise<void>
     {
         const server = express();
+
+        server.get('/favicon.ico', (req, res) => res.status(204));
 
 
         this._config.Statics.forEach((r: StaticRoute) => 
@@ -25,20 +27,25 @@ export class Main
         });
 
 
-        this._config.Routes.forEach((r: Route) => 
+        this._config.Routes.forEach((route: Route) => 
         {
-            server.all(r.url, async (req, res) => 
+            server.all(route.url, async (req, res) => 
             {
-                const action = Replace(r.action, req.params);
-
                 try
                 {
-                    const result = await this._exe.Exe(action);
+                    const rawCommand = route.command;
+                    const command = ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params);
+                    console.log('Executing:', command);
 
-                    res.status(200).send(result);
+                    const commandResult = await this._exe.Exe(command);
+                    console.log('Result:', commandResult);
+
+                    res.status(200).send(commandResult);
                 }
                 catch (error)
                 {
+                    console.log('Executing error:', error);
+
                     res.status(500).send(error);
                 }
             });
