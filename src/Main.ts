@@ -34,17 +34,27 @@ export class Main
                 try
                 {
                     const rawCommand = route.command;
-                    const command = ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params);
+                    const command = ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
                     console.log('Executing:', command);
 
-                    const commandResult = await this._exe.Exe(command);
+                    let commandResult = await this._exe.Exe(command);
                     console.log('Result:', commandResult);
+
+                    if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
+                    {
+                        commandResult = this.ConvertToHtml(commandResult);
+                    }
 
                     res.status(200).send(commandResult);
                 }
                 catch (error)
                 {
                     console.log('Executing error:', error);
+
+                    if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
+                    {
+                        error = this.ConvertToHtml(error);
+                    }
 
                     res.status(500).send(error);
                 }
@@ -59,5 +69,12 @@ export class Main
 
 
         server.listen(this._config.ServerPort, () => console.log('Server started at port', this._config.ServerPort));
+    }
+
+    private ConvertToHtml(text)
+    {
+        return text.replace(/\n/gi, "<br>")
+        .replace(/ /gi, "&nbsp;")
+        .replace(/\t/gi, "<span>    </span>")
     }
 }

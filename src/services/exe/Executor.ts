@@ -1,31 +1,46 @@
+import 'reflect-metadata';
 import { IExecutor } from "./IExecutor";
 import { spawn } from 'child_process';
-import { injectable } from "inversify";
-import 'reflect-metadata';
+import { inject, injectable } from "inversify";
+import { IConfig } from "../config/IConfig";
+import { Types } from "../../IoC/Types";
 
 @injectable()
 export class Executor implements IExecutor
 {
+    constructor(@inject(Types.IConfig) private _config: IConfig)
+    { }
+
     public async Exe(rawCmd: string): Promise<string> 
     {
         return new Promise<string>((resolve, reject) => 
         {
-            // THIS WILL WORK BUT NOT WITH PIPES:
-            // const chunks = rawCmd.split(' ');
-            // const app = chunks[0];
-            // const args = chunks.splice(1);
-            // const process = spawn(app, args);
+            const process = spawn(this._config.Shell, ['-c', rawCmd]);
 
-            const process = spawn('sh', ['-c', rawCmd]);
+            let response = "";
+            let isErr = false;
 
             process.stdout.on('data', (data) =>
             {
-                resolve(data.toString());
+                response += data.toString();
             });
 
             process.stderr.on('data', (data) =>
             {
-                reject('STDERR: ' + data.toString());
+                response += data.toString();
+                isErr = true;
+            });
+
+            process.stderr.on('end', () =>
+            {
+                if (isErr) 
+                {
+                    reject(response);
+                }
+                else 
+                {
+                    resolve(response);
+                }
             });
 
             process.on('error', (error: Error) =>

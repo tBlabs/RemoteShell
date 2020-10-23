@@ -32,6 +32,9 @@ let Config = class Config {
     get Statics() {
         return this.config.statics;
     }
+    get Shell() {
+        return this.config.shell || "sh"; // 'sh' for linux, 'powershell' for windows
+    }
 };
 Config = __decorate([
     inversify_1.injectable(),

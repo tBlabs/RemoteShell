@@ -31,14 +31,20 @@ let Main = class Main {
             server.all(route.url, async (req, res) => {
                 try {
                     const rawCommand = route.command;
-                    const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params);
+                    const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
                     console.log('Executing:', command);
-                    const commandResult = await this._exe.Exe(command);
+                    let commandResult = await this._exe.Exe(command);
                     console.log('Result:', commandResult);
+                    if (req.headers.responsetype === "html") {
+                        commandResult = this.ConvertToHtml(commandResult);
+                    }
                     res.status(200).send(commandResult);
                 }
                 catch (error) {
                     console.log('Executing error:', error);
+                    if (req.headers.responsetype === "html") {
+                        error = this.ConvertToHtml(error);
+                    }
                     res.status(500).send(error);
                 }
             });
@@ -47,6 +53,11 @@ let Main = class Main {
             res.sendStatus(404);
         });
         server.listen(this._config.ServerPort, () => console.log('Server started at port', this._config.ServerPort));
+    }
+    ConvertToHtml(text) {
+        return text.replace(/\n/gi, "<br>")
+            .replace(/ /gi, "&nbsp;")
+            .replace(/\t/gi, "<span>    </span>");
     }
 };
 Main = __decorate([

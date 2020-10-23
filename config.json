@@ -1,5 +1,6 @@
 {
     "serverPort": 3000,
+    "shell": "powershell",
     "routes": [
         {
             "url": "/ping",
@@ -10,8 +11,17 @@
             "command": "echo test ok {test}"
         },
         {
+            "url": "/:a/plus/:b",
+            "command": "{a}+{b}"
+        },
+        {
             "url": "/shell/:cmd",
             "command": "{cmd}"
+        },
+        {
+            "url": "/shell2/:cmd",
+            "command": "{cmd}",
+            "options": "Base64Params"
         },
         {
             "url": "/ListOfFilesContainingPackage",

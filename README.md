@@ -52,6 +52,10 @@ As you may noticed call with spaces, pipes or apostrophes may be not possible. `
 ```
 And then call `http://localhost:3000/ListOfFilesContainingFoo` (This should respond with `EXIT: 1` and this is valid answer because `grep` returning no lines returns `1` exit code).
 
+## Headers
+
+Use `responsetype` header === `html` to convert all `\n` to `<br>` and so on.
+
 ### Static files
 
 To get some static resource hit `http://localhost:3000/files/file.txt`. You should see `file content` from `file.txt` from `/shared_files`.

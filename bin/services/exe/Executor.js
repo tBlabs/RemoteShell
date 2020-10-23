@@ -5,24 +5,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
 const child_process_1 = require("child_process");
 const inversify_1 = require("inversify");
-require("reflect-metadata");
+const Types_1 = require("../../IoC/Types");
 let Executor = class Executor {
+    constructor(_config) {
+        this._config = _config;
+    }
     async Exe(rawCmd) {
         return new Promise((resolve, reject) => {
-            // THIS WILL WORK BUT NOT WITH PIPES:
-            // const chunks = rawCmd.split(' ');
-            // const app = chunks[0];
-            // const args = chunks.splice(1);
-            // const process = spawn(app, args);
-            const process = child_process_1.spawn('sh', ['-c', rawCmd]);
+            const process = child_process_1.spawn(this._config.Shell, ['-c', rawCmd]);
+            let response = "";
+            let isErr = false;
             process.stdout.on('data', (data) => {
-                resolve(data.toString());
+                response += data.toString();
             });
             process.stderr.on('data', (data) => {
-                reject('STDERR: ' + data.toString());
+                response += data.toString();
+                isErr = true;
+            });
+            process.stderr.on('end', () => {
+                if (isErr) {
+                    reject(response);
+                }
+                else {
+                    resolve(response);
+                }
             });
             process.on('error', (error) => {
                 reject('ERROR: ' + error.toString());
@@ -44,7 +60,9 @@ let Executor = class Executor {
     ;
 };
 Executor = __decorate([
-    inversify_1.injectable()
+    inversify_1.injectable(),
+    __param(0, inversify_1.inject(Types_1.Types.IConfig)),
+    __metadata("design:paramtypes", [Object])
 ], Executor);
 exports.Executor = Executor;
 //# sourceMappingURL=Executor.js.map

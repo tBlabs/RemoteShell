@@ -6,8 +6,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Logger_1;
-"use strict";
 const LogEntry_1 = require("./LogEntry");
 const LogType_1 = require("./LogType");
 const LoggerConfig_1 = require("./LoggerConfig");
@@ -77,4 +75,5 @@ Logger = Logger_1 = __decorate([
     inversify_1.injectable()
 ], Logger);
 exports.Logger = Logger;
+var Logger_1;
 //# sourceMappingURL=Logger.js.map

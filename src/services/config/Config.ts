@@ -34,4 +34,9 @@ export class Config implements IConfig
     {
         return this.config.statics;  
     }
+
+    public get Shell(): string
+    {
+        return this.config.shell || "sh"; // 'sh' for linux, 'powershell' for windows
+    }
 }
