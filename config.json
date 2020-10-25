@@ -1,11 +1,8 @@
 {
     "serverPort": 3000,
     "shell": "powershell",
+    "logsLevel": 0,
     "routes": [
-        {
-            "url": "/ping",
-            "command": "echo pong"
-        },
         {
             "url": "/test/:test",
             "command": "echo test ok {test}"
@@ -19,17 +16,9 @@
             "command": "{cmd}"
         },
         {
-            "url": "/shell2/:cmd",
+            "url": "/shell64/:cmd",
             "command": "{cmd}",
             "options": "Base64Params"
-        },
-        {
-            "url": "/ListOfFilesContainingPackage",
-            "command": "ls -l | grep \"package\""
-        },
-        {
-            "url": "/ListOfFilesContainingFoo",
-            "command": "ls -l | grep \"foo\""
         }
     ],
     "statics": [

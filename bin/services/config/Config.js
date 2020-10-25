@@ -23,8 +23,11 @@ let Config = class Config {
         const configFileContent = fs.readFileSync(configFileDir, 'utf8');
         this.config = JSON.parse(configFileContent);
     }
+    get LogsLevel() {
+        return +this._args.Args.logsLevel || this.config.logsLevel || 1;
+    }
     get ServerPort() {
-        return this._args.Args.port || this.config.serverPort || 3000;
+        return this._args.Args.serverPort || this.config.serverPort || 3000;
     }
     get Routes() {
         return this.config.routes;

@@ -9,6 +9,8 @@ import { RunMode } from './../services/runMode/RunMode';
 import { IEnvironment } from './../services/env/IEnvironment';
 import { Environment } from './../services/env/Environment';
 import { Logger } from '../services/logger/Logger';
+import { ConsoleOutput } from "../services/logger/ConsoleOutput";
+import { ILoggerOutput } from "../services/logger/ILoggerOutput";
 import { Main } from '../Main';
 import { ISample } from '../services/_samples/ISample';
 import { SampleService } from './../services/_samples/SampleService';
@@ -27,6 +29,7 @@ try
     IoC.bind<ISample>(Types.ISample).to(SampleService).whenTargetIsDefault(); // can be injected with @inject(Types.ISample) in class constructor
     IoC.bind<IEnvironment>(Types.IEnvironment).to(Environment).whenTargetIsDefault();
     IoC.bind<IRunMode>(Types.IRunMode).to(RunMode).whenTargetIsDefault();
+    IoC.bind<ILoggerOutput>(Types.ILoggerOutput).to(ConsoleOutput).inSingletonScope().whenTargetIsDefault();
     IoC.bind<ILogger>(Types.ILogger).to(Logger).inSingletonScope().whenTargetIsDefault();
     IoC.bind<Main>(Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind<IStartupArgs>(Types.IStartupArgs).to(StartupArgs).inSingletonScope().whenTargetIsDefault();

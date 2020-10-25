@@ -7,6 +7,7 @@ const inversify_1 = require("inversify");
 const RunMode_1 = require("./../services/runMode/RunMode");
 const Environment_1 = require("./../services/env/Environment");
 const Logger_1 = require("../services/logger/Logger");
+const ConsoleOutput_1 = require("../services/logger/ConsoleOutput");
 const Main_1 = require("../Main");
 const SampleService_1 = require("./../services/_samples/SampleService");
 const StartupArgs_1 = require("../services/env/StartupArgs");
@@ -19,6 +20,7 @@ try {
     IoC.bind(Types_1.Types.ISample).to(SampleService_1.SampleService).whenTargetIsDefault(); // can be injected with @inject(Types.ISample) in class constructor
     IoC.bind(Types_1.Types.IEnvironment).to(Environment_1.Environment).whenTargetIsDefault();
     IoC.bind(Types_1.Types.IRunMode).to(RunMode_1.RunMode).whenTargetIsDefault();
+    IoC.bind(Types_1.Types.ILoggerOutput).to(ConsoleOutput_1.ConsoleOutput).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.ILogger).to(Logger_1.Logger).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Main_1.Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IStartupArgs).to(StartupArgs_1.StartupArgs).inSingletonScope().whenTargetIsDefault();

@@ -19,10 +19,15 @@ export class Config implements IConfig
         
         this.config = JSON.parse(configFileContent);
     }    
+    
+    public get LogsLevel(): number
+    {
+        return +this._args.Args.logsLevel || this.config.logsLevel || 1;
+    }
 
     public get ServerPort(): number
     {
-        return this._args.Args.port || this.config.serverPort || 3000;
+        return this._args.Args.serverPort || this.config.serverPort || 3000;
     }
 
     public get Routes(): Route[]

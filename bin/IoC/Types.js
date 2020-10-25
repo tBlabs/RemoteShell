@@ -7,6 +7,7 @@ exports.Types = {
     IRunMode: Symbol('IRunMode'),
     IStartupArgs: Symbol('IStartupArgs'),
     IConfig: Symbol('IRouterConfig'),
-    IExecutor: Symbol('IExecutor')
+    IExecutor: Symbol('IExecutor'),
+    ILoggerOutput: Symbol('ILoggerOutput')
 };
 //# sourceMappingURL=Types.js.map

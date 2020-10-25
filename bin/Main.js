@@ -16,32 +16,44 @@ const inversify_1 = require("inversify");
 const Types_1 = require("./IoC/Types");
 const express = require("express");
 const Replace_1 = require("./utils/Replace");
+const axios_1 = require("axios");
+const HelpBuilder_1 = require("./utils/HelpBuilder");
 let Main = class Main {
-    constructor(_config, _exe) {
+    constructor(_logger, _config, _exe) {
+        this._logger = _logger;
         this._config = _config;
         this._exe = _exe;
     }
     async Run() {
+        await this.AbortIfAppIsAlreadyRunning();
         const server = express();
+        const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Http calls to command line utility")
+            .Config("logsLevel", this._config.LogsLevel.toString(), "1", "0 - off, 1 - log, 2 - trace", "config.json or command line argument 'logsLevel' (ex: --logsLevel 2)")
+            .Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
+            .Config("serverPort", this._config.ServerPort.toString(), "3000", "1234", "config.json or command line argument 'serverPort' (ex: --serverPort 1234)")
+            .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
+            .Config("statics", JSON.stringify(this._config.Statics), "[]", '[{"url": "/files", "dir": "./shared_files" }]', "config.json")
+            .Api("/ping", "Always returns 'pong'")
+            .Api("/{any route}", "Defined in config.json")
+            .Api("responsetype header", "Defines if response should be html-formatted or not. Possible options are: html (or just no header)");
         server.get('/favicon.ico', (req, res) => res.status(204));
-        this._config.Statics.forEach((r) => {
-            server.use(r.url, express.static(r.dir));
-        });
+        server.get('/', (req, res) => res.send(hb.ToString()));
+        server.get('/ping', (req, res) => res.send('pong'));
         this._config.Routes.forEach((route) => {
             server.all(route.url, async (req, res) => {
                 try {
                     const rawCommand = route.command;
                     const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
-                    console.log('Executing:', command);
+                    this._logger.Log('Executing:', command);
                     let commandResult = await this._exe.Exe(command);
-                    console.log('Result:', commandResult);
+                    this._logger.Log('Result:', commandResult);
                     if (req.headers.responsetype === "html") {
                         commandResult = this.ConvertToHtml(commandResult);
                     }
                     res.status(200).send(commandResult);
                 }
                 catch (error) {
-                    console.log('Executing error:', error);
+                    this._logger.Log('Execution error:', error);
                     if (req.headers.responsetype === "html") {
                         error = this.ConvertToHtml(error);
                     }
@@ -49,10 +61,26 @@ let Main = class Main {
                 }
             });
         });
+        this._config.Statics.forEach((r) => {
+            server.use(r.url, express.static(r.dir));
+        });
         server.use((req, res, next) => {
             res.sendStatus(404);
         });
-        server.listen(this._config.ServerPort, () => console.log('Server started at port', this._config.ServerPort));
+        server.listen(this._config.ServerPort, () => this._logger.Log('Server started at port', this._config.ServerPort));
+    }
+    async AbortIfAppIsAlreadyRunning() {
+        try {
+            this._logger.Trace('Pinging myself...');
+            const selfPingResponse = await axios_1.default.get('http://localhost:' + this._config.ServerPort + '/ping');
+            if (selfPingResponse.data === "pong") {
+                this._logger.Trace('App is already running.');
+                process.exit(0);
+            }
+        }
+        catch (error) {
+            this._logger.Trace('App not started yet.');
+        }
     }
     ConvertToHtml(text) {
         return text.replace(/\n/gi, "<br>")
@@ -62,9 +90,10 @@ let Main = class Main {
 };
 Main = __decorate([
     inversify_1.injectable(),
-    __param(0, inversify_1.inject(Types_1.Types.IConfig)),
-    __param(1, inversify_1.inject(Types_1.Types.IExecutor)),
-    __metadata("design:paramtypes", [Object, Object])
+    __param(0, inversify_1.inject(Types_1.Types.ILogger)),
+    __param(1, inversify_1.inject(Types_1.Types.IConfig)),
+    __param(2, inversify_1.inject(Types_1.Types.IExecutor)),
+    __metadata("design:paramtypes", [Object, Object, Object])
 ], Main);
 exports.Main = Main;
 //# sourceMappingURL=Main.js.map
