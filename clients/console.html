@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remote Console</title>
     <style>
-        *
-        {
+        * {
             box-sizing: border-box;
             margin: 0;
             background-color: #222;
@@ -14,35 +14,38 @@
             font-size: 18px;
             padding: 12px;
         }
-        html 
-        {
+
+        html {
             padding: 0;
         }
-        body
-        {
+
+        body {
             background-color: rgb(58, 58, 58);
         }
-        input[type=text]
-        {
+
+        input[type=text] {
             width: 90%;
             font-weight: bold;
         }
-        input[type=button]
-        {
+
+        input[type=button] {
             width: 9%;
             font-weight: bold;
         }
-        textarea
-        {
+
+        textarea {
             width: 99%;
         }
     </style>
 </head>
+
 <body>
     <input type="text" id="InputTextbox" value="ls /dev">
     <input type="button" id="RunButton" value="RUN">
     <br /><br />
     <textarea name="output" id="OutputTextarea" cols="80" rows="60"></textarea>
 </body>
+
 <script src="/clients/console.js"></script>
+
 </html>
