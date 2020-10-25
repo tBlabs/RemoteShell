@@ -41,7 +41,6 @@ export class Main
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
         
-        console.log(this.ClientsDir);
         server.use('/clients', express.static(this.ClientsDir));
 
 
@@ -98,7 +97,7 @@ export class Main
     public get ClientsDir(): string
     {
         const fullDirBlocks = __dirname.split(path.sep);
-        const dir = [fullDirBlocks.slice(0, fullDirBlocks.length - 1) // for Linux '- 3'
+        const dir = [fullDirBlocks.slice(0, fullDirBlocks.length - 1)
             .join(path.sep), 'clients']
             .join(path.sep);
         return dir;

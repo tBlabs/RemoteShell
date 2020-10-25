@@ -41,7 +41,6 @@ let Main = class Main {
         server.get('/favicon.ico', (req, res) => res.status(204));
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
-        console.log(this.ClientsDir);
         server.use('/clients', express.static(this.ClientsDir));
         this._config.Routes.forEach((route) => {
             server.all(route.url, async (req, res) => {
@@ -75,7 +74,7 @@ let Main = class Main {
     }
     get ClientsDir() {
         const fullDirBlocks = __dirname.split(path.sep);
-        const dir = [fullDirBlocks.slice(0, fullDirBlocks.length - 1) // for Linux '- 3'
+        const dir = [fullDirBlocks.slice(0, fullDirBlocks.length - 1)
                 .join(path.sep), 'clients']
             .join(path.sep);
         return dir;

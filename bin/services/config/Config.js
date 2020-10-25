@@ -24,7 +24,11 @@ let Config = class Config {
         this.config = JSON.parse(configFileContent);
     }
     get LogsLevel() {
-        return +this._args.Args.logsLevel || this.config.logsLevel || 1;
+        if (this._args.Args.logsLevel !== undefined)
+            return +this._args.Args.logsLevel;
+        if (this.config.logsLevel !== undefined)
+            return this.config.logsLevel;
+        return 1;
     }
     get ServerPort() {
         return this._args.Args.serverPort || this.config.serverPort || 3000;

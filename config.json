@@ -1,7 +1,7 @@
 {
     "serverPort": 3000,
     "shell": "powershell",
-    "logsLevel": 0,
+    "logsLevel": 2,
     "routes": [
         {
             "url": "/test/:test",

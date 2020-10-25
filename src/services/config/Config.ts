@@ -14,15 +14,20 @@ export class Config implements IConfig
     constructor(@inject(Types.IStartupArgs) private _args: IStartupArgs)
     {
         const configFileDir = this._args.Args.config || './config.json';
-
         const configFileContent = fs.readFileSync(configFileDir, 'utf8');
-        
+
         this.config = JSON.parse(configFileContent);
     }    
     
-    public get LogsLevel(): number
+    public get LogsLevel(): number // || operator cannot be used here because it treats 0 as no value
     {
-        return +this._args.Args.logsLevel || this.config.logsLevel || 1;
+        if (this._args.Args.logsLevel !== undefined)
+            return +this._args.Args.logsLevel;
+        
+        if (this.config.logsLevel !== undefined)
+            return this.config.logsLevel;
+            
+        return 1;
     }
 
     public get ServerPort(): number
