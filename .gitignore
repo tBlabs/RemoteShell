@@ -3,3 +3,4 @@
 /_priv
 /.vscode
 .env
+.config.json

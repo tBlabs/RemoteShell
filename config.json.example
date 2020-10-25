@@ -1,0 +1,30 @@
+{
+    "serverPort": 3000,
+    "shell": "powershell",
+    "logsLevel": 0,
+    "routes": [
+        {
+            "url": "/test/:test",
+            "command": "echo test ok {test}"
+        },
+        {
+            "url": "/:a/plus/:b",
+            "command": "{a}+{b}"
+        },
+        {
+            "url": "/shell/:cmd",
+            "command": "{cmd}"
+        },
+        {
+            "url": "/shell64/:cmd",
+            "command": "{cmd}",
+            "options": "Base64Params"
+        }
+    ],
+    "statics": [
+        {
+            "url": "/files",
+            "dir": "./shared_files"
+        }
+    ]
+}
