@@ -17,8 +17,8 @@ const Types_1 = require("../../IoC/Types");
 let Logger = class Logger {
     constructor(_config, _output) {
         this._output = _output;
-        this.LogEnable = true;
-        this.TraceEnable = true;
+        this.LogEnable = false;
+        this.TraceEnable = false;
         this.SetLogLevel(_config.LogsLevel);
     }
     SetLogLevel(level) {

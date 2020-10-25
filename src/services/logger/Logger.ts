@@ -7,8 +7,8 @@ import { ILogger } from './ILogger';
 @injectable()
 export class Logger implements ILogger
 {
-    public LogEnable: boolean = true;
-    public TraceEnable: boolean = true;
+    public LogEnable: boolean = false;
+    public TraceEnable: boolean = false;
 
     constructor(
         @inject(Types.IConfig) _config: IConfig,

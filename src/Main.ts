@@ -8,6 +8,7 @@ import { IExecutor } from "./services/exe/IExecutor";
 import Axios from 'axios';
 import { HelpBuilder } from './utils/HelpBuilder';
 import { ILogger } from "./services/logger/ILogger";
+import * as path from 'path';
 
 @injectable()
 export class Main
@@ -31,13 +32,18 @@ export class Main
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
             .Config("statics", JSON.stringify(this._config.Statics), "[]", '[{"url": "/files", "dir": "./shared_files" }]', "config.json")
             .Api("/ping", "Always returns 'pong'")
-            .Api("/{any route}", "Defined in config.json")
+            .Api("/clients/console.html", "Simple web client for shell")
+            .Api("/{any route}", "Routes and their assigned commands defined in config.json")
             .Api("responsetype header", "Defines if response should be html-formatted or not. Possible options are: html (or just no header)");
            
         server.get('/favicon.ico', (req, res) => res.status(204));
 
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
+        
+        console.log(this.ClientsDir);
+        server.use('/clients', express.static(this.ClientsDir));
+
 
         this._config.Routes.forEach((route: Route) => 
         {
@@ -86,7 +92,16 @@ export class Main
         });
 
 
-        server.listen(this._config.ServerPort, () => this._logger.Log('Server started at port', this._config.ServerPort));
+        server.listen(this._config.ServerPort, () => this._logger.Log('Remote Shell started @', this._config.ServerPort));
+    }
+
+    public get ClientsDir(): string
+    {
+        const fullDirBlocks = __dirname.split(path.sep);
+        const dir = [fullDirBlocks.slice(0, fullDirBlocks.length - 1) // for Linux '- 3'
+            .join(path.sep), 'clients']
+            .join(path.sep);
+        return dir;
     }
 
     private async AbortIfAppIsAlreadyRunning()
@@ -95,6 +110,7 @@ export class Main
         {
             this._logger.Trace('Pinging myself...');
             const selfPingResponse = await Axios.get('http://localhost:' + this._config.ServerPort + '/ping');
+            // console.log(selfPingResponse);
             if (selfPingResponse.data === "pong")
             {
                 this._logger.Trace('App is already running.');
@@ -103,6 +119,7 @@ export class Main
         }
         catch (error)
         {
+            // console.log(error);
             this._logger.Trace('App not started yet.');
         }
     }

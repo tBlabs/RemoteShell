@@ -18,6 +18,7 @@ const express = require("express");
 const Replace_1 = require("./utils/Replace");
 const axios_1 = require("axios");
 const HelpBuilder_1 = require("./utils/HelpBuilder");
+const path = require("path");
 let Main = class Main {
     constructor(_logger, _config, _exe) {
         this._logger = _logger;
@@ -34,11 +35,14 @@ let Main = class Main {
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
             .Config("statics", JSON.stringify(this._config.Statics), "[]", '[{"url": "/files", "dir": "./shared_files" }]', "config.json")
             .Api("/ping", "Always returns 'pong'")
-            .Api("/{any route}", "Defined in config.json")
+            .Api("/clients/console.html", "Simple web client for shell")
+            .Api("/{any route}", "Routes and their assigned commands defined in config.json")
             .Api("responsetype header", "Defines if response should be html-formatted or not. Possible options are: html (or just no header)");
         server.get('/favicon.ico', (req, res) => res.status(204));
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
+        console.log(this.ClientsDir);
+        server.use('/clients', express.static(this.ClientsDir));
         this._config.Routes.forEach((route) => {
             server.all(route.url, async (req, res) => {
                 try {
@@ -67,18 +71,27 @@ let Main = class Main {
         server.use((req, res, next) => {
             res.sendStatus(404);
         });
-        server.listen(this._config.ServerPort, () => this._logger.Log('Server started at port', this._config.ServerPort));
+        server.listen(this._config.ServerPort, () => this._logger.Log('Remote Shell started @', this._config.ServerPort));
+    }
+    get ClientsDir() {
+        const fullDirBlocks = __dirname.split(path.sep);
+        const dir = [fullDirBlocks.slice(0, fullDirBlocks.length - 1) // for Linux '- 3'
+                .join(path.sep), 'clients']
+            .join(path.sep);
+        return dir;
     }
     async AbortIfAppIsAlreadyRunning() {
         try {
             this._logger.Trace('Pinging myself...');
             const selfPingResponse = await axios_1.default.get('http://localhost:' + this._config.ServerPort + '/ping');
+            // console.log(selfPingResponse);
             if (selfPingResponse.data === "pong") {
                 this._logger.Trace('App is already running.');
                 process.exit(0);
             }
         }
         catch (error) {
+            // console.log(error);
             this._logger.Trace('App not started yet.');
         }
     }
