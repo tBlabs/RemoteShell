@@ -44,7 +44,7 @@ export class Main
         server.use('/clients', express.static(this.ClientsDir));
 
 
-        this._config.Routes.forEach((route: Route) => 
+        this._config.Routes?.forEach((route: Route) => 
         {
             server.all(route.url, async (req, res) => 
             {
@@ -79,7 +79,7 @@ export class Main
         });
 
 
-        this._config.Statics.forEach((r: StaticRoute) => 
+        this._config.Statics?.forEach((r: StaticRoute) => 
         {
             server.use(r.url, express.static(r.dir));
         });

@@ -9,10 +9,9 @@ export function ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, requestKey
         if (options === "Base64Params")
         {
             const reqKey = requestKeys[key];
-console.log(reqKey);
+
             let buff = Buffer.from(reqKey, 'base64');
             let k = buff.toString();
-            console.log('kkkkkkkkk', k);
 
             rawCommand = rawCommand.replace(regex, k);
         }
