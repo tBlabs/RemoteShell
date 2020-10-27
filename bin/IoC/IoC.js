@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.IoC = void 0;
 // These two imports must go first!
 require("reflect-metadata");
 const Types_1 = require("./Types");

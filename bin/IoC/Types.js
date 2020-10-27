@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Types = void 0;
 exports.Types = {
     ISample: Symbol('ISample'),
     IEnvironment: Symbol('IEnvironment'),

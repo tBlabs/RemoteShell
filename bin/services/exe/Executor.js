@@ -12,6 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Executor = void 0;
 require("reflect-metadata");
 const child_process_1 = require("child_process");
 const inversify_1 = require("inversify");

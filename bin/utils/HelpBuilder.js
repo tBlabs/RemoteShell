@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.HelpBuilder = void 0;
 class HelpBuilder {
     constructor(appName, description) {
         this.appName = appName;

@@ -12,6 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Main = void 0;
 const inversify_1 = require("inversify");
 const Types_1 = require("./IoC/Types");
 const express = require("express");
@@ -26,6 +27,7 @@ let Main = class Main {
         this._exe = _exe;
     }
     async Run() {
+        var _a, _b;
         await this.AbortIfAppIsAlreadyRunning();
         const server = express();
         const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Http calls to command line utility")
@@ -42,7 +44,7 @@ let Main = class Main {
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
         server.use('/clients', express.static(this.ClientsDir));
-        this._config.Routes.forEach((route) => {
+        (_a = this._config.Routes) === null || _a === void 0 ? void 0 : _a.forEach((route) => {
             server.all(route.url, async (req, res) => {
                 try {
                     const rawCommand = route.command;
@@ -50,21 +52,23 @@ let Main = class Main {
                     this._logger.Log('Executing:', command);
                     let commandResult = await this._exe.Exe(command);
                     this._logger.Log('Result:', commandResult);
-                    if (req.headers.responsetype === "html") {
+                    if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
+                     {
                         commandResult = this.ConvertToHtml(commandResult);
                     }
                     res.status(200).send(commandResult);
                 }
                 catch (error) {
                     this._logger.Log('Execution error:', error);
-                    if (req.headers.responsetype === "html") {
+                    if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
+                     {
                         error = this.ConvertToHtml(error);
                     }
                     res.status(500).send(error);
                 }
             });
         });
-        this._config.Statics.forEach((r) => {
+        (_b = this._config.Statics) === null || _b === void 0 ? void 0 : _b.forEach((r) => {
             server.use(r.url, express.static(r.dir));
         });
         server.use((req, res, next) => {
