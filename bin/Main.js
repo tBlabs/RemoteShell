@@ -32,11 +32,11 @@ let Main = class Main {
         var _a, _b;
         const server = express();
         const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Http calls to command line utility")
-            .Config("logsLevel", this._config.LogsLevel.toString(), "1", "0 - off, 1 - log, 2 - trace", "config.json or command line argument 'logsLevel' (ex: --logsLevel 2)")
             .Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
-            .Config("serverPort", this._config.ServerPort.toString(), "3000", "1234", "config.json or command line argument 'serverPort' (ex: --serverPort 1234)")
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
+            .Config("serverPort", this._config.ServerPort.toString(), "3000", "1234", "config.json or command line argument 'serverPort' (ex: --serverPort 1234)")
             .Config("statics", JSON.stringify(this._config.Statics), "[]", '[{"url": "/files", "dir": "./shared_files" }]', "config.json")
+            .Config("logsLevel", this._config.LogsLevel.toString(), "1", "0 - off, 1 - log, 2 - trace", "config.json or command line argument 'logsLevel' (ex: --logsLevel 2)")
             .Api("/ping", "Always returns 'pong'")
             .Api("/clients/console.html", "Simple web client for shell")
             .Api("/{any route}", "Routes and their assigned commands defined in config.json")
@@ -45,18 +45,16 @@ let Main = class Main {
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
         server.use('/clients', express.static(this.ClientsDir));
-        let id = 0;
         (_a = this._config.Routes) === null || _a === void 0 ? void 0 : _a.forEach((route) => {
             server.all(route.url, async (req, res) => {
                 try {
-                    id += 1;
                     const rawCommand = route.command;
                     const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
-                    this._logger.Log(`[${id}] Executing: ${command}`);
+                    this._logger.Log('Executing:', command);
                     // let commandResult = await this._exe.Exe(command);
                     const exe = new Shell_1.Shell(this._config);
                     let commandResult = await exe.Exe(command);
-                    this._logger.Log(`[${id}] Result:`, commandResult);
+                    this._logger.Log('Result:', commandResult);
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                      {
                         commandResult = this.ConvertToHtml(commandResult);
@@ -64,7 +62,7 @@ let Main = class Main {
                     res.status(200).send(commandResult);
                 }
                 catch (error) {
-                    this._logger.Log(`[${id}] Execution error:`, error);
+                    this._logger.Log('Execution error:', error);
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                      {
                         error = this.ConvertToHtml(error);
@@ -92,14 +90,12 @@ let Main = class Main {
         try {
             this._logger.Trace('Pinging myself...');
             const selfPingResponse = await axios_1.default.get('http://localhost:' + this._config.ServerPort + '/ping');
-            // console.log(selfPingResponse);
             if (selfPingResponse.data === "pong") {
                 this._logger.Trace('App is already running.');
                 process.exit(0);
             }
         }
         catch (error) {
-            // console.log(error);
             this._logger.Trace('App not started yet.');
         }
     }

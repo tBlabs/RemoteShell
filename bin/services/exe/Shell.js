@@ -42,7 +42,6 @@ let Shell = class Shell {
                 }
             });
             process.on('error', (error) => {
-                // console.log('ERROR', error);
                 reject('ERROR: ' + error);
             });
             process.on('close', (code, signal) => {
@@ -52,9 +51,7 @@ let Shell = class Shell {
                 reject('DISCONNECT');
             });
             process.on('exit', (code, signal) => {
-                // console.log('EXIT', code, signal);
-                // reject('EXIT: ' + code?.toString() + ', SIGNAL: ' + signal);
-                /* do nothing */
+                /* do nothing, especially do not reject here */
             });
             process.on('message', (msg) => {
                 reject('MESSAGE: ' + msg);
