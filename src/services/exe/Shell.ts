@@ -45,7 +45,7 @@ export class Shell implements IShell
 
             process.on('error', (error: Error) =>
             {
-                console.log('ERROR', error);
+                // console.log('ERROR', error);
                 reject('ERROR: ' + error);
             });
 
@@ -61,8 +61,9 @@ export class Shell implements IShell
 
             process.on('exit', (code, signal) =>
             {
-                console.log('EXIT', code, signal);
+                // console.log('EXIT', code, signal);
                 // reject('EXIT: ' + code?.toString() + ', SIGNAL: ' + signal);
+                /* do nothing */
             });
 
             process.on('message', (msg) =>

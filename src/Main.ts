@@ -44,6 +44,7 @@ export class Main
         
         server.use('/clients', express.static(this.ClientsDir));
 
+        let id = 0;
 
         this._config.Routes?.forEach((route: Route) => 
         {
@@ -51,14 +52,16 @@ export class Main
             {
                 try
                 {
+                    id += 1;
+
                     const rawCommand = route.command;
                     const command = ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
-                    this._logger.Log('Executing:', command);
+                    this._logger.Log(`[${id}] Executing: ${command}`);
 
                     // let commandResult = await this._exe.Exe(command);
                     const exe = new Shell(this._config);
                     let commandResult = await exe.Exe(command);
-                    this._logger.Log('Result:', commandResult);
+                    this._logger.Log(`[${id}] Result:`, commandResult);
 
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                     {
@@ -69,7 +72,7 @@ export class Main
                 }
                 catch (error)
                 {
-                    this._logger.Log('Execution error:', error);
+                    this._logger.Log(`[${id}] Execution error:`, error);
 
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                     {

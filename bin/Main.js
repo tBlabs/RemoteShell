@@ -45,16 +45,18 @@ let Main = class Main {
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
         server.use('/clients', express.static(this.ClientsDir));
+        let id = 0;
         (_a = this._config.Routes) === null || _a === void 0 ? void 0 : _a.forEach((route) => {
             server.all(route.url, async (req, res) => {
                 try {
+                    id += 1;
                     const rawCommand = route.command;
                     const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
-                    this._logger.Log('Executing:', command);
+                    this._logger.Log(`[${id}] Executing: ${command}`);
                     // let commandResult = await this._exe.Exe(command);
                     const exe = new Shell_1.Shell(this._config);
                     let commandResult = await exe.Exe(command);
-                    this._logger.Log('Result:', commandResult);
+                    this._logger.Log(`[${id}] Result:`, commandResult);
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                      {
                         commandResult = this.ConvertToHtml(commandResult);
@@ -62,7 +64,7 @@ let Main = class Main {
                     res.status(200).send(commandResult);
                 }
                 catch (error) {
-                    this._logger.Log('Execution error:', error);
+                    this._logger.Log(`[${id}] Execution error:`, error);
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                      {
                         error = this.ConvertToHtml(error);
