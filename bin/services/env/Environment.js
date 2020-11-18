@@ -26,7 +26,7 @@ let Environment = class Environment {
         if (!this.Exists(key)) {
             throw new Error('Environment variable "' + key + '" not exists');
         }
-        return process.env[key];
+        return process.env[key] || "";
     }
     ValueOrDefault(key, defaultValue) {
         try {

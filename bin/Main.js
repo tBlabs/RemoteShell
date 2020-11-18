@@ -20,6 +20,7 @@ const Replace_1 = require("./utils/Replace");
 const axios_1 = require("axios");
 const HelpBuilder_1 = require("./utils/HelpBuilder");
 const path = require("path");
+const Executor_1 = require("./services/exe/Executor");
 let Main = class Main {
     constructor(_logger, _config, _exe) {
         this._logger = _logger;
@@ -50,7 +51,9 @@ let Main = class Main {
                     const rawCommand = route.command;
                     const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
                     this._logger.Log('Executing:', command);
-                    let commandResult = await this._exe.Exe(command);
+                    // let commandResult = await this._exe.Exe(command);
+                    const exe = new Executor_1.Executor(this._config);
+                    let commandResult = await exe.Exe(command);
                     this._logger.Log('Result:', commandResult);
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                      {

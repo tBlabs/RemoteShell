@@ -34,7 +34,7 @@ try
     IoC.bind<Main>(Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind<IStartupArgs>(Types.IStartupArgs).to(StartupArgs).inSingletonScope().whenTargetIsDefault();
     IoC.bind<IConfig>(Types.IConfig).to(Config).inSingletonScope().whenTargetIsDefault();
-    IoC.bind<IExecutor>(Types.IExecutor).to(Executor).whenTargetIsDefault();
+    IoC.bind<IExecutor>(Types.IExecutor).to(Executor).inRequestScope().whenTargetIsDefault(); // REQUEST????????????
 }
 catch (ex)
 {

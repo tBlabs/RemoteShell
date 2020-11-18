@@ -26,7 +26,7 @@ try {
     IoC.bind(Main_1.Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IStartupArgs).to(StartupArgs_1.StartupArgs).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IConfig).to(Config_1.Config).inSingletonScope().whenTargetIsDefault();
-    IoC.bind(Types_1.Types.IExecutor).to(Executor_1.Executor).whenTargetIsDefault();
+    IoC.bind(Types_1.Types.IExecutor).to(Executor_1.Executor).inRequestScope().whenTargetIsDefault(); // REQUEST????????????
 }
 catch (ex) {
     console.log('IoC exception:', ex);
