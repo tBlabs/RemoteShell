@@ -33,16 +33,26 @@
             font-weight: bold;
         }
 
+        .status {
+            border: none;
+            color: #ccc;
+            text-align: right;
+            background-color: inherit;
+            font-size: 14px;
+            height: 28px;
+        }
+
         textarea {
             width: 99%;
+            height: 600px;
         }
     </style>
 </head>
 
 <body>
-    <input type="text" id="InputTextbox">
-    <input type="button" id="RunButton" value="RUN">
-    <br /><br />
+    <input type="text" id="InputTextbox" />
+    <input type="button" id="RunButton" value="RUN" />
+    <p class="status" id="HttpResponseCode"></p>
     <textarea name="output" id="OutputTextarea" cols="80" rows="60" readonly></textarea>
 </body>
 

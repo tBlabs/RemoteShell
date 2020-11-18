@@ -51,7 +51,7 @@ let Executor = class Executor {
                 reject('DISCONNECT');
             });
             process.on('exit', (code, signal) => {
-                reject('EXIT: ' + code.toString());
+                reject('EXIT: ' + (code === null || code === void 0 ? void 0 : code.toString()) + ', SIGNAL: ' + signal);
             });
             process.on('message', (msg) => {
                 reject('MESSAGE: ' + msg);

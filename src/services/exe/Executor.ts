@@ -60,7 +60,7 @@ export class Executor implements IExecutor
 
             process.on('exit', (code, signal) =>
             {
-                reject('EXIT: ' + code.toString());
+                reject('EXIT: ' + code?.toString() + ', SIGNAL: ' + signal);
             });
 
             process.on('message', (msg) =>
