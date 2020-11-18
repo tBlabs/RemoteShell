@@ -17,8 +17,8 @@ import { SampleService } from './../services/_samples/SampleService';
 import { IStartupArgs } from '../services/env/IStartupArgs';
 import { StartupArgs } from '../services/env/StartupArgs';
 import { Config } from '../services/config/Config';
-import { IExecutor } from '../services/exe/IExecutor';
-import { Executor } from '../services/exe/Executor';
+import { IShell } from '../services/exe/IShell';
+import { Shell } from '../services/exe/Shell';
 import { IConfig } from '../services/config/IConfig';
 
 const IoC = new Container();
@@ -34,7 +34,7 @@ try
     IoC.bind<Main>(Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind<IStartupArgs>(Types.IStartupArgs).to(StartupArgs).inSingletonScope().whenTargetIsDefault();
     IoC.bind<IConfig>(Types.IConfig).to(Config).inSingletonScope().whenTargetIsDefault();
-    IoC.bind<IExecutor>(Types.IExecutor).to(Executor).inRequestScope().whenTargetIsDefault(); // REQUEST????????????
+    IoC.bind<IShell>(Types.IExecutor).to(Shell).inRequestScope().whenTargetIsDefault(); // REQUEST????????????
 }
 catch (ex)
 {

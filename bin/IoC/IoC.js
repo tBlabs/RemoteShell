@@ -13,7 +13,7 @@ const Main_1 = require("../Main");
 const SampleService_1 = require("./../services/_samples/SampleService");
 const StartupArgs_1 = require("../services/env/StartupArgs");
 const Config_1 = require("../services/config/Config");
-const Executor_1 = require("../services/exe/Executor");
+const Shell_1 = require("../services/exe/Shell");
 const IoC = new inversify_1.Container();
 exports.IoC = IoC;
 try {
@@ -26,7 +26,7 @@ try {
     IoC.bind(Main_1.Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IStartupArgs).to(StartupArgs_1.StartupArgs).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IConfig).to(Config_1.Config).inSingletonScope().whenTargetIsDefault();
-    IoC.bind(Types_1.Types.IExecutor).to(Executor_1.Executor).inRequestScope().whenTargetIsDefault(); // REQUEST????????????
+    IoC.bind(Types_1.Types.IExecutor).to(Shell_1.Shell).inRequestScope().whenTargetIsDefault(); // REQUEST????????????
 }
 catch (ex) {
     console.log('IoC exception:', ex);

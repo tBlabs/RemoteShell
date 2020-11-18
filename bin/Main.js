@@ -20,7 +20,7 @@ const Replace_1 = require("./utils/Replace");
 const axios_1 = require("axios");
 const HelpBuilder_1 = require("./utils/HelpBuilder");
 const path = require("path");
-const Executor_1 = require("./services/exe/Executor");
+const Shell_1 = require("./services/exe/Shell");
 let Main = class Main {
     constructor(_logger, _config, _exe) {
         this._logger = _logger;
@@ -28,8 +28,8 @@ let Main = class Main {
         this._exe = _exe;
     }
     async Run() {
+        // await this.AbortIfAppIsAlreadyRunning();
         var _a, _b;
-        await this.AbortIfAppIsAlreadyRunning();
         const server = express();
         const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Http calls to command line utility")
             .Config("logsLevel", this._config.LogsLevel.toString(), "1", "0 - off, 1 - log, 2 - trace", "config.json or command line argument 'logsLevel' (ex: --logsLevel 2)")
@@ -52,7 +52,7 @@ let Main = class Main {
                     const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
                     this._logger.Log('Executing:', command);
                     // let commandResult = await this._exe.Exe(command);
-                    const exe = new Executor_1.Executor(this._config);
+                    const exe = new Shell_1.Shell(this._config);
                     let commandResult = await exe.Exe(command);
                     this._logger.Log('Result:', commandResult);
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!

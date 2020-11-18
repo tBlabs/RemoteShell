@@ -1,12 +1,12 @@
 import 'reflect-metadata';
-import { IExecutor } from "./IExecutor";
+import { IShell } from "./IShell";
 import { spawn } from 'child_process';
 import { inject, injectable } from "inversify";
 import { IConfig } from "../config/IConfig";
 import { Types } from "../../IoC/Types";
 
 @injectable()
-export class Executor implements IExecutor
+export class Shell implements IShell
 {
     constructor(@inject(Types.IConfig) private _config: IConfig)
     { }
@@ -45,7 +45,8 @@ export class Executor implements IExecutor
 
             process.on('error', (error: Error) =>
             {
-                reject('ERROR: ' + error.toString());
+                console.log('ERROR', error);
+                reject('ERROR: ' + error);
             });
 
             process.on('close', (code, signal) =>
@@ -60,7 +61,8 @@ export class Executor implements IExecutor
 
             process.on('exit', (code, signal) =>
             {
-                reject('EXIT: ' + code?.toString() + ', SIGNAL: ' + signal);
+                console.log('EXIT', code, signal);
+                // reject('EXIT: ' + code?.toString() + ', SIGNAL: ' + signal);
             });
 
             process.on('message', (msg) =>

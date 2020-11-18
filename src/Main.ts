@@ -4,12 +4,12 @@ import * as express from 'express';
 import { ChangeRawCommandPlaceholdersToRequestKeys } from "./utils/Replace";
 import { Route, StaticRoute } from './services/config/Route';
 import { IConfig } from "./services/config/IConfig";
-import { IExecutor } from "./services/exe/IExecutor";
+import { IShell } from "./services/exe/IShell";
 import Axios from 'axios';
 import { HelpBuilder } from './utils/HelpBuilder';
 import { ILogger } from "./services/logger/ILogger";
 import * as path from 'path';
-import { Executor } from './services/exe/Executor';
+import { Shell } from './services/exe/Shell';
 
 @injectable()
 export class Main
@@ -17,12 +17,12 @@ export class Main
     constructor(
         @inject(Types.ILogger) private _logger: ILogger,
         @inject(Types.IConfig) private _config: IConfig,
-        @inject(Types.IExecutor) private _exe: IExecutor)
+        @inject(Types.IExecutor) private _exe: IShell)
     { }
 
     public async Run(): Promise<void>
     {
-        await this.AbortIfAppIsAlreadyRunning();
+        // await this.AbortIfAppIsAlreadyRunning();
 
         const server = express();
 
@@ -56,7 +56,7 @@ export class Main
                     this._logger.Log('Executing:', command);
 
                     // let commandResult = await this._exe.Exe(command);
-                    const exe = new Executor(this._config);
+                    const exe = new Shell(this._config);
                     let commandResult = await exe.Exe(command);
                     this._logger.Log('Result:', commandResult);
 
