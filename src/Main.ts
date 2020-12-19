@@ -10,6 +10,7 @@ import { HelpBuilder } from './utils/HelpBuilder';
 import { ILogger } from "./services/logger/ILogger";
 import * as path from 'path';
 import { Shell } from './services/exe/Shell';
+import * as cors from 'cors';
 
 @injectable()
 export class Main
@@ -25,7 +26,8 @@ export class Main
         // await this.AbortIfAppIsAlreadyRunning();
 
         const server = express();
-
+        server.use(cors({ exposedHeaders: 'Content-Length' }));
+    
         const hb = new HelpBuilder("RemoteShell", "Http calls to command line utility")
             .Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
