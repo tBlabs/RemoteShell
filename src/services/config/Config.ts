@@ -1,5 +1,6 @@
 import * as fs from 'fs';
-import { Route, StaticRoute } from './Route';
+import { Route } from './Route';
+import { StaticRoute } from "./StaticRoute";
 import 'reflect-metadata'; 
 import { injectable, inject } from 'inversify';
 import { Types } from '../../IoC/Types';

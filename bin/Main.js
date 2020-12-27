@@ -20,7 +20,8 @@ const Replace_1 = require("./utils/Replace");
 const axios_1 = require("axios");
 const HelpBuilder_1 = require("./utils/HelpBuilder");
 const path = require("path");
-const Shell_1 = require("./services/exe/Shell");
+const cors = require("cors");
+const IoC_1 = require("./IoC/IoC");
 let Main = class Main {
     constructor(_logger, _config, _exe) {
         this._logger = _logger;
@@ -31,6 +32,7 @@ let Main = class Main {
         // await this.AbortIfAppIsAlreadyRunning();
         var _a, _b;
         const server = express();
+        server.use(cors({ exposedHeaders: 'Content-Length' }));
         const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Http calls to command line utility")
             .Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
@@ -38,12 +40,14 @@ let Main = class Main {
             .Config("statics", JSON.stringify(this._config.Statics), "[]", '[{"url": "/files", "dir": "./shared_files" }]', "config.json")
             .Config("logsLevel", this._config.LogsLevel.toString(), "1", "0 - off, 1 - log, 2 - trace", "config.json or command line argument 'logsLevel' (ex: --logsLevel 2)")
             .Api("/ping", "Always returns 'pong'")
+            .Api("/console", "Will redirect /clients/console.html")
             .Api("/clients/console.html", "Simple web client for shell")
             .Api("/{any route}", "Routes and their assigned commands defined in config.json")
             .Api("responsetype header", "Defines if response should be html-formatted or not. Possible options are: html (or just no header)");
         server.get('/favicon.ico', (req, res) => res.status(204));
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
+        server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
         (_a = this._config.Routes) === null || _a === void 0 ? void 0 : _a.forEach((route) => {
             server.all(route.url, async (req, res) => {
@@ -52,7 +56,8 @@ let Main = class Main {
                     const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
                     this._logger.Log('Executing:', command);
                     // let commandResult = await this._exe.Exe(command);
-                    const exe = new Shell_1.Shell(this._config);
+                    // const exe = new Shell(this._config);
+                    const exe = IoC_1.IoC.get(Types_1.Types.IShell); // TODO: transform to factory
                     let commandResult = await exe.Exe(command);
                     this._logger.Log('Result:', commandResult);
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
@@ -81,8 +86,10 @@ let Main = class Main {
     }
     get ClientsDir() {
         const fullDirBlocks = __dirname.split(path.sep);
-        const dir = [fullDirBlocks.slice(0, fullDirBlocks.length - 1)
-                .join(path.sep), 'clients']
+        const dir = [
+            fullDirBlocks.slice(0, fullDirBlocks.length - 1).join(path.sep),
+            'clients'
+        ]
             .join(path.sep);
         return dir;
     }
@@ -109,7 +116,7 @@ Main = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(Types_1.Types.ILogger)),
     __param(1, inversify_1.inject(Types_1.Types.IConfig)),
-    __param(2, inversify_1.inject(Types_1.Types.IExecutor)),
+    __param(2, inversify_1.inject(Types_1.Types.IShell)),
     __metadata("design:paramtypes", [Object, Object, Object])
 ], Main);
 exports.Main = Main;

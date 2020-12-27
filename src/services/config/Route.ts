@@ -5,8 +5,3 @@ export interface Route
     options: string;
 }
 
-export interface StaticRoute
-{
-    url: string;
-    dir: string;
-}

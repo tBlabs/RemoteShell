@@ -10,15 +10,12 @@ const Environment_1 = require("./../services/env/Environment");
 const Logger_1 = require("../services/logger/Logger");
 const ConsoleOutput_1 = require("../services/logger/ConsoleOutput");
 const Main_1 = require("../Main");
-const SampleService_1 = require("./../services/_samples/SampleService");
 const StartupArgs_1 = require("../services/env/StartupArgs");
 const Config_1 = require("../services/config/Config");
-const Shell_1 = require("../services/exe/Shell");
+const Shell_1 = require("../services/shell/Shell");
 const IoC = new inversify_1.Container();
 exports.IoC = IoC;
 try {
-    IoC.bind(SampleService_1.SampleService).toSelf().whenTargetIsDefault(); // can be injected in constructor with any special helpers
-    IoC.bind(Types_1.Types.ISample).to(SampleService_1.SampleService).whenTargetIsDefault(); // can be injected with @inject(Types.ISample) in class constructor
     IoC.bind(Types_1.Types.IEnvironment).to(Environment_1.Environment).whenTargetIsDefault();
     IoC.bind(Types_1.Types.IRunMode).to(RunMode_1.RunMode).whenTargetIsDefault();
     IoC.bind(Types_1.Types.ILoggerOutput).to(ConsoleOutput_1.ConsoleOutput).inSingletonScope().whenTargetIsDefault();
@@ -26,7 +23,7 @@ try {
     IoC.bind(Main_1.Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IStartupArgs).to(StartupArgs_1.StartupArgs).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IConfig).to(Config_1.Config).inSingletonScope().whenTargetIsDefault();
-    IoC.bind(Types_1.Types.IExecutor).to(Shell_1.Shell).inRequestScope().whenTargetIsDefault(); // REQUEST????????????
+    IoC.bind(Types_1.Types.IShell).to(Shell_1.Shell).inTransientScope().whenTargetIsDefault();
 }
 catch (ex) {
     console.log('IoC exception:', ex);

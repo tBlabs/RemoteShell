@@ -1,4 +1,5 @@
-import { Route, StaticRoute } from "./Route";
+import { Route } from "./Route";
+import { StaticRoute } from "./StaticRoute";
 
 export interface IConfig
 {

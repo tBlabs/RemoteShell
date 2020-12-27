@@ -18,6 +18,7 @@ function LoadHistory(c)
 
 const RunRoutine = async () => 
 {
+    const start = +new Date();
     output.textContent = "";
     httpResponseCode.textContent = "Awaiting response...";
     const inputValue = input.value;
@@ -38,7 +39,8 @@ const RunRoutine = async () =>
     }
     finally
     {
-        httpResponseCode.textContent = "Http response code: " + response.status;
+        const stop = +new Date() - start
+        httpResponseCode.textContent = "Http response code: " + response.status + " in " + stop + " ms";
     }
 }
 

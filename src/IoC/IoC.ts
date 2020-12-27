@@ -12,21 +12,17 @@ import { Logger } from '../services/logger/Logger';
 import { ConsoleOutput } from "../services/logger/ConsoleOutput";
 import { ILoggerOutput } from "../services/logger/ILoggerOutput";
 import { Main } from '../Main';
-import { ISample } from '../services/_samples/ISample';
-import { SampleService } from './../services/_samples/SampleService';
 import { IStartupArgs } from '../services/env/IStartupArgs';
 import { StartupArgs } from '../services/env/StartupArgs';
 import { Config } from '../services/config/Config';
-import { IShell } from '../services/exe/IShell';
-import { Shell } from '../services/exe/Shell';
+import { IShell } from '../services/shell/IShell';
+import { Shell } from '../services/shell/Shell';
 import { IConfig } from '../services/config/IConfig';
 
 const IoC = new Container();
 
 try
 {
-    IoC.bind<SampleService>(SampleService).toSelf().whenTargetIsDefault(); // can be injected in constructor with any special helpers
-    IoC.bind<ISample>(Types.ISample).to(SampleService).whenTargetIsDefault(); // can be injected with @inject(Types.ISample) in class constructor
     IoC.bind<IEnvironment>(Types.IEnvironment).to(Environment).whenTargetIsDefault();
     IoC.bind<IRunMode>(Types.IRunMode).to(RunMode).whenTargetIsDefault();
     IoC.bind<ILoggerOutput>(Types.ILoggerOutput).to(ConsoleOutput).inSingletonScope().whenTargetIsDefault();
@@ -34,7 +30,7 @@ try
     IoC.bind<Main>(Main).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind<IStartupArgs>(Types.IStartupArgs).to(StartupArgs).inSingletonScope().whenTargetIsDefault();
     IoC.bind<IConfig>(Types.IConfig).to(Config).inSingletonScope().whenTargetIsDefault();
-    IoC.bind<IShell>(Types.IExecutor).to(Shell).inRequestScope().whenTargetIsDefault(); // REQUEST????????????
+    IoC.bind<IShell>(Types.IShell).to(Shell).inTransientScope().whenTargetIsDefault();
 }
 catch (ex)
 {
