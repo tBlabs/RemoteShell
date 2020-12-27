@@ -23,10 +23,11 @@ const path = require("path");
 const cors = require("cors");
 const IoC_1 = require("./IoC/IoC");
 let Main = class Main {
-    constructor(_logger, _config, _exe) {
+    constructor(_logger, _config
+    // @inject(Types.IShell) private _exe: IShell
+    ) {
         this._logger = _logger;
         this._config = _config;
-        this._exe = _exe;
     }
     async Run() {
         // await this.AbortIfAppIsAlreadyRunning();
@@ -47,37 +48,25 @@ let Main = class Main {
         server.get('/favicon.ico', (req, res) => res.status(204));
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
+        let queue = 0;
+        let id = 0;
+        server.get('/queue', (req, res) => res.send(queue.toString()));
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
         (_a = this._config.Routes) === null || _a === void 0 ? void 0 : _a.forEach((route) => {
             server.all(route.url, async (req, res) => {
-                let shell;
-                try {
-                    const rawCommand = route.command;
-                    const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
-                    this._logger.Log('Executing:', command);
-                    // let commandResult = await this._exe.Exe(command);
-                    // const exe = new Shell(this._config);
-                    shell = IoC_1.IoC.get(Types_1.Types.IShell); // TODO: transform to factory
-                    let commandResult = await shell.Exe(command);
-                    this._logger.Log('Result:', commandResult);
-                    if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
-                     {
-                        commandResult = this.ConvertToHtml(commandResult);
-                    }
-                    res.status(200).send(commandResult);
+                queue += 1;
+                id += 1;
+                const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(route.command, req.params, route.options);
+                const shell = IoC_1.IoC.get(Types_1.Types.IShell); // TODO: transform to factory, do not take Shell from constructor!
+                let commandResult = await shell.ExecAsync(command, id);
+                if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
+                 {
+                    commandResult = this.ConvertToHtml(commandResult.Message);
                 }
-                catch (error) {
-                    this._logger.Log('Execution error:', error);
-                    if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
-                     {
-                        error = this.ConvertToHtml(error);
-                    }
-                    res.status(500).send(error);
-                }
-                finally {
-                    shell.Dispose();
-                }
+                queue -= 1;
+                res.status(commandResult.IsSuccess ? 200 : 500)
+                    .send(commandResult.Message);
             });
         });
         (_b = this._config.Statics) === null || _b === void 0 ? void 0 : _b.forEach((r) => {
@@ -120,8 +109,7 @@ Main = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(Types_1.Types.ILogger)),
     __param(1, inversify_1.inject(Types_1.Types.IConfig)),
-    __param(2, inversify_1.inject(Types_1.Types.IShell)),
-    __metadata("design:paramtypes", [Object, Object, Object])
+    __metadata("design:paramtypes", [Object, Object])
 ], Main);
 exports.Main = Main;
 //# sourceMappingURL=Main.js.map

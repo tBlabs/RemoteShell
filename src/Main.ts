@@ -20,8 +20,9 @@ export class Main
 {
     constructor(
         @inject(Types.ILogger) private _logger: ILogger,
-        @inject(Types.IConfig) private _config: IConfig,
-        @inject(Types.IShell) private _exe: IShell)
+        @inject(Types.IConfig) private _config: IConfig
+        // @inject(Types.IShell) private _exe: IShell
+    )
     { }
 
     public async Run(): Promise<void>
@@ -48,50 +49,35 @@ export class Main
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
 
+        let queue = 0;
+        let id = 0;
+        server.get('/queue', (req, res) => res.send(queue.toString()));
+
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
-
 
         this._config.Routes?.forEach((route: Route) => 
         {
             server.all(route.url, async (req, res) => 
             {
-                let shell;
-                try
+                queue += 1;
+                id += 1;
+
+                const command = ChangeRawCommandPlaceholdersToRequestKeys(route.command, req.params, route.options);
+
+                const shell = IoC.get<IShell>(Types.IShell); // TODO: transform to factory, do not take Shell from constructor!
+
+                let commandResult = await shell.ExecAsync(command, id);
+
+                if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                 {
-                    const rawCommand = route.command;
-                    const command = ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
-                    this._logger.Log('Executing:', command);
-
-                    // let commandResult = await this._exe.Exe(command);
-                    // const exe = new Shell(this._config);
-                    shell = IoC.get<IShell>(Types.IShell); // TODO: transform to factory
-
-                    let commandResult = await shell.Exe(command);
-                    this._logger.Log('Result:', commandResult);
-
-                    if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
-                    {
-                        commandResult = this.ConvertToHtml(commandResult);
-                    }
-
-                    res.status(200).send(commandResult);
+                    commandResult = this.ConvertToHtml(commandResult.Message);
                 }
-                catch (error)
-                {
-                    this._logger.Log('Execution error:', error);
 
-                    if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
-                    {
-                        error = this.ConvertToHtml(error);
-                    }
+                queue -= 1;
 
-                    res.status(500).send(error);
-                }
-                finally
-                {
-                    shell.Dispose();
-                }
+                res.status(commandResult.IsSuccess ? 200 : 500)
+                    .send(commandResult.Message);
             });
         });
 
@@ -116,7 +102,7 @@ export class Main
         const fullDirBlocks = __dirname.split(path.sep);
         const dir = [
             fullDirBlocks.slice(0, fullDirBlocks.length - 1).join(path.sep)
-            , 
+            ,
             'clients'
         ]
             .join(path.sep);
