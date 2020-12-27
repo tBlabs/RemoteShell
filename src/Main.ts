@@ -13,6 +13,7 @@ import * as path from 'path';
 import * as cors from 'cors';
 import { IoC } from './IoC/IoC';
 import * as fs from 'fs';
+import { Shell } from './services/shell/Shell';
 
 @injectable()
 export class Main
@@ -55,6 +56,7 @@ export class Main
         {
             server.all(route.url, async (req, res) => 
             {
+                let shell;
                 try
                 {
                     const rawCommand = route.command;
@@ -63,9 +65,9 @@ export class Main
 
                     // let commandResult = await this._exe.Exe(command);
                     // const exe = new Shell(this._config);
-                    const exe = IoC.get<IShell>(Types.IShell); // TODO: transform to factory
+                    shell = IoC.get<IShell>(Types.IShell); // TODO: transform to factory
 
-                    let commandResult = await exe.Exe(command);
+                    let commandResult = await shell.Exe(command);
                     this._logger.Log('Result:', commandResult);
 
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
@@ -85,6 +87,10 @@ export class Main
                     }
 
                     res.status(500).send(error);
+                }
+                finally
+                {
+                    shell.Dispose();
                 }
             });
         });

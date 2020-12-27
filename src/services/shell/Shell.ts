@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { IShell } from "./IShell";
-import { spawn } from 'child_process';
+import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { inject, injectable } from "inversify";
 import { IConfig } from "../config/IConfig";
 import { Types } from "../../IoC/Types";
@@ -11,27 +11,36 @@ export class Shell implements IShell
     constructor(@inject(Types.IConfig) private _config: IConfig)
     { }
 
+    private process: ChildProcessWithoutNullStreams;
+
+    public Dispose()
+    {
+        this.process.stdout.removeAllListeners();
+        this.process.stderr.removeAllListeners();
+        this.process.removeAllListeners();
+    }
+
     public async Exe(rawCmd: string): Promise<string> 
     {
         return new Promise<string>((resolve, reject) => 
         {
-            const process = spawn(this._config.Shell, ['-c', rawCmd]);
+            this.process = spawn(this._config.Shell, ['-c', rawCmd], { detached: false } );
 
             let response = "";
             let isErr = false;
 
-            process.stdout.on('data', (data) =>
+            this.process.stdout.on('data', (data) =>
             {
                 response += data.toString();
             });
 
-            process.stderr.on('data', (data) =>
+            this.process.stderr.on('data', (data) =>
             {
                 response += data.toString();
                 isErr = true;
             });
 
-            process.stderr.on('end', () =>
+            this.process.stderr.on('end', () =>
             {
                 if (isErr) 
                 {
@@ -43,27 +52,35 @@ export class Shell implements IShell
                 }
             });
 
-            process.on('error', (error: Error) =>
+            this.process.on('error', (error: Error) =>
             {
                 reject('ERROR: ' + error);
             });
 
-            process.on('close', (code, signal) =>
+            this.process.on('close', (code, signal) =>
             {
                 reject('CLOSE: ' + code.toString() + ' ' + signal);
             });
 
-            process.on('disconnect', () =>
+            this.process.on('disconnect', () =>
             {
                 reject('DISCONNECT');
             });
 
-            process.on('exit', (code, signal) =>
+            this.process.on('exit', (code, signal) =>
             {
                 /* do nothing, especially do not reject here */
+                if (isErr) //???????????????????????????????????????
+                {
+                    reject(response);
+                }
+                else 
+                {
+                    resolve(response);
+                }
             });
 
-            process.on('message', (msg) =>
+            this.process.on('message', (msg) =>
             {
                 reject('MESSAGE: ' + msg);
             });

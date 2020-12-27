@@ -21,19 +21,24 @@ let Shell = class Shell {
     constructor(_config) {
         this._config = _config;
     }
+    Dispose() {
+        this.process.stdout.removeAllListeners();
+        this.process.stderr.removeAllListeners();
+        this.process.removeAllListeners();
+    }
     async Exe(rawCmd) {
         return new Promise((resolve, reject) => {
-            const process = child_process_1.spawn(this._config.Shell, ['-c', rawCmd]);
+            this.process = child_process_1.spawn(this._config.Shell, ['-c', rawCmd], { detached: false });
             let response = "";
             let isErr = false;
-            process.stdout.on('data', (data) => {
+            this.process.stdout.on('data', (data) => {
                 response += data.toString();
             });
-            process.stderr.on('data', (data) => {
+            this.process.stderr.on('data', (data) => {
                 response += data.toString();
                 isErr = true;
             });
-            process.stderr.on('end', () => {
+            this.process.stderr.on('end', () => {
                 if (isErr) {
                     reject(response);
                 }
@@ -41,19 +46,26 @@ let Shell = class Shell {
                     resolve(response);
                 }
             });
-            process.on('error', (error) => {
+            this.process.on('error', (error) => {
                 reject('ERROR: ' + error);
             });
-            process.on('close', (code, signal) => {
+            this.process.on('close', (code, signal) => {
                 reject('CLOSE: ' + code.toString() + ' ' + signal);
             });
-            process.on('disconnect', () => {
+            this.process.on('disconnect', () => {
                 reject('DISCONNECT');
             });
-            process.on('exit', (code, signal) => {
+            this.process.on('exit', (code, signal) => {
                 /* do nothing, especially do not reject here */
+                if (isErr) //???????????????????????????????????????
+                 {
+                    reject(response);
+                }
+                else {
+                    resolve(response);
+                }
             });
-            process.on('message', (msg) => {
+            this.process.on('message', (msg) => {
                 reject('MESSAGE: ' + msg);
             });
         });

@@ -51,14 +51,15 @@ let Main = class Main {
         server.use('/clients', express.static(this.ClientsDir));
         (_a = this._config.Routes) === null || _a === void 0 ? void 0 : _a.forEach((route) => {
             server.all(route.url, async (req, res) => {
+                let shell;
                 try {
                     const rawCommand = route.command;
                     const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(rawCommand, req.params, route.options);
                     this._logger.Log('Executing:', command);
                     // let commandResult = await this._exe.Exe(command);
                     // const exe = new Shell(this._config);
-                    const exe = IoC_1.IoC.get(Types_1.Types.IShell); // TODO: transform to factory
-                    let commandResult = await exe.Exe(command);
+                    shell = IoC_1.IoC.get(Types_1.Types.IShell); // TODO: transform to factory
+                    let commandResult = await shell.Exe(command);
                     this._logger.Log('Result:', commandResult);
                     if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                      {
@@ -73,6 +74,9 @@ let Main = class Main {
                         error = this.ConvertToHtml(error);
                     }
                     res.status(500).send(error);
+                }
+                finally {
+                    shell.Dispose();
                 }
             });
         });
