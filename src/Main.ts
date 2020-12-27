@@ -15,6 +15,27 @@ import { IoC } from './IoC/IoC';
 import * as fs from 'fs';
 import { Shell } from './services/shell/Shell';
 
+export class TasksQueue
+{
+    private list: {id: number, cmd: string, status: string}[] = [];
+    public Add(id: number, cmd: string): void
+    {
+        this.list.push({ id, cmd, status: "waiting" });
+    }
+
+    public Remove(id)
+    {
+        const e = this.list.find(x=>x.id === id);
+        if (e===undefined) return;
+        e.status = "executed";
+    }
+
+    public get ListOfWaiting()
+    {
+        return this.list.filter(x=>x.status==="waiting");
+    }
+}
+
 @injectable()
 export class Main
 {
@@ -50,11 +71,14 @@ export class Main
         server.get('/ping', (req, res) => res.send('pong'));
 
         let queue = 0;
+        const tasksQueue = new TasksQueue();
         let id = 0;
         server.get('/queue', (req, res) => res.send(queue.toString()));
+        server.get('/queue/list', (req, res) => res.send(tasksQueue.ListOfWaiting));
 
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
+
 
         this._config.Routes?.forEach((route: Route) => 
         {
@@ -62,22 +86,24 @@ export class Main
             {
                 queue += 1;
                 id += 1;
-
+                
                 const command = ChangeRawCommandPlaceholdersToRequestKeys(route.command, req.params, route.options);
+                tasksQueue.Add(id, command);
 
                 const shell = IoC.get<IShell>(Types.IShell); // TODO: transform to factory, do not take Shell from constructor!
 
-                let commandResult = await shell.ExecAsync(command, id);
+                let result = await shell.ExecAsync(command, id);
 
                 if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                 {
-                    commandResult = this.ConvertToHtml(commandResult.Message);
+                    result = this.ConvertToHtml(result.Message);
                 }
 
                 queue -= 1;
+                tasksQueue.Remove(result.id);
 
-                res.status(commandResult.IsSuccess ? 200 : 500)
-                    .send(commandResult.Message);
+                res.status(result.IsSuccess ? 200 : 500)
+                    .send(result.Message);
             });
         });
 

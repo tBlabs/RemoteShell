@@ -12,7 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Main = void 0;
+exports.Main = exports.TasksQueue = void 0;
 const inversify_1 = require("inversify");
 const Types_1 = require("./IoC/Types");
 const express = require("express");
@@ -22,6 +22,24 @@ const HelpBuilder_1 = require("./utils/HelpBuilder");
 const path = require("path");
 const cors = require("cors");
 const IoC_1 = require("./IoC/IoC");
+class TasksQueue {
+    constructor() {
+        this.list = [];
+    }
+    Add(id, cmd) {
+        this.list.push({ id, cmd, status: "waiting" });
+    }
+    Remove(id) {
+        const e = this.list.find(x => x.id === id);
+        if (e === undefined)
+            return;
+        e.status = "executed";
+    }
+    get ListOfWaiting() {
+        return this.list.filter(x => x.status === "waiting");
+    }
+}
+exports.TasksQueue = TasksQueue;
 let Main = class Main {
     constructor(_logger, _config
     // @inject(Types.IShell) private _exe: IShell
@@ -49,8 +67,10 @@ let Main = class Main {
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
         let queue = 0;
+        const tasksQueue = new TasksQueue();
         let id = 0;
         server.get('/queue', (req, res) => res.send(queue.toString()));
+        server.get('/queue/list', (req, res) => res.send(tasksQueue.ListOfWaiting));
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
         (_a = this._config.Routes) === null || _a === void 0 ? void 0 : _a.forEach((route) => {
@@ -58,15 +78,17 @@ let Main = class Main {
                 queue += 1;
                 id += 1;
                 const command = Replace_1.ChangeRawCommandPlaceholdersToRequestKeys(route.command, req.params, route.options);
+                tasksQueue.Add(id, command);
                 const shell = IoC_1.IoC.get(Types_1.Types.IShell); // TODO: transform to factory, do not take Shell from constructor!
-                let commandResult = await shell.ExecAsync(command, id);
+                let result = await shell.ExecAsync(command, id);
                 if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                  {
-                    commandResult = this.ConvertToHtml(commandResult.Message);
+                    result = this.ConvertToHtml(result.Message);
                 }
                 queue -= 1;
-                res.status(commandResult.IsSuccess ? 200 : 500)
-                    .send(commandResult.Message);
+                tasksQueue.Remove(result.id);
+                res.status(result.IsSuccess ? 200 : 500)
+                    .send(result.Message);
             });
         });
         (_b = this._config.Statics) === null || _b === void 0 ? void 0 : _b.forEach((r) => {

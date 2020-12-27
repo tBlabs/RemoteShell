@@ -15,7 +15,12 @@ import { ILogger } from '../logger/ILogger';
 
 export class ExecResult
 {
-    constructor(public command: string, public code: number, public stdout: string, public stderr: string) { }
+    constructor(public command: string, 
+        public code: number, 
+        public stdout: string, 
+        public stderr: string, 
+        public id: string | number,
+        public duration: number) { }
    
     public get Command(): string
     {
@@ -56,12 +61,15 @@ export class Shell implements IShell
         return new Promise((resolve, reject) =>
         {
             this._log.Log(`Exec ${id}: ${cmd}`);
+            const start = +new Date();
 
             shell.exec(cmd, (code, stdout, stderr) =>
             {
-                const result = new ExecResult(cmd, code, stdout, stderr);
+                const duration = +new Date() - start;
 
-                this._log.Log(`Result ${id}:`, result.Message);
+                const result = new ExecResult(cmd, code, stdout, stderr, id, duration);
+
+                this._log.Log(`Result ${id}:`, result.Message, `(took ${result.duration} ms)`);
 
                 resolve(result);
             });

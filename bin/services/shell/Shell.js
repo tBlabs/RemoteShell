@@ -24,11 +24,13 @@ const inversify_1 = require("inversify");
 const shell = require("shelljs");
 const Types_1 = require("../../IoC/Types");
 class ExecResult {
-    constructor(command, code, stdout, stderr) {
+    constructor(command, code, stdout, stderr, id, duration) {
         this.command = command;
         this.code = code;
         this.stdout = stdout;
         this.stderr = stderr;
+        this.id = id;
+        this.duration = duration;
     }
     get Command() {
         return this.command;
@@ -58,9 +60,11 @@ let Shell = class Shell {
     ExecAsync(cmd, id) {
         return new Promise((resolve, reject) => {
             this._log.Log(`Exec ${id}: ${cmd}`);
+            const start = +new Date();
             shell.exec(cmd, (code, stdout, stderr) => {
-                const result = new ExecResult(cmd, code, stdout, stderr);
-                this._log.Log(`Result ${id}:`, result.Message);
+                const duration = +new Date() - start;
+                const result = new ExecResult(cmd, code, stdout, stderr, id, duration);
+                this._log.Log(`Result ${id}:`, result.Message, `(took ${result.duration} ms)`);
                 resolve(result);
             });
         });
