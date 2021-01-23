@@ -12,38 +12,14 @@ import { ILogger } from "./services/logger/ILogger";
 import * as path from 'path';
 import * as cors from 'cors';
 import { IoC } from './IoC/IoC';
-import * as fs from 'fs';
-import { Shell } from './services/shell/Shell';
-
-export class TasksQueue
-{
-    private list: {id: number, cmd: string, status: string}[] = [];
-    public Add(id: number, cmd: string): void
-    {
-        this.list.push({ id, cmd, status: "waiting" });
-    }
-
-    public Remove(id)
-    {
-        const e = this.list.find(x=>x.id === id);
-        if (e===undefined) return;
-        e.status = "executed";
-    }
-
-    public get ListOfWaiting()
-    {
-        return this.list.filter(x=>x.status==="waiting");
-    }
-}
+import { TasksQueue } from './utils/TasksQueue/TasksQueue';
 
 @injectable()
 export class Main
 {
     constructor(
         @inject(Types.ILogger) private _logger: ILogger,
-        @inject(Types.IConfig) private _config: IConfig
-        // @inject(Types.IShell) private _exe: IShell
-    )
+        @inject(Types.IConfig) private _config: IConfig)
     { }
 
     public async Run(): Promise<void>
@@ -60,6 +36,8 @@ export class Main
             .Config("statics", JSON.stringify(this._config.Statics), "[]", '[{"url": "/files", "dir": "./shared_files" }]', "config.json")
             .Config("logsLevel", this._config.LogsLevel.toString(), "1", "0 - off, 1 - log, 2 - trace", "config.json or command line argument 'logsLevel' (ex: --logsLevel 2)")
             .Api("/ping", "Always returns 'pong'")
+            .Api("/queue/waiting", "Returns list of last 100 waiting tasks")
+            .Api("/queue/all", "Returns list of last 100 tasks")
             .Api("/console", "Will redirect /clients/console.html")
             .Api("/clients/console.html", "Simple web client for shell")
             .Api("/{any route}", "Routes and their assigned commands defined in config.json")
@@ -70,11 +48,10 @@ export class Main
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
 
-        let queue = 0;
         const tasksQueue = new TasksQueue();
-        let id = 0;
-        server.get('/queue', (req, res) => res.send(queue.toString()));
-        server.get('/queue/list', (req, res) => res.send(tasksQueue.ListOfWaiting));
+        let ind = 0;
+        server.get('/queue/waiting', (req, res) => res.send(tasksQueue.ListOfLast100Waiting));
+        server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
 
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
@@ -84,22 +61,20 @@ export class Main
         {
             server.all(route.url, async (req, res) => 
             {
-                queue += 1;
-                id += 1;
-                
+                ind += 1;
+
                 const command = ChangeRawCommandPlaceholdersToRequestKeys(route.command, req.params, route.options);
-                tasksQueue.Add(id, command);
+                tasksQueue.Add(ind, command);
 
                 const shell = IoC.get<IShell>(Types.IShell); // TODO: transform to factory, do not take Shell from constructor!
 
-                let result = await shell.ExecAsync(command, id);
+                let result = await shell.ExecAsync(command, ind);
 
                 if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                 {
                     result = this.ConvertToHtml(result.Message);
                 }
 
-                queue -= 1;
                 tasksQueue.Remove(result.id);
 
                 res.status(result.IsSuccess ? 200 : 500)
