@@ -1,0 +1,1299 @@
+    +0 |    Pinging myself...
+  +696 |    App not started yet.
+  +357 | Remote Shell started @ 3000
+  +239 | Executing: cat /home/pi/RaspberryPi.RemoteIO/config.json
+  +131 | Result: {\n    "port": 8000,\n    "logsLevel": 0,\n    "outputs": [\n        {\n            "name": "GreenLed",\n            "pin": 17\n        },\n        {\n            "name": "RedLed",\n            "pin": 18\n        }\n    ]\n}\n
+  +221 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +108 | Executing: rm /home/pi/TransCorder/91a5ffde-1f47-11eb-b89f-b827eb6605c0.jpg
+   +68 | Result: 
+   +70 | Execution error: EXIT: 0
+ +3059 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +103 | Result: /dev/sda\n
+   +27 | Executing: test -e /media/sdcard
+   +39 | Result: 
+   +23 | Executing: sudo mount /dev/sda /media/sdcard
+  +192 | Execution error: mount: /dev/sda is already mounted or /media/sdcard busy\n       /dev/sda is already mounted on /media/sdcard\n
+   +27 | Executing: ls /media/sdcard/ | grep .jpg | sort -V | tail -1
+  +445 | Executing: hostname
+  +102 | Result: MasterPi\n
+   +30 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +176 | Result: /dev/sda\n
+   +27 | Executing: hostname -I
+   +72 | Result: 8736.jpg\n
+   +36 | Result: 192.168.43.229 \n
+   +21 | Executing: df -h /dev/sda
+   +78 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  358M  3.4G  10% /media/sdcard\n
+   +33 | Executing: ls /media/sdcard | wc -l
+   +89 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +94 | Result: 
+  +118 | Result: 8737\n
+  +303 | Executing: sudo jpegoptim /home/pi/TransCorder/97b023d2-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +681 | Result: /home/pi/TransCorder/97b023d2-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597158 --> 23558 bytes (96.05%), optimized.\n
+   +32 | Executing: sudo cp /home/pi/TransCorder/97b023d2-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8737.jpg
+  +261 | Result: 
+  +137 | Executing: rm /home/pi/TransCorder/97b023d2-1f47-11eb-b89f-b827eb6605c0.jpg
+  +112 | Result: 
+ +1098 | Executing: sudo jpegoptim /home/pi/TransCorder/99060170-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +822 | Result: /home/pi/TransCorder/99060170-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597754 --> 23570 bytes (96.06%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/99060170-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8738.jpg
+  +256 | Result: 
+  +125 | Executing: rm /home/pi/TransCorder/99060170-1f47-11eb-b89f-b827eb6605c0.jpg
+   +59 | Result: 
+  +880 | Executing: sudo jpegoptim /home/pi/TransCorder/9a5e608a-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +438 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +180 | Result: 
+  +596 | Result: /home/pi/TransCorder/9a5e608a-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596855 --> 23720 bytes (96.03%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/9a5e608a-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8739.jpg
+  +242 | Result: 
+   +40 | Executing: rm /home/pi/TransCorder/9a5e608a-1f47-11eb-b89f-b827eb6605c0.jpg
+   +46 | Result: 
+  +719 | Executing: sudo jpegoptim /home/pi/TransCorder/9bc1ebd6-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +731 | Result: /home/pi/TransCorder/9bc1ebd6-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596711 --> 23628 bytes (96.04%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/9bc1ebd6-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8740.jpg
+  +229 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/9bc1ebd6-1f47-11eb-b89f-b827eb6605c0.jpg
+   +65 | Result: 
+  +705 | Executing: sudo jpegoptim /home/pi/TransCorder/9cd452d4-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +243 | Executing: hostname
+   +96 | Result: MasterPi\n
+   +43 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +172 | Result: /dev/sda\n
+   +34 | Executing: hostname -I
+  +105 | Result: 192.168.43.229 \n
+   +43 | Executing: df -h /dev/sda
+  +105 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+   +31 | Executing: ls /media/sdcard | wc -l
+  +169 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +454 | Result: 8741\n
+    +9 | Execution error: EXIT: 0
+    +8 | Execution error: EXIT: 0
+   +36 | Executing: sudo cp /home/pi/TransCorder/9cd452d4-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8741.jpg
+   +53 | Executing: cat /home/pi/TransCorder/config.json
+   +88 | Result: {"auto_fuses":1,"recorder_enabled":1,"transmitter_enabled":0,"config_pulling_interval":5000,"status_pushing_interval":10000,"camera_width":1200,"camera_height":900,"camera_brightness":62,"camera_contrast":72,"camera_sharpness":100,"camera_horizontal_flip":0,"camera_vertical_flip":0,"camera_optimization":70}\n
+  +156 | Result: 
+   +37 | Executing: rm /home/pi/TransCorder/9cd452d4-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +719 | Executing: sudo jpegoptim /home/pi/TransCorder/9e6693a0-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +718 | Result: /home/pi/TransCorder/9e6693a0-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 599506 --> 23866 bytes (96.02%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/9e6693a0-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8742.jpg
+  +225 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/9e6693a0-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +742 | Executing: sudo jpegoptim /home/pi/TransCorder/9f729744-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +744 | Result: /home/pi/TransCorder/9f729744-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597233 --> 23547 bytes (96.06%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/9f729744-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8743.jpg
+  +225 | Result: 
+   +24 | Executing: rm /home/pi/TransCorder/9f729744-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +427 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +37 | Result: 
+  +271 | Executing: sudo jpegoptim /home/pi/TransCorder/a086eac2-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +875 | Result: /home/pi/TransCorder/a086eac2-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597250 --> 23567 bytes (96.05%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/a086eac2-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8744.jpg
+  +230 | Result: 
+   +25 | Executing: rm /home/pi/TransCorder/a086eac2-1f47-11eb-b89f-b827eb6605c0.jpg
+   +61 | Result: 
+  +850 | Executing: sudo jpegoptim /home/pi/TransCorder/a1c571b0-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +728 | Result: /home/pi/TransCorder/a1c571b0-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597193 --> 23643 bytes (96.04%), optimized.\n
+   +35 | Executing: sudo cp /home/pi/TransCorder/a1c571b0-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8745.jpg
+  +261 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/a1c571b0-1f47-11eb-b89f-b827eb6605c0.jpg
+  +285 | Result: 
+  +613 | Executing: hostname
+   +50 | Result: MasterPi\n
+   +68 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+   +41 | Executing: sudo jpegoptim /home/pi/TransCorder/a2fe3418-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +114 | Result: /dev/sda\n
+   +48 | Executing: hostname -I
+  +109 | Result: 192.168.43.229 \n
+   +43 | Executing: df -h /dev/sda
+  +113 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+  +107 | Executing: ls /media/sdcard | wc -l
+   +66 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +123 | Result: 
+  +276 | Result: 8746\n
+  +286 | Result: /home/pi/TransCorder/a2fe3418-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597980 --> 23564 bytes (96.06%), optimized.\n
+   +24 | Executing: sudo cp /home/pi/TransCorder/a2fe3418-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8746.jpg
+  +222 | Result: 
+   +25 | Executing: rm /home/pi/TransCorder/a2fe3418-1f47-11eb-b89f-b827eb6605c0.jpg
+   +96 | Result: 
+  +714 | Executing: sudo jpegoptim /home/pi/TransCorder/a46f49b8-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +711 | Result: /home/pi/TransCorder/a46f49b8-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598584 --> 23611 bytes (96.06%), optimized.\n
+   +41 | Executing: sudo cp /home/pi/TransCorder/a46f49b8-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8747.jpg
+  +222 | Result: 
+   +33 | Executing: rm /home/pi/TransCorder/a46f49b8-1f47-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +743 | Executing: sudo jpegoptim /home/pi/TransCorder/a57ca56c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +722 | Result: /home/pi/TransCorder/a57ca56c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597040 --> 23647 bytes (96.04%), optimized.\n
+   +40 | Executing: sudo cp /home/pi/TransCorder/a57ca56c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8748.jpg
+  +228 | Result: 
+   +33 | Executing: rm /home/pi/TransCorder/a57ca56c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +272 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +36 | Result: 
+  +418 | Executing: sudo jpegoptim /home/pi/TransCorder/a6912d10-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +724 | Result: /home/pi/TransCorder/a6912d10-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597509 --> 23674 bytes (96.04%), optimized.\n
+   +47 | Executing: sudo cp /home/pi/TransCorder/a6912d10-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8749.jpg
+  +251 | Result: 
+   +32 | Executing: rm /home/pi/TransCorder/a6912d10-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +709 | Executing: sudo jpegoptim /home/pi/TransCorder/a7a84954-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +726 | Result: /home/pi/TransCorder/a7a84954-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597329 --> 23652 bytes (96.04%), optimized.\n
+   +31 | Executing: sudo cp /home/pi/TransCorder/a7a84954-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8750.jpg
+  +270 | Result: 
+   +22 | Executing: rm /home/pi/TransCorder/a7a84954-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +710 | Executing: sudo jpegoptim /home/pi/TransCorder/a8ba2d62-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +292 | Executing: hostname
+   +96 | Result: MasterPi\n
+   +92 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +276 | Result: /dev/sda\n
+   +57 | Executing: hostname -I
+  +106 | Result: 192.168.43.229 \n
+   +29 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +65 | Executing: df -h /dev/sda
+   +84 | Result: 
+   +52 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+   +31 | Executing: ls /media/sdcard | wc -l
+  +138 | Result: /home/pi/TransCorder/a8ba2d62-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597995 --> 23409 bytes (96.09%), optimized.\n
+   +48 | Executing: sudo cp /home/pi/TransCorder/a8ba2d62-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8751.jpg
+  +261 | Result: 8751\n
+  +112 | Result: 
+   +21 | Executing: rm /home/pi/TransCorder/a8ba2d62-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +743 | Executing: sudo jpegoptim /home/pi/TransCorder/aa3c1de4-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +755 | Result: /home/pi/TransCorder/aa3c1de4-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597960 --> 23776 bytes (96.02%), optimized.\n
+   +33 | Executing: sudo cp /home/pi/TransCorder/aa3c1de4-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8752.jpg
+  +271 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/aa3c1de4-1f47-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +741 | Executing: sudo jpegoptim /home/pi/TransCorder/ab59b31c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +693 | Result: /home/pi/TransCorder/ab59b31c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597819 --> 23603 bytes (96.05%), optimized.\n
+   +42 | Executing: sudo cp /home/pi/TransCorder/ab59b31c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8753.jpg
+  +272 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/ab59b31c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +484 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +49 | Result: 
+  +191 | Executing: sudo jpegoptim /home/pi/TransCorder/ac6efa0a-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +669 | Result: /home/pi/TransCorder/ac6efa0a-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596589 --> 23544 bytes (96.05%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/ac6efa0a-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8754.jpg
+  +252 | Result: 
+   +41 | Executing: rm /home/pi/TransCorder/ac6efa0a-1f47-11eb-b89f-b827eb6605c0.jpg
+   +50 | Result: 
+  +699 | Executing: sudo jpegoptim /home/pi/TransCorder/ad7cfc6c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +686 | Result: /home/pi/TransCorder/ad7cfc6c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597090 --> 23494 bytes (96.07%), optimized.\n
+   +42 | Executing: sudo cp /home/pi/TransCorder/ad7cfc6c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8755.jpg
+  +248 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/ad7cfc6c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +50 | Result: 
+  +728 | Executing: sudo jpegoptim /home/pi/TransCorder/ae894afc-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +552 | Executing: hostname
+   +92 | Result: MasterPi\n
+   +48 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +119 | Result: /home/pi/TransCorder/ae894afc-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597534 --> 23643 bytes (96.04%), optimized.\n
+   +34 | Executing: sudo cp /home/pi/TransCorder/ae894afc-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8756.jpg
+   +44 | Result: /dev/sda\n
+   +26 | Executing: hostname -I
+   +92 | Result: 192.168.43.229 \n
+   +45 | Executing: df -h /dev/sda
+  +112 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+   +37 | Executing: ls /media/sdcard | wc -l
+   +67 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +104 | Result: 
+   +39 | Executing: rm /home/pi/TransCorder/ae894afc-1f47-11eb-b89f-b827eb6605c0.jpg
+   +64 | Result: 
+   +37 | Result: 
+  +118 | Result: 8757\n
+  +621 | Executing: sudo jpegoptim /home/pi/TransCorder/afdcd9c8-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+ +1128 | Result: /home/pi/TransCorder/afdcd9c8-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597429 --> 23752 bytes (96.02%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/afdcd9c8-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8757.jpg
+  +253 | Result: 
+   +26 | Executing: rm /home/pi/TransCorder/afdcd9c8-1f47-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+  +727 | Executing: sudo jpegoptim /home/pi/TransCorder/b131eeb2-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +662 | Result: /home/pi/TransCorder/b131eeb2-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597435 --> 23658 bytes (96.04%), optimized.\n
+   +25 | Executing: sudo cp /home/pi/TransCorder/b131eeb2-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8758.jpg
+  +272 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/b131eeb2-1f47-11eb-b89f-b827eb6605c0.jpg
+   +50 | Result: 
+  +699 | Executing: sudo jpegoptim /home/pi/TransCorder/b23dde38-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +35 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +90 | Result: 
+  +617 | Result: /home/pi/TransCorder/b23dde38-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598254 --> 23600 bytes (96.06%), optimized.\n
+   +34 | Executing: sudo cp /home/pi/TransCorder/b23dde38-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8759.jpg
+  +247 | Result: 
+   +32 | Executing: rm /home/pi/TransCorder/b23dde38-1f47-11eb-b89f-b827eb6605c0.jpg
+   +60 | Result: 
+  +768 | Executing: sudo jpegoptim /home/pi/TransCorder/b3536ac2-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +675 | Result: /home/pi/TransCorder/b3536ac2-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 592752 --> 23048 bytes (96.11%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/b3536ac2-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8760.jpg
+  +223 | Result: 
+   +21 | Executing: rm /home/pi/TransCorder/b3536ac2-1f47-11eb-b89f-b827eb6605c0.jpg
+   +67 | Result: 
+  +735 | Executing: sudo jpegoptim /home/pi/TransCorder/b4667e40-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +715 | Result: /home/pi/TransCorder/b4667e40-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597269 --> 23464 bytes (96.07%), optimized.\n
+   +16 | Executing: hostname
+   +35 | Executing: sudo cp /home/pi/TransCorder/b4667e40-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8761.jpg
+   +50 | Result: MasterPi\n
+   +62 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +137 | Result: /dev/sda\n
+   +27 | Executing: hostname -I
+   +85 | Result: 192.168.43.229 \n
+   +28 | Executing: df -h /dev/sda
+   +62 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/b4667e40-1f47-11eb-b89f-b827eb6605c0.jpg
+   +39 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+   +16 | Execution error: EXIT: 0
+   +30 | Executing: ls /media/sdcard | wc -l
+  +105 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +107 | Result: 
+  +115 | Result: 8762\n
+  +453 | Executing: sudo jpegoptim /home/pi/TransCorder/b5991ce6-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +725 | Result: /home/pi/TransCorder/b5991ce6-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596510 --> 23447 bytes (96.07%), optimized.\n
+   +57 | Executing: sudo cp /home/pi/TransCorder/b5991ce6-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8762.jpg
+  +224 | Result: 
+   +40 | Executing: rm /home/pi/TransCorder/b5991ce6-1f47-11eb-b89f-b827eb6605c0.jpg
+   +50 | Result: 
+  +718 | Executing: sudo jpegoptim /home/pi/TransCorder/b6bd9ae8-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +748 | Result: /home/pi/TransCorder/b6bd9ae8-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597760 --> 23586 bytes (96.05%), optimized.\n
+   +36 | Executing: sudo cp /home/pi/TransCorder/b6bd9ae8-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8763.jpg
+  +223 | Result: 
+   +37 | Executing: rm /home/pi/TransCorder/b6bd9ae8-1f47-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +704 | Executing: sudo jpegoptim /home/pi/TransCorder/b7cee19e-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +684 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +82 | Result: /home/pi/TransCorder/b7cee19e-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597679 --> 23521 bytes (96.06%), optimized.\n
+   +17 | Execution error: EXIT: 0
+   +22 | Executing: sudo cp /home/pi/TransCorder/b7cee19e-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8764.jpg
+   +36 | Executing: cat /home/pi/TransCorder/config.json
+  +102 | Result: {"auto_fuses":1,"recorder_enabled":1,"transmitter_enabled":0,"config_pulling_interval":5000,"status_pushing_interval":10000,"camera_width":1200,"camera_height":900,"camera_brightness":62,"camera_contrast":72,"camera_sharpness":100,"camera_horizontal_flip":0,"camera_vertical_flip":0,"camera_optimization":70}\n
+  +159 | Result: 
+   +26 | Executing: rm /home/pi/TransCorder/b7cee19e-1f47-11eb-b89f-b827eb6605c0.jpg
+   +59 | Result: 
+  +733 | Executing: sudo jpegoptim /home/pi/TransCorder/b8ef8a24-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +741 | Result: /home/pi/TransCorder/b8ef8a24-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596201 --> 23383 bytes (96.08%), optimized.\n
+   +36 | Executing: sudo cp /home/pi/TransCorder/b8ef8a24-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8765.jpg
+  +251 | Result: 
+   +35 | Executing: rm /home/pi/TransCorder/b8ef8a24-1f47-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +730 | Executing: sudo jpegoptim /home/pi/TransCorder/ba083bcc-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +701 | Result: /home/pi/TransCorder/ba083bcc-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596906 --> 23489 bytes (96.06%), optimized.\n
+   +42 | Executing: sudo cp /home/pi/TransCorder/ba083bcc-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8766.jpg
+  +258 | Result: 
+   +33 | Executing: rm /home/pi/TransCorder/ba083bcc-1f47-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+  +174 | Executing: hostname
+   +61 | Result: MasterPi\n
+   +35 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+   +84 | Result: /dev/sda\n
+   +28 | Executing: hostname -I
+   +58 | Result: 192.168.43.229 \n
+   +24 | Executing: df -h /dev/sda
+   +47 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+   +38 | Executing: ls /media/sdcard | wc -l
+  +217 | Executing: sudo jpegoptim /home/pi/TransCorder/bb1d5eac-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +124 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +156 | Result: 
+  +115 | Result: 8767\n
+  +685 | Result: /home/pi/TransCorder/bb1d5eac-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596253 --> 23584 bytes (96.04%), optimized.\n
+   +42 | Executing: sudo cp /home/pi/TransCorder/bb1d5eac-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8767.jpg
+  +251 | Result: 
+   +74 | Executing: rm /home/pi/TransCorder/bb1d5eac-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +702 | Executing: sudo jpegoptim /home/pi/TransCorder/bc75f692-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +731 | Result: /home/pi/TransCorder/bc75f692-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598175 --> 23500 bytes (96.07%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/bc75f692-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8768.jpg
+  +251 | Result: 
+   +64 | Executing: rm /home/pi/TransCorder/bc75f692-1f47-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+  +728 | Executing: sudo jpegoptim /home/pi/TransCorder/bd8c4b1c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +730 | Result: /home/pi/TransCorder/bd8c4b1c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597076 --> 23567 bytes (96.05%), optimized.\n
+   +46 | Executing: sudo cp /home/pi/TransCorder/bd8c4b1c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8769.jpg
+  +252 | Result: 
+   +32 | Executing: rm /home/pi/TransCorder/bd8c4b1c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+   +24 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +50 | Result: 
+  +685 | Executing: sudo jpegoptim /home/pi/TransCorder/bea53c66-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +669 | Result: /home/pi/TransCorder/bea53c66-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598178 --> 23521 bytes (96.07%), optimized.\n
+   +34 | Executing: sudo cp /home/pi/TransCorder/bea53c66-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8770.jpg
+  +250 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/bea53c66-1f47-11eb-b89f-b827eb6605c0.jpg
+   +65 | Result: 
+  +706 | Executing: sudo jpegoptim /home/pi/TransCorder/bfb78ef6-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +673 | Result: /home/pi/TransCorder/bfb78ef6-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598610 --> 23577 bytes (96.06%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/bfb78ef6-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8771.jpg
+  +230 | Result: 
+   +26 | Executing: rm /home/pi/TransCorder/bfb78ef6-1f47-11eb-b89f-b827eb6605c0.jpg
+  +494 | Result: 
+  +309 | Executing: hostname
+   +47 | Result: MasterPi\n
+   +28 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +100 | Result: /dev/sda\n
+   +77 | Executing: hostname -I
+   +43 | Result: 192.168.43.229 \n
+   +32 | Executing: df -h /dev/sda
+  +105 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+   +16 | Executing: sudo jpegoptim /home/pi/TransCorder/c1023e46-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +67 | Executing: ls /media/sdcard | wc -l
+  +213 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +207 | Result: 
+  +105 | Result: 8772\n
+  +537 | Result: /home/pi/TransCorder/c1023e46-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598347 --> 23549 bytes (96.06%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/c1023e46-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8772.jpg
+  +251 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/c1023e46-1f47-11eb-b89f-b827eb6605c0.jpg
+   +84 | Result: 
+  +733 | Executing: sudo jpegoptim /home/pi/TransCorder/c25c74f0-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+ +1076 | Result: /home/pi/TransCorder/c25c74f0-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597815 --> 23490 bytes (96.07%), optimized.\n
+   +22 | Executing: sudo cp /home/pi/TransCorder/c25c74f0-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8773.jpg
+  +271 | Result: 
+   +32 | Executing: rm /home/pi/TransCorder/c25c74f0-1f47-11eb-b89f-b827eb6605c0.jpg
+   +80 | Result: 
+  +716 | Executing: sudo jpegoptim /home/pi/TransCorder/c3afa3c2-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +698 | Result: /home/pi/TransCorder/c3afa3c2-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597574 --> 23625 bytes (96.05%), optimized.\n
+   +34 | Executing: sudo cp /home/pi/TransCorder/c3afa3c2-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8774.jpg
+  +101 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +95 | Result: 
+  +114 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/c3afa3c2-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +737 | Executing: sudo jpegoptim /home/pi/TransCorder/c4c60e7c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +661 | Result: /home/pi/TransCorder/c4c60e7c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598323 --> 23475 bytes (96.08%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/c4c60e7c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8775.jpg
+  +250 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/c4c60e7c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+  +738 | Executing: sudo jpegoptim /home/pi/TransCorder/c5d20bae-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+ +1517 | Executing: hostname
+   +71 | Result: MasterPi\n
+   +50 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+   +92 | Result: /dev/sda\n
+   +26 | Executing: hostname -I
+   +47 | Result: 192.168.43.229 \n
+   +35 | Executing: df -h /dev/sda
+   +60 | Result: /home/pi/TransCorder/c5d20bae-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598412 --> 23525 bytes (96.07%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/c5d20bae-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8776.jpg
+   +38 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+   +36 | Executing: ls /media/sdcard | wc -l
+  +186 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +84 | Result: 
+   +80 | Result: 
+   +36 | Executing: rm /home/pi/TransCorder/c5d20bae-1f47-11eb-b89f-b827eb6605c0.jpg
+   +80 | Result: 
+   +43 | Result: 8777\n
+  +688 | Executing: sudo jpegoptim /home/pi/TransCorder/c7ba564c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +724 | Result: /home/pi/TransCorder/c7ba564c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597991 --> 23690 bytes (96.04%), optimized.\n
+   +34 | Executing: sudo cp /home/pi/TransCorder/c7ba564c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8777.jpg
+  +222 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/c7ba564c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +714 | Executing: sudo jpegoptim /home/pi/TransCorder/c8c99a20-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+ +1143 | Result: /home/pi/TransCorder/c8c99a20-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598387 --> 23573 bytes (96.06%), optimized.\n
+   +38 | Executing: sudo cp /home/pi/TransCorder/c8c99a20-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8778.jpg
+  +222 | Result: 
+   +38 | Executing: rm /home/pi/TransCorder/c8c99a20-1f47-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +741 | Executing: sudo jpegoptim /home/pi/TransCorder/ca188706-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +74 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +90 | Result: 
+  +635 | Result: /home/pi/TransCorder/ca188706-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598891 --> 23575 bytes (96.06%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/ca188706-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8779.jpg
+  +221 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/ca188706-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +760 | Executing: sudo jpegoptim /home/pi/TransCorder/cb356852-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +754 | Result: /home/pi/TransCorder/cb356852-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597739 --> 23667 bytes (96.04%), optimized.\n
+   +33 | Executing: sudo cp /home/pi/TransCorder/cb356852-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8780.jpg
+  +258 | Result: 
+   +25 | Executing: rm /home/pi/TransCorder/cb356852-1f47-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +700 | Executing: sudo jpegoptim /home/pi/TransCorder/cc5231de-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +635 | Executing: hostname
+   +98 | Result: MasterPi\n
+   +54 | Result: /home/pi/TransCorder/cc5231de-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598157 --> 23657 bytes (96.05%), optimized.\n
+   +14 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+   +48 | Executing: sudo cp /home/pi/TransCorder/cc5231de-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8781.jpg
+   +86 | Result: /dev/sda\n
+   +31 | Executing: hostname -I
+  +111 | Result: 192.168.43.229 \n
+   +51 | Executing: df -h /dev/sda
+  +106 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  359M  3.4G  10% /media/sdcard\n
+   +28 | Executing: ls /media/sdcard | wc -l
+  +101 | Result: 
+   +20 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +64 | Executing: rm /home/pi/TransCorder/cc5231de-1f47-11eb-b89f-b827eb6605c0.jpg
+   +64 | Result: 
+   +30 | Result: 
+  +109 | Result: 8782\n
+  +641 | Executing: sudo jpegoptim /home/pi/TransCorder/cdaa2f0a-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +748 | Result: /home/pi/TransCorder/cdaa2f0a-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597295 --> 23489 bytes (96.07%), optimized.\n
+   +25 | Executing: sudo cp /home/pi/TransCorder/cdaa2f0a-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8782.jpg
+  +264 | Result: 
+   +26 | Executing: rm /home/pi/TransCorder/cdaa2f0a-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +721 | Executing: sudo jpegoptim /home/pi/TransCorder/cec3d12a-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +679 | Result: /home/pi/TransCorder/cec3d12a-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598807 --> 23461 bytes (96.08%), optimized.\n
+   +35 | Executing: sudo cp /home/pi/TransCorder/cec3d12a-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8783.jpg
+  +262 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/cec3d12a-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +718 | Executing: sudo jpegoptim /home/pi/TransCorder/cfd29aa6-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +583 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +70 | Result: 
+   +97 | Result: /home/pi/TransCorder/cfd29aa6-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598648 --> 23656 bytes (96.05%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/cfd29aa6-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8784.jpg
+  +252 | Result: 
+   +44 | Executing: rm /home/pi/TransCorder/cfd29aa6-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +743 | Executing: sudo jpegoptim /home/pi/TransCorder/d0eb07f2-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +681 | Result: /home/pi/TransCorder/d0eb07f2-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597220 --> 23642 bytes (96.04%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/d0eb07f2-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8785.jpg
+  +251 | Result: 
+   +37 | Executing: rm /home/pi/TransCorder/d0eb07f2-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +749 | Executing: sudo jpegoptim /home/pi/TransCorder/d1fca678-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +692 | Result: /home/pi/TransCorder/d1fca678-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596145 --> 23507 bytes (96.06%), optimized.\n
+   +36 | Executing: sudo cp /home/pi/TransCorder/d1fca678-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8786.jpg
+  +227 | Result: 
+   +24 | Executing: rm /home/pi/TransCorder/d1fca678-1f47-11eb-b89f-b827eb6605c0.jpg
+   +68 | Result: 
+   +46 | Executing: hostname
+   +67 | Result: MasterPi\n
+   +30 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +124 | Result: /dev/sda\n
+   +25 | Executing: hostname -I
+   +67 | Result: 192.168.43.229 \n
+   +27 | Executing: df -h /dev/sda
+   +53 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  360M  3.4G  10% /media/sdcard\n
+   +42 | Executing: ls /media/sdcard | wc -l
+  +224 | Result: 8787\n
+   +95 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +35 | Executing: sudo jpegoptim /home/pi/TransCorder/d30e3aa4-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +41 | Result: 
+  +638 | Result: /home/pi/TransCorder/d30e3aa4-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 595920 --> 23217 bytes (96.10%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/d30e3aa4-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8787.jpg
+  +222 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/d30e3aa4-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +776 | Executing: sudo jpegoptim /home/pi/TransCorder/d4274bc4-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +686 | Result: /home/pi/TransCorder/d4274bc4-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597107 --> 23362 bytes (96.09%), optimized.\n
+   +25 | Executing: sudo cp /home/pi/TransCorder/d4274bc4-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8788.jpg
+  +224 | Result: 
+   +40 | Executing: rm /home/pi/TransCorder/d4274bc4-1f47-11eb-b89f-b827eb6605c0.jpg
+   +57 | Result: 
+  +715 | Executing: sudo jpegoptim /home/pi/TransCorder/d5396b50-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+ +1076 | Result: /home/pi/TransCorder/d5396b50-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597930 --> 23412 bytes (96.08%), optimized.\n
+   +46 | Executing: sudo cp /home/pi/TransCorder/d5396b50-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8789.jpg
+  +258 | Result: 
+   +38 | Executing: rm /home/pi/TransCorder/d5396b50-1f47-11eb-b89f-b827eb6605c0.jpg
+   +40 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +36 | Result: 
+   +14 | Result: 
+  +728 | Executing: sudo jpegoptim /home/pi/TransCorder/d68b5ebe-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +688 | Result: /home/pi/TransCorder/d68b5ebe-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 595733 --> 23173 bytes (96.11%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/d68b5ebe-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8790.jpg
+  +222 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/d68b5ebe-1f47-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +734 | Executing: sudo jpegoptim /home/pi/TransCorder/d7956f5c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +734 | Result: /home/pi/TransCorder/d7956f5c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 595233 --> 23199 bytes (96.10%), optimized.\n
+   +33 | Executing: sudo cp /home/pi/TransCorder/d7956f5c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8791.jpg
+  +223 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/d7956f5c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +54 | Result: 
+  +661 | Executing: hostname
+   +90 | Executing: sudo jpegoptim /home/pi/TransCorder/d8a97460-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +43 | Result: MasterPi\n
+   +36 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +165 | Result: /dev/sda\n
+   +28 | Executing: hostname -I
+  +128 | Result: 192.168.43.229 \n
+   +30 | Executing: df -h /dev/sda
+  +112 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  360M  3.4G  10% /media/sdcard\n
+   +30 | Executing: ls /media/sdcard | wc -l
+  +102 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +113 | Result: 
+  +256 | Result: 8792\n
+  +222 | Result: /home/pi/TransCorder/d8a97460-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596821 --> 23385 bytes (96.08%), optimized.\n
+   +49 | Executing: sudo cp /home/pi/TransCorder/d8a97460-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8792.jpg
+  +223 | Result: 
+   +24 | Executing: rm /home/pi/TransCorder/d8a97460-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +777 | Executing: sudo jpegoptim /home/pi/TransCorder/da125344-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +889 | Result: /home/pi/TransCorder/da125344-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598014 --> 23420 bytes (96.08%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/da125344-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8793.jpg
+  +435 | Result: 
+   +65 | Executing: rm /home/pi/TransCorder/da125344-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +733 | Executing: sudo jpegoptim /home/pi/TransCorder/db66a04c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +740 | Result: /home/pi/TransCorder/db66a04c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596948 --> 23455 bytes (96.07%), optimized.\n
+   +41 | Executing: sudo cp /home/pi/TransCorder/db66a04c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8794.jpg
+  +239 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/db66a04c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +34 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +46 | Result: 
+    +8 | Execution error: EXIT: 0
+   +40 | Executing: cat /home/pi/TransCorder/config.json
+   +60 | Result: {"auto_fuses":1,"recorder_enabled":1,"transmitter_enabled":0,"config_pulling_interval":5000,"status_pushing_interval":10000,"camera_width":1200,"camera_height":900,"camera_brightness":62,"camera_contrast":72,"camera_sharpness":100,"camera_horizontal_flip":0,"camera_vertical_flip":0,"camera_optimization":70}\n
+  +634 | Executing: sudo jpegoptim /home/pi/TransCorder/dc84f974-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +693 | Result: /home/pi/TransCorder/dc84f974-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 595844 --> 23345 bytes (96.08%), optimized.\n
+   +34 | Executing: sudo cp /home/pi/TransCorder/dc84f974-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8795.jpg
+  +223 | Result: 
+   +32 | Executing: rm /home/pi/TransCorder/dc84f974-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +714 | Executing: sudo jpegoptim /home/pi/TransCorder/dd8f93ec-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +735 | Result: /home/pi/TransCorder/dd8f93ec-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596785 --> 23350 bytes (96.09%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/dd8f93ec-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8796.jpg
+  +246 | Result: 
+   +25 | Executing: rm /home/pi/TransCorder/dd8f93ec-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +659 | Executing: hostname
+   +89 | Executing: sudo jpegoptim /home/pi/TransCorder/dea0cc38-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +37 | Result: MasterPi\n
+   +26 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +177 | Result: /dev/sda\n
+   +32 | Executing: hostname -I
+   +99 | Result: 192.168.43.229 \n
+   +31 | Executing: df -h /dev/sda
+  +103 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  360M  3.4G  10% /media/sdcard\n
+   +32 | Executing: ls /media/sdcard | wc -l
+  +116 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +139 | Result: 
+  +215 | Result: 8797\n
+  +227 | Result: /home/pi/TransCorder/dea0cc38-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596492 --> 23294 bytes (96.09%), optimized.\n
+   +31 | Executing: sudo cp /home/pi/TransCorder/dea0cc38-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8797.jpg
+  +224 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/dea0cc38-1f47-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+  +737 | Executing: sudo jpegoptim /home/pi/TransCorder/e0027f9a-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +722 | Result: /home/pi/TransCorder/e0027f9a-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 595853 --> 23350 bytes (96.08%), optimized.\n
+   +32 | Executing: sudo cp /home/pi/TransCorder/e0027f9a-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8798.jpg
+  +245 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/e0027f9a-1f47-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +725 | Executing: sudo jpegoptim /home/pi/TransCorder/e11662a2-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +697 | Result: /home/pi/TransCorder/e11662a2-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596052 --> 23212 bytes (96.11%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/e11662a2-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8799.jpg
+  +251 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/e11662a2-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +567 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +34 | Result: 
+  +124 | Executing: sudo jpegoptim /home/pi/TransCorder/e2245604-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +712 | Result: /home/pi/TransCorder/e2245604-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 609798 --> 24556 bytes (95.97%), optimized.\n
+   +31 | Executing: sudo cp /home/pi/TransCorder/e2245604-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8800.jpg
+  +269 | Result: 
+   +23 | Executing: rm /home/pi/TransCorder/e2245604-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +725 | Executing: sudo jpegoptim /home/pi/TransCorder/e3398866-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +713 | Result: /home/pi/TransCorder/e3398866-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 610402 --> 24765 bytes (95.94%), optimized.\n
+   +31 | Executing: sudo cp /home/pi/TransCorder/e3398866-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8801.jpg
+  +273 | Result: 
+   +33 | Executing: rm /home/pi/TransCorder/e3398866-1f47-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +705 | Executing: sudo jpegoptim /home/pi/TransCorder/e44e2950-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +433 | Executing: hostname
+   +87 | Result: MasterPi\n
+   +22 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +136 | Result: /dev/sda\n
+   +22 | Executing: hostname -I
+   +90 | Result: 192.168.43.229 \n
+   +22 | Executing: df -h /dev/sda
+   +77 | Result: /home/pi/TransCorder/e44e2950-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 608139 --> 24706 bytes (95.94%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/e44e2950-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8802.jpg
+   +33 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  360M  3.4G  10% /media/sdcard\n
+   +33 | Executing: ls /media/sdcard | wc -l
+  +234 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +394 | Result: 
+   +19 | Result: 8803\n
+   +10 | Execution error: EXIT: 0
+   +18 | Executing: rm /home/pi/TransCorder/e44e2950-1f47-11eb-b89f-b827eb6605c0.jpg
+   +37 | Executing: cat /home/pi/TransCorder/config.json
+   +47 | Result: 
+   +26 | Result: {"auto_fuses":1,"recorder_enabled":1,"transmitter_enabled":0,"config_pulling_interval":5000,"status_pushing_interval":10000,"camera_width":1200,"camera_height":900,"camera_brightness":62,"camera_contrast":72,"camera_sharpness":100,"camera_horizontal_flip":0,"camera_vertical_flip":0,"camera_optimization":70}\n
+  +750 | Executing: sudo jpegoptim /home/pi/TransCorder/e5c6cc42-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +690 | Result: /home/pi/TransCorder/e5c6cc42-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596133 --> 23304 bytes (96.09%), optimized.\n
+   +35 | Executing: sudo cp /home/pi/TransCorder/e5c6cc42-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8803.jpg
+  +256 | Result: 
+   +75 | Executing: rm /home/pi/TransCorder/e5c6cc42-1f47-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +753 | Executing: sudo jpegoptim /home/pi/TransCorder/e6e3ed6c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +684 | Result: /home/pi/TransCorder/e6e3ed6c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596203 --> 23329 bytes (96.09%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/e6e3ed6c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8804.jpg
+  +250 | Result: 
+   +42 | Executing: rm /home/pi/TransCorder/e6e3ed6c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+  +734 | Executing: sudo jpegoptim /home/pi/TransCorder/e7f6af78-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +79 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +74 | Result: 
+  +581 | Result: /home/pi/TransCorder/e7f6af78-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597196 --> 23340 bytes (96.09%), optimized.\n
+   +34 | Executing: sudo cp /home/pi/TransCorder/e7f6af78-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8805.jpg
+  +232 | Result: 
+   +31 | Executing: rm /home/pi/TransCorder/e7f6af78-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +719 | Executing: sudo jpegoptim /home/pi/TransCorder/e90bcf56-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +676 | Result: /home/pi/TransCorder/e90bcf56-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 609399 --> 24700 bytes (95.95%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/e90bcf56-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8806.jpg
+  +241 | Result: 
+   +53 | Executing: rm /home/pi/TransCorder/e90bcf56-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +705 | Executing: sudo jpegoptim /home/pi/TransCorder/ea176658-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +711 | Result: /home/pi/TransCorder/ea176658-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 594854 --> 23190 bytes (96.10%), optimized.\n
+   +27 | Executing: hostname
+   +32 | Executing: sudo cp /home/pi/TransCorder/ea176658-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8807.jpg
+   +47 | Result: MasterPi\n
+   +35 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +182 | Result: /dev/sda\n
+   +25 | Executing: hostname -I
+   +87 | Result: 192.168.43.229 \n
+   +23 | Executing: df -h /dev/sda
+   +65 | Result: 
+   +30 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  360M  3.4G  10% /media/sdcard\n
+    +7 | Executing: rm /home/pi/TransCorder/ea176658-1f47-11eb-b89f-b827eb6605c0.jpg
+   +36 | Executing: ls /media/sdcard | wc -l
+   +48 | Result: 
+  +110 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +198 | Result: 8808\n
+  +312 | Result: 
+  +502 | Executing: sudo jpegoptim /home/pi/TransCorder/eb53c412-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +670 | Result: /home/pi/TransCorder/eb53c412-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 595168 --> 23495 bytes (96.05%), optimized.\n
+   +48 | Executing: sudo cp /home/pi/TransCorder/eb53c412-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8808.jpg
+  +227 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/eb53c412-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +724 | Executing: sudo jpegoptim /home/pi/TransCorder/ec980d6a-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +676 | Result: /home/pi/TransCorder/ec980d6a-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 594916 --> 23276 bytes (96.09%), optimized.\n
+   +67 | Executing: sudo cp /home/pi/TransCorder/ec980d6a-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8809.jpg
+  +222 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/ec980d6a-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +690 | Executing: sudo jpegoptim /home/pi/TransCorder/eda4d896-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +554 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +81 | Result: 
+  +132 | Result: /home/pi/TransCorder/eda4d896-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 609412 --> 24568 bytes (95.97%), optimized.\n
+   +46 | Executing: sudo cp /home/pi/TransCorder/eda4d896-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8810.jpg
+  +285 | Result: 
+   +43 | Executing: rm /home/pi/TransCorder/eda4d896-1f47-11eb-b89f-b827eb6605c0.jpg
+   +69 | Result: 
+  +701 | Executing: sudo jpegoptim /home/pi/TransCorder/eec76680-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +740 | Result: /home/pi/TransCorder/eec76680-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 608995 --> 24673 bytes (95.95%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/eec76680-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8811.jpg
+  +225 | Result: 
+   +35 | Executing: rm /home/pi/TransCorder/eec76680-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +710 | Executing: sudo jpegoptim /home/pi/TransCorder/efd527f6-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +761 | Result: /home/pi/TransCorder/efd527f6-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 608716 --> 24559 bytes (95.97%), optimized.\n
+   +35 | Executing: sudo cp /home/pi/TransCorder/efd527f6-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8812.jpg
+  +267 | Result: 
+   +64 | Executing: hostname
+   +33 | Executing: rm /home/pi/TransCorder/efd527f6-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: MasterPi\n
+   +23 | Result: 
+   +13 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +104 | Result: /dev/sda\n
+   +27 | Executing: hostname -I
+   +42 | Result: 192.168.43.229 \n
+   +23 | Executing: df -h /dev/sda
+   +75 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  360M  3.4G  10% /media/sdcard\n
+   +26 | Executing: ls /media/sdcard | wc -l
+  +188 | Result: 8813\n
+  +134 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +34 | Result: 
+  +135 | Executing: sudo jpegoptim /home/pi/TransCorder/f0fbd440-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +727 | Result: /home/pi/TransCorder/f0fbd440-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596786 --> 23449 bytes (96.07%), optimized.\n
+   +40 | Executing: sudo cp /home/pi/TransCorder/f0fbd440-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8813.jpg
+  +254 | Result: 
+   +23 | Executing: rm /home/pi/TransCorder/f0fbd440-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +713 | Executing: sudo jpegoptim /home/pi/TransCorder/f21c4db4-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +710 | Result: /home/pi/TransCorder/f21c4db4-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596968 --> 23503 bytes (96.06%), optimized.\n
+   +51 | Executing: sudo cp /home/pi/TransCorder/f21c4db4-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8814.jpg
+  +250 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/f21c4db4-1f47-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +716 | Executing: sudo jpegoptim /home/pi/TransCorder/f331b2ac-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +652 | Result: /home/pi/TransCorder/f331b2ac-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596483 --> 23351 bytes (96.09%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/f331b2ac-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8815.jpg
+  +250 | Result: 
+   +31 | Executing: rm /home/pi/TransCorder/f331b2ac-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +223 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +42 | Result: 
+  +463 | Executing: sudo jpegoptim /home/pi/TransCorder/f4372c04-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +687 | Result: /home/pi/TransCorder/f4372c04-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596897 --> 23461 bytes (96.07%), optimized.\n
+   +33 | Executing: sudo cp /home/pi/TransCorder/f4372c04-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8816.jpg
+  +233 | Result: 
+   +38 | Executing: rm /home/pi/TransCorder/f4372c04-1f47-11eb-b89f-b827eb6605c0.jpg
+   +72 | Result: 
+  +725 | Executing: sudo jpegoptim /home/pi/TransCorder/f54756aa-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +682 | Result: /home/pi/TransCorder/f54756aa-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597768 --> 23496 bytes (96.07%), optimized.\n
+   +31 | Executing: sudo cp /home/pi/TransCorder/f54756aa-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8817.jpg
+  +237 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/f54756aa-1f47-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +720 | Executing: sudo jpegoptim /home/pi/TransCorder/f65306fc-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +208 | Executing: hostname
+   +93 | Result: MasterPi\n
+   +30 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +145 | Result: /dev/sda\n
+   +69 | Executing: hostname -I
+   +82 | Result: 192.168.43.229 \n
+   +30 | Executing: df -h /dev/sda
+   +94 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  360M  3.4G  10% /media/sdcard\n
+   +37 | Executing: ls /media/sdcard | wc -l
+  +261 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +111 | Result: 
+  +131 | Result: 8818\n
+  +302 | Result: /home/pi/TransCorder/f65306fc-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597205 --> 23590 bytes (96.05%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/f65306fc-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8818.jpg
+  +251 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/f65306fc-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +727 | Executing: sudo jpegoptim /home/pi/TransCorder/f7ea74b4-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +683 | Result: /home/pi/TransCorder/f7ea74b4-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597049 --> 23492 bytes (96.07%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/f7ea74b4-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8819.jpg
+  +241 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/f7ea74b4-1f47-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +738 | Executing: sudo jpegoptim /home/pi/TransCorder/f8f5cdae-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +665 | Result: /home/pi/TransCorder/f8f5cdae-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597807 --> 23485 bytes (96.07%), optimized.\n
+   +86 | Executing: sudo cp /home/pi/TransCorder/f8f5cdae-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8820.jpg
+  +222 | Result: 
+   +32 | Executing: rm /home/pi/TransCorder/f8f5cdae-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +524 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +85 | Result: 
+  +134 | Executing: sudo jpegoptim /home/pi/TransCorder/fa06bda2-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +669 | Result: /home/pi/TransCorder/fa06bda2-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597532 --> 23668 bytes (96.04%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/fa06bda2-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8821.jpg
+  +221 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/fa06bda2-1f47-11eb-b89f-b827eb6605c0.jpg
+   +66 | Result: 
+  +715 | Executing: sudo jpegoptim /home/pi/TransCorder/fb120d0a-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +741 | Result: /home/pi/TransCorder/fb120d0a-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598646 --> 23540 bytes (96.07%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/fb120d0a-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8822.jpg
+  +222 | Result: 
+   +24 | Executing: rm /home/pi/TransCorder/fb120d0a-1f47-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +770 | Executing: sudo jpegoptim /home/pi/TransCorder/fc28ee0c-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +439 | Executing: hostname
+   +93 | Result: MasterPi\n
+   +28 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +152 | Result: /dev/sda\n
+   +28 | Executing: hostname -I
+  +112 | Result: 192.168.43.229 \n
+   +23 | Executing: df -h /dev/sda
+  +138 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  360M  3.4G  10% /media/sdcard\n
+   +30 | Executing: ls /media/sdcard | wc -l
+  +107 | Result: /home/pi/TransCorder/fc28ee0c-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598293 --> 23424 bytes (96.08%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/fc28ee0c-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8823.jpg
+   +87 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +135 | Result: 
+  +187 | Result: 8823\n
+  +190 | Result: 
+   +60 | Executing: rm /home/pi/TransCorder/fc28ee0c-1f47-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +734 | Executing: sudo jpegoptim /home/pi/TransCorder/fdb4799e-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +717 | Result: /home/pi/TransCorder/fdb4799e-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597269 --> 23525 bytes (96.06%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/fdb4799e-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8824.jpg
+  +228 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/fdb4799e-1f47-11eb-b89f-b827eb6605c0.jpg
+   +74 | Result: 
+  +733 | Executing: sudo jpegoptim /home/pi/TransCorder/fec90bd8-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +720 | Result: /home/pi/TransCorder/fec90bd8-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597586 --> 23501 bytes (96.07%), optimized.\n
+   +50 | Executing: sudo cp /home/pi/TransCorder/fec90bd8-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8825.jpg
+  +221 | Result: 
+   +41 | Executing: rm /home/pi/TransCorder/fec90bd8-1f47-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +722 | Executing: sudo jpegoptim /home/pi/TransCorder/ffdc7316-1f47-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +38 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +86 | Result: 
+  +655 | Result: /home/pi/TransCorder/ffdc7316-1f47-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597863 --> 23396 bytes (96.09%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/ffdc7316-1f47-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8826.jpg
+  +238 | Result: 
+   +24 | Executing: rm /home/pi/TransCorder/ffdc7316-1f47-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +727 | Executing: sudo jpegoptim /home/pi/TransCorder/00f469b6-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +727 | Result: /home/pi/TransCorder/00f469b6-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597319 --> 23482 bytes (96.07%), optimized.\n
+   +39 | Executing: sudo cp /home/pi/TransCorder/00f469b6-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8827.jpg
+  +246 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/00f469b6-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +690 | Executing: sudo jpegoptim /home/pi/TransCorder/020780fe-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +612 | Executing: hostname
+   +95 | Result: MasterPi\n
+   +36 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+   +53 | Result: /home/pi/TransCorder/020780fe-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597532 --> 23412 bytes (96.08%), optimized.\n
+   +42 | Executing: sudo cp /home/pi/TransCorder/020780fe-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8828.jpg
+   +75 | Result: /dev/sda\n
+   +30 | Executing: hostname -I
+  +102 | Result: 192.168.43.229 \n
+   +44 | Executing: df -h /dev/sda
+   +99 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  361M  3.4G  10% /media/sdcard\n
+   +26 | Executing: ls /media/sdcard | wc -l
+  +112 | Result: 
+   +24 | Executing: rm /home/pi/TransCorder/020780fe-1f48-11eb-b89f-b827eb6605c0.jpg
+   +85 | Result: 
+   +32 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +86 | Result: 
+   +71 | Result: 8829\n
+  +531 | Executing: sudo jpegoptim /home/pi/TransCorder/034b4b8a-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +730 | Result: /home/pi/TransCorder/034b4b8a-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598238 --> 23618 bytes (96.05%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/034b4b8a-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8829.jpg
+  +264 | Result: 
+   +36 | Executing: rm /home/pi/TransCorder/034b4b8a-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +711 | Executing: sudo jpegoptim /home/pi/TransCorder/0462c534-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +722 | Result: /home/pi/TransCorder/0462c534-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598583 --> 23512 bytes (96.07%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/0462c534-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8830.jpg
+  +258 | Result: 
+   +37 | Executing: rm /home/pi/TransCorder/0462c534-1f48-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +717 | Executing: sudo jpegoptim /home/pi/TransCorder/05761796-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +649 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +86 | Result: /home/pi/TransCorder/05761796-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597922 --> 23666 bytes (96.04%), optimized.\n
+   +18 | Execution error: EXIT: 0
+   +16 | Executing: sudo cp /home/pi/TransCorder/05761796-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8831.jpg
+   +43 | Executing: cat /home/pi/TransCorder/config.json
+   +92 | Result: {"auto_fuses":1,"recorder_enabled":1,"transmitter_enabled":0,"config_pulling_interval":5000,"status_pushing_interval":10000,"camera_width":1200,"camera_height":900,"camera_brightness":62,"camera_contrast":72,"camera_sharpness":100,"camera_horizontal_flip":0,"camera_vertical_flip":0,"camera_optimization":70}\n
+  +182 | Result: 
+   +23 | Executing: rm /home/pi/TransCorder/05761796-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +727 | Executing: sudo jpegoptim /home/pi/TransCorder/0695034e-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +637 | Result: /home/pi/TransCorder/0695034e-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597378 --> 23566 bytes (96.06%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/0695034e-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8832.jpg
+  +237 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/0695034e-1f48-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +732 | Executing: sudo jpegoptim /home/pi/TransCorder/0799efde-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +678 | Result: /home/pi/TransCorder/0799efde-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597358 --> 23530 bytes (96.06%), optimized.\n
+   +42 | Executing: sudo cp /home/pi/TransCorder/0799efde-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8833.jpg
+  +222 | Result: 
+   +33 | Executing: rm /home/pi/TransCorder/0799efde-1f48-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +253 | Executing: hostname
+   +46 | Result: MasterPi\n
+   +24 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+   +89 | Result: /dev/sda\n
+   +25 | Executing: hostname -I
+   +49 | Result: 192.168.43.229 \n
+   +26 | Executing: df -h /dev/sda
+   +58 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  361M  3.4G  10% /media/sdcard\n
+   +24 | Executing: ls /media/sdcard | wc -l
+  +124 | Executing: sudo jpegoptim /home/pi/TransCorder/08a1ff02-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +282 | Result: 8834\n
+   +32 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +83 | Result: 
+  +489 | Result: /home/pi/TransCorder/08a1ff02-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597999 --> 23637 bytes (96.05%), optimized.\n
+   +22 | Executing: sudo cp /home/pi/TransCorder/08a1ff02-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8834.jpg
+  +221 | Result: 
+   +32 | Executing: rm /home/pi/TransCorder/08a1ff02-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +694 | Executing: sudo jpegoptim /home/pi/TransCorder/09c6f4a0-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +738 | Result: /home/pi/TransCorder/09c6f4a0-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598353 --> 23536 bytes (96.07%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/09c6f4a0-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8835.jpg
+  +240 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/09c6f4a0-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +716 | Executing: sudo jpegoptim /home/pi/TransCorder/0ad535a0-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +726 | Result: /home/pi/TransCorder/0ad535a0-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598360 --> 23628 bytes (96.05%), optimized.\n
+   +78 | Executing: sudo cp /home/pi/TransCorder/0ad535a0-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8836.jpg
+  +239 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/0ad535a0-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +558 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +34 | Result: 
+  +115 | Executing: sudo jpegoptim /home/pi/TransCorder/0becaebe-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +704 | Result: /home/pi/TransCorder/0becaebe-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598059 --> 23624 bytes (96.05%), optimized.\n
+   +36 | Executing: sudo cp /home/pi/TransCorder/0becaebe-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8837.jpg
+  +254 | Result: 
+   +35 | Executing: rm /home/pi/TransCorder/0becaebe-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +707 | Executing: sudo jpegoptim /home/pi/TransCorder/0cfb6976-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +724 | Result: /home/pi/TransCorder/0cfb6976-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598673 --> 23635 bytes (96.05%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/0cfb6976-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8838.jpg
+  +269 | Result: 
+   +31 | Executing: rm /home/pi/TransCorder/0cfb6976-1f48-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +769 | Executing: sudo jpegoptim /home/pi/TransCorder/0e15c5fe-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +369 | Executing: hostname
+  +101 | Result: MasterPi\n
+   +33 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +176 | Result: /dev/sda\n
+   +37 | Executing: hostname -I
+   +98 | Result: 192.168.43.229 \n
+   +23 | Executing: df -h /dev/sda
+   +98 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  361M  3.4G  10% /media/sdcard\n
+   +25 | Executing: ls /media/sdcard | wc -l
+  +100 | Result: /home/pi/TransCorder/0e15c5fe-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598008 --> 23503 bytes (96.07%), optimized.\n
+   +37 | Executing: sudo cp /home/pi/TransCorder/0e15c5fe-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8839.jpg
+   +90 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +116 | Result: 
+  +165 | Result: 8839\n
+   +88 | Result: 
+   +31 | Executing: rm /home/pi/TransCorder/0e15c5fe-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +693 | Executing: sudo jpegoptim /home/pi/TransCorder/0f7d9124-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +716 | Result: /home/pi/TransCorder/0f7d9124-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597384 --> 23526 bytes (96.06%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/0f7d9124-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8840.jpg
+  +252 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/0f7d9124-1f48-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+  +706 | Executing: sudo jpegoptim /home/pi/TransCorder/108a9382-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +677 | Result: /home/pi/TransCorder/108a9382-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597002 --> 23377 bytes (96.08%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/108a9382-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8841.jpg
+  +269 | Result: 
+   +37 | Executing: rm /home/pi/TransCorder/108a9382-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +714 | Executing: sudo jpegoptim /home/pi/TransCorder/1199146a-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +323 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +72 | Result: 
+  +329 | Result: /home/pi/TransCorder/1199146a-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597443 --> 23512 bytes (96.06%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/1199146a-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8842.jpg
+  +273 | Result: 
+   +46 | Executing: rm /home/pi/TransCorder/1199146a-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +731 | Executing: sudo jpegoptim /home/pi/TransCorder/12b0a610-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +681 | Result: /home/pi/TransCorder/12b0a610-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598116 --> 23663 bytes (96.04%), optimized.\n
+   +54 | Executing: sudo cp /home/pi/TransCorder/12b0a610-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8843.jpg
+  +227 | Result: 
+   +24 | Executing: rm /home/pi/TransCorder/12b0a610-1f48-11eb-b89f-b827eb6605c0.jpg
+   +63 | Result: 
+  +733 | Executing: sudo jpegoptim /home/pi/TransCorder/13bff31c-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +697 | Result: /home/pi/TransCorder/13bff31c-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597705 --> 23571 bytes (96.06%), optimized.\n
+   +25 | Executing: sudo cp /home/pi/TransCorder/13bff31c-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8844.jpg
+  +148 | Executing: hostname
+   +88 | Result: MasterPi\n
+   +23 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+   +54 | Result: 
+   +36 | Executing: rm /home/pi/TransCorder/13bff31c-1f48-11eb-b89f-b827eb6605c0.jpg
+   +69 | Result: /dev/sda\n
+   +18 | Result: 
+   +12 | Executing: hostname -I
+   +70 | Result: 192.168.43.229 \n
+   +27 | Executing: df -h /dev/sda
+   +50 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  361M  3.4G  10% /media/sdcard\n
+   +32 | Executing: ls /media/sdcard | wc -l
+  +246 | Result: 8845\n
+   +80 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +52 | Result: 
+  +199 | Executing: sudo jpegoptim /home/pi/TransCorder/14dfcbfa-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +685 | Result: /home/pi/TransCorder/14dfcbfa-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598752 --> 23638 bytes (96.05%), optimized.\n
+   +39 | Executing: sudo cp /home/pi/TransCorder/14dfcbfa-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8845.jpg
+  +226 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/14dfcbfa-1f48-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +720 | Executing: sudo jpegoptim /home/pi/TransCorder/15f0f618-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +730 | Result: /home/pi/TransCorder/15f0f618-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597696 --> 23611 bytes (96.05%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/15f0f618-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8846.jpg
+  +240 | Result: 
+   +36 | Executing: rm /home/pi/TransCorder/15f0f618-1f48-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +712 | Executing: sudo jpegoptim /home/pi/TransCorder/17026294-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +732 | Result: /home/pi/TransCorder/17026294-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597326 --> 23555 bytes (96.06%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/17026294-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8847.jpg
+  +250 | Result: 
+   +23 | Executing: rm /home/pi/TransCorder/17026294-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +161 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +49 | Result: 
+  +527 | Executing: sudo jpegoptim /home/pi/TransCorder/1812c19c-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +695 | Result: /home/pi/TransCorder/1812c19c-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597983 --> 23584 bytes (96.06%), optimized.\n
+   +33 | Executing: sudo cp /home/pi/TransCorder/1812c19c-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8848.jpg
+  +251 | Result: 
+   +31 | Executing: rm /home/pi/TransCorder/1812c19c-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +705 | Executing: sudo jpegoptim /home/pi/TransCorder/1924218e-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +727 | Result: /home/pi/TransCorder/1924218e-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597958 --> 23517 bytes (96.07%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/1924218e-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8849.jpg
+  +252 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/1924218e-1f48-11eb-b89f-b827eb6605c0.jpg
+   +46 | Result: 
+  +729 | Executing: sudo jpegoptim /home/pi/TransCorder/1a355f48-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +47 | Executing: hostname
+   +92 | Result: MasterPi\n
+   +49 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +138 | Result: /dev/sda\n
+   +26 | Executing: hostname -I
+   +84 | Result: 192.168.43.229 \n
+   +23 | Executing: df -h /dev/sda
+   +94 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  361M  3.4G  10% /media/sdcard\n
+   +21 | Executing: ls /media/sdcard | wc -l
+  +281 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +127 | Result: 
+   +77 | Result: 8850\n
+  +229 | Result: /home/pi/TransCorder/1a355f48-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598615 --> 23542 bytes (96.07%), optimized.\n
+   +25 | Executing: sudo cp /home/pi/TransCorder/1a355f48-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8850.jpg
+  +251 | Result: 
+   +25 | Executing: rm /home/pi/TransCorder/1a355f48-1f48-11eb-b89f-b827eb6605c0.jpg
+   +43 | Result: 
+  +710 | Executing: sudo jpegoptim /home/pi/TransCorder/1b9d6290-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +746 | Result: /home/pi/TransCorder/1b9d6290-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597806 --> 23603 bytes (96.05%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/1b9d6290-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8851.jpg
+  +251 | Result: 
+   +41 | Executing: rm /home/pi/TransCorder/1b9d6290-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +726 | Executing: sudo jpegoptim /home/pi/TransCorder/1cb3b6de-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +676 | Result: /home/pi/TransCorder/1cb3b6de-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598300 --> 23534 bytes (96.07%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/1cb3b6de-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8852.jpg
+  +253 | Result: 
+   +60 | Executing: rm /home/pi/TransCorder/1cb3b6de-1f48-11eb-b89f-b827eb6605c0.jpg
+   +65 | Result: 
+  +663 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +45 | Result: 
+   +15 | Executing: sudo jpegoptim /home/pi/TransCorder/1dc86de4-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +678 | Result: /home/pi/TransCorder/1dc86de4-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597437 --> 23543 bytes (96.06%), optimized.\n
+   +67 | Executing: sudo cp /home/pi/TransCorder/1dc86de4-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8853.jpg
+  +433 | Result: 
+   +39 | Executing: rm /home/pi/TransCorder/1dc86de4-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +713 | Executing: sudo jpegoptim /home/pi/TransCorder/1ef743b6-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +696 | Result: /home/pi/TransCorder/1ef743b6-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596746 --> 23364 bytes (96.08%), optimized.\n
+   +46 | Executing: sudo cp /home/pi/TransCorder/1ef743b6-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8854.jpg
+  +244 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/1ef743b6-1f48-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +709 | Executing: sudo jpegoptim /home/pi/TransCorder/200603fa-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +305 | Executing: hostname
+   +84 | Result: MasterPi\n
+   +19 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +135 | Result: /dev/sda\n
+   +26 | Executing: hostname -I
+   +91 | Result: 192.168.43.229 \n
+   +38 | Executing: df -h /dev/sda
+  +170 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  361M  3.4G  10% /media/sdcard\n
+   +39 | Executing: ls /media/sdcard | wc -l
+  +286 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +92 | Result: /home/pi/TransCorder/200603fa-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597726 --> 23638 bytes (96.05%), optimized.\n
+   +29 | Result: 
+   +20 | Executing: sudo cp /home/pi/TransCorder/200603fa-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8855.jpg
+   +46 | Result: 8855\n
+  +230 | Result: 
+   +25 | Executing: rm /home/pi/TransCorder/200603fa-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +729 | Executing: sudo jpegoptim /home/pi/TransCorder/21723bb4-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +669 | Result: /home/pi/TransCorder/21723bb4-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598376 --> 23422 bytes (96.09%), optimized.\n
+   +38 | Executing: sudo cp /home/pi/TransCorder/21723bb4-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8856.jpg
+  +271 | Result: 
+   +43 | Executing: rm /home/pi/TransCorder/21723bb4-1f48-11eb-b89f-b827eb6605c0.jpg
+  +107 | Result: 
+  +751 | Executing: sudo jpegoptim /home/pi/TransCorder/22919a76-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +653 | Result: /home/pi/TransCorder/22919a76-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596716 --> 23411 bytes (96.08%), optimized.\n
+   +56 | Executing: sudo cp /home/pi/TransCorder/22919a76-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8857.jpg
+  +239 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/22919a76-1f48-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +749 | Executing: sudo jpegoptim /home/pi/TransCorder/239fe88c-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +124 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +71 | Result: 
+  +566 | Result: /home/pi/TransCorder/239fe88c-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597393 --> 23579 bytes (96.05%), optimized.\n
+  +115 | Executing: sudo cp /home/pi/TransCorder/239fe88c-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8858.jpg
+  +227 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/239fe88c-1f48-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +737 | Executing: sudo jpegoptim /home/pi/TransCorder/24c24da4-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +679 | Result: /home/pi/TransCorder/24c24da4-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597094 --> 23446 bytes (96.07%), optimized.\n
+   +46 | Executing: sudo cp /home/pi/TransCorder/24c24da4-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8859.jpg
+  +233 | Result: 
+   +23 | Executing: rm /home/pi/TransCorder/24c24da4-1f48-11eb-b89f-b827eb6605c0.jpg
+   +45 | Result: 
+  +748 | Executing: sudo jpegoptim /home/pi/TransCorder/25d079e6-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +563 | Executing: hostname
+   +89 | Result: MasterPi\n
+   +21 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +137 | Result: /dev/sda\n
+   +23 | Executing: hostname -I
+   +89 | Result: /home/pi/TransCorder/25d079e6-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597516 --> 23415 bytes (96.08%), optimized.\n
+   +13 | Result: 192.168.43.229 \n
+   +16 | Executing: sudo cp /home/pi/TransCorder/25d079e6-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8860.jpg
+   +32 | Executing: df -h /dev/sda
+   +95 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  361M  3.4G  10% /media/sdcard\n
+   +42 | Executing: ls /media/sdcard | wc -l
+  +231 | Result: 
+   +22 | Executing: rm /home/pi/TransCorder/25d079e6-1f48-11eb-b89f-b827eb6605c0.jpg
+   +71 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +88 | Result: 
+   +18 | Result: 
+   +41 | Result: 8861\n
+  +709 | Executing: sudo jpegoptim /home/pi/TransCorder/272c90f4-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +702 | Result: /home/pi/TransCorder/272c90f4-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597641 --> 23477 bytes (96.07%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/272c90f4-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8861.jpg
+  +223 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/272c90f4-1f48-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +748 | Executing: sudo jpegoptim /home/pi/TransCorder/283c617c-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +716 | Result: /home/pi/TransCorder/283c617c-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597898 --> 23301 bytes (96.10%), optimized.\n
+   +34 | Executing: sudo cp /home/pi/TransCorder/283c617c-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8862.jpg
+  +223 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/283c617c-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +713 | Executing: sudo jpegoptim /home/pi/TransCorder/294e03fe-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +576 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +78 | Result: 
+  +161 | Result: /home/pi/TransCorder/294e03fe-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597792 --> 23507 bytes (96.07%), optimized.\n
+   +28 | Executing: sudo cp /home/pi/TransCorder/294e03fe-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8863.jpg
+  +226 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/294e03fe-1f48-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +692 | Executing: sudo jpegoptim /home/pi/TransCorder/2a682332-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +708 | Result: /home/pi/TransCorder/2a682332-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598271 --> 23465 bytes (96.08%), optimized.\n
+   +39 | Executing: sudo cp /home/pi/TransCorder/2a682332-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8864.jpg
+  +272 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/2a682332-1f48-11eb-b89f-b827eb6605c0.jpg
+   +46 | Result: 
+  +711 | Executing: sudo jpegoptim /home/pi/TransCorder/2b78a120-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +703 | Result: /home/pi/TransCorder/2b78a120-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 598671 --> 23512 bytes (96.07%), optimized.\n
+   +36 | Executing: sudo cp /home/pi/TransCorder/2b78a120-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8865.jpg
+  +270 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/2b78a120-1f48-11eb-b89f-b827eb6605c0.jpg
+   +49 | Result: 
+   +37 | Executing: hostname
+   +63 | Result: MasterPi\n
+   +24 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +116 | Result: /dev/sda\n
+   +23 | Executing: hostname -I
+   +57 | Result: 192.168.43.229 \n
+   +32 | Executing: df -h /dev/sda
+   +49 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  361M  3.4G  10% /media/sdcard\n
+   +32 | Executing: ls /media/sdcard | wc -l
+  +205 | Result: 8866\n
+  +141 | Executing: sudo jpegoptim /home/pi/TransCorder/2c8c5048-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +98 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +79 | Result: 
+  +530 | Result: /home/pi/TransCorder/2c8c5048-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597194 --> 23471 bytes (96.07%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/2c8c5048-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8866.jpg
+  +250 | Result: 
+   +37 | Executing: rm /home/pi/TransCorder/2c8c5048-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +700 | Executing: sudo jpegoptim /home/pi/TransCorder/2da5a29a-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +702 | Result: /home/pi/TransCorder/2da5a29a-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597855 --> 23510 bytes (96.07%), optimized.\n
+   +30 | Executing: sudo cp /home/pi/TransCorder/2da5a29a-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8867.jpg
+  +257 | Result: 
+   +39 | Executing: rm /home/pi/TransCorder/2da5a29a-1f48-11eb-b89f-b827eb6605c0.jpg
+   +48 | Result: 
+  +714 | Executing: sudo jpegoptim /home/pi/TransCorder/2eb43872-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +685 | Result: /home/pi/TransCorder/2eb43872-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597122 --> 23381 bytes (96.08%), optimized.\n
+   +33 | Executing: sudo cp /home/pi/TransCorder/2eb43872-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8868.jpg
+  +224 | Result: 
+   +62 | Executing: rm /home/pi/TransCorder/2eb43872-1f48-11eb-b89f-b827eb6605c0.jpg
+   +44 | Result: 
+  +471 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +257 | Executing: sudo jpegoptim /home/pi/TransCorder/2fc17ad6-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +69 | Result: 
+  +630 | Result: /home/pi/TransCorder/2fc17ad6-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 599269 --> 23434 bytes (96.09%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/2fc17ad6-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8869.jpg
+  +440 | Result: 
+   +26 | Executing: rm /home/pi/TransCorder/2fc17ad6-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +718 | Executing: sudo jpegoptim /home/pi/TransCorder/30ec6a2e-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +688 | Result: /home/pi/TransCorder/30ec6a2e-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597873 --> 23569 bytes (96.06%), optimized.\n
+   +36 | Executing: sudo cp /home/pi/TransCorder/30ec6a2e-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8870.jpg
+  +230 | Result: 
+  +262 | Executing: rm /home/pi/TransCorder/30ec6a2e-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +731 | Executing: hostname
+   +35 | Executing: sudo jpegoptim /home/pi/TransCorder/3219a146-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+   +47 | Result: MasterPi\n
+   +53 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +220 | Result: /dev/sda\n
+   +30 | Executing: hostname -I
+   +86 | Result: 192.168.43.229 \n
+   +35 | Executing: df -h /dev/sda
+   +95 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  362M  3.4G  10% /media/sdcard\n
+   +22 | Executing: ls /media/sdcard | wc -l
+  +205 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +101 | Result: 
+  +135 | Result: 8871\n
+  +214 | Result: /home/pi/TransCorder/3219a146-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597527 --> 23621 bytes (96.05%), optimized.\n
+   +29 | Executing: sudo cp /home/pi/TransCorder/3219a146-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8871.jpg
+  +231 | Result: 
+   +29 | Executing: rm /home/pi/TransCorder/3219a146-1f48-11eb-b89f-b827eb6605c0.jpg
+   +47 | Result: 
+  +691 | Executing: sudo jpegoptim /home/pi/TransCorder/337ec106-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +691 | Result: /home/pi/TransCorder/337ec106-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596991 --> 23554 bytes (96.05%), optimized.\n
+   +32 | Executing: sudo cp /home/pi/TransCorder/337ec106-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8872.jpg
+  +227 | Result: 
+   +19 | Executing: rm /home/pi/TransCorder/337ec106-1f48-11eb-b89f-b827eb6605c0.jpg
+   +65 | Result: 
+  +932 | Executing: sudo jpegoptim /home/pi/TransCorder/34881f84-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +690 | Result: /home/pi/TransCorder/34881f84-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597316 --> 23470 bytes (96.07%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/34881f84-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8873.jpg
+  +224 | Result: 
+   +27 | Executing: rm /home/pi/TransCorder/34881f84-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+  +566 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +39 | Result: 
+  +139 | Executing: sudo jpegoptim /home/pi/TransCorder/35aec714-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +713 | Result: /home/pi/TransCorder/35aec714-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 597829 --> 23419 bytes (96.08%), optimized.\n
+   +27 | Executing: sudo cp /home/pi/TransCorder/35aec714-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8874.jpg
+  +225 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/35aec714-1f48-11eb-b89f-b827eb6605c0.jpg
+   +42 | Result: 
+  +711 | Executing: sudo jpegoptim /home/pi/TransCorder/36bdd384-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +780 | Result: /home/pi/TransCorder/36bdd384-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596703 --> 23356 bytes (96.09%), optimized.\n
+   +26 | Executing: sudo cp /home/pi/TransCorder/36bdd384-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8875.jpg
+  +229 | Result: 
+   +28 | Executing: rm /home/pi/TransCorder/36bdd384-1f48-11eb-b89f-b827eb6605c0.jpg
+   +61 | Result: 
+  +717 | Executing: sudo jpegoptim /home/pi/TransCorder/37d65c14-1f48-11eb-b89f-b827eb6605c0.jpg -m70 --strip-all
+  +413 | Executing: hostname
+  +166 | Result: MasterPi\n
+   +35 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +201 | Result: /dev/sda\n
+   +26 | Executing: hostname -I
+   +99 | Result: 192.168.43.229 \n
+   +26 | Executing: df -h /dev/sda
+  +103 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  362M  3.4G  10% /media/sdcard\n
+   +52 | Executing: ls /media/sdcard | wc -l
+  +126 | Result: /home/pi/TransCorder/37d65c14-1f48-11eb-b89f-b827eb6605c0.jpg 1200x900 24bit N Exif  [OK] 596923 --> 23395 bytes (96.08%), optimized.\n
+   +14 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +60 | Executing: sudo cp /home/pi/TransCorder/37d65c14-1f48-11eb-b89f-b827eb6605c0.jpg /media/sdcard/8876.jpg
+   +67 | Result: 
+  +195 | Result: 8876\n
+   +98 | Result: 
+   +30 | Executing: rm /home/pi/TransCorder/37d65c14-1f48-11eb-b89f-b827eb6605c0.jpg
+   +41 | Result: 
+ +4499 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+  +112 | Result: 
+ +4049 | Executing: hostname
+   +88 | Result: MasterPi\n
+   +29 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +175 | Result: /dev/sda\n
+   +21 | Executing: hostname -I
+  +135 | Result: 192.168.43.229 \n
+   +21 | Executing: df -h /dev/sda
+  +109 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  362M  3.4G  10% /media/sdcard\n
+   +26 | Executing: ls /media/sdcard | wc -l
+  +260 | Result: 8877\n
+   +22 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +43 | Result: 
+ +4940 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +50 | Result: 
+ +4091 | Executing: hostname
+   +77 | Result: MasterPi\n
+   +27 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+   +96 | Result: /dev/sda\n
+   +44 | Executing: hostname -I
+   +80 | Result: 192.168.43.229 \n
+   +23 | Executing: df -h /dev/sda
+   +51 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  362M  3.4G  10% /media/sdcard\n
+   +21 | Executing: ls /media/sdcard | wc -l
+  +221 | Result: 8877\n
+  +214 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +58 | Result: 
+ +4964 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +55 | Result: 
+ +4076 | Executing: hostname
+   +57 | Result: MasterPi\n
+   +27 | Executing: blkid | grep "/dev/sd" | tr ":" "\n" | head -n 1
+  +102 | Result: /dev/sda\n
+   +21 | Executing: hostname -I
+   +41 | Result: 192.168.43.229 \n
+   +22 | Executing: df -h /dev/sda
+   +46 | Result: Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda        3.7G  362M  3.4G  10% /media/sdcard\n
+   +22 | Executing: ls /media/sdcard | wc -l
+  +225 | Result: 8877\n
+  +249 | Executing: echo {\"auto_fuses\":1,\"recorder_enabled\":1,\"transmitter_enabled\":0,\"config_pulling_interval\":5000,\"status_pushing_interval\":10000,\"camera_width\":1200,\"camera_height\":900,\"camera_brightness\":62,\"camera_contrast\":72,\"camera_sharpness\":100,\"camera_horizontal_flip\":0,\"camera_vertical_flip\":0,\"camera_optimization\":70} > /home/pi/TransCorder/config.json
+   +39 | Result: 
