@@ -1,4 +1,4 @@
-import { ExecResult } from "./Shell";
+import { ExecResult } from "./ExecResult";
 
 export interface IShell 
 {

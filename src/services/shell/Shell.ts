@@ -1,52 +1,10 @@
-// import 'reflect-metadata';
-// import { IShell } from "./IShell";
-// import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
-// import { inject, injectable } from "inversify";
-// import { IConfig } from "../config/IConfig";
-// import { Types } from "../../IoC/Types";
-
 import 'reflect-metadata';
 import { injectable, inject } from 'inversify';
 import * as shell from 'shelljs';
-// import { ExecResult } from './ExecResult';
 import { IShell } from './IShell';
 import { Types } from '../../IoC/Types';
 import { ILogger } from '../logger/ILogger';
-
-export class ExecResult
-{
-    constructor(public command: string, 
-        public code: number, 
-        public stdout: string, 
-        public stderr: string, 
-        public id: string | number,
-        public duration: number) { }
-   
-    public get Command(): string
-    {
-        return this.command;
-    }
-
-    public get IsSuccess(): boolean
-    {
-        return this.code === 0;
-    }
-
-    public get StdOut(): string
-    {
-        return this.stdout?.toString()?.trim() ?? "";
-    }
-
-    public get StdErr(): string
-    {
-        return this.stderr?.toString()?.trim() ?? "";
-    }
-
-    public get Message(): string
-    {
-        return this.StdOut?.length ? this.StdOut : this.StdErr;
-    }
-}
+import { ExecResult } from './ExecResult';
 
 @injectable()
 export class Shell implements IShell
@@ -60,7 +18,7 @@ export class Shell implements IShell
     {
         return new Promise((resolve, reject) =>
         {
-            this._log.Log(`Exec ${id}: ${cmd}`);
+            this._log.Log(`Exec #${id}: ${cmd}`);
             const start = +new Date();
 
             shell.exec(cmd, (code, stdout, stderr) =>
@@ -69,11 +27,34 @@ export class Shell implements IShell
 
                 const result = new ExecResult(cmd, code, stdout, stderr, id, duration);
 
-                this._log.Log(`Result ${id}:`, result.Message, `(took ${result.duration} ms)`);
+                this._log.Log(`Result #${id}:`, result.Message, `(took ${result.duration} ms)`);
 
                 resolve(result);
             });
         });
+    }
+
+    public RunInBackground(cmd: string, cwd: string)
+    {
+        const s = spawn('sudo node', ['App1.js'], { stdio: 'ignore',  cwd: '/home/pi/app1', detached: true });
+        if (0)
+        s.stdout.on('data', (data)=>{
+          console.log(data.toString());
+        });
+        if (0)
+        s.stderr.on('data', (data)=>console.log(data.toString()));
+        
+        console.log('pid', s.pid);
+        s.unref();
+        
+    }
+}
+
+export class ProcessesManager
+{
+    public Start(args: string[], workingDirectory: string)
+    {
+        _shell.RunInBackground()
     }
 }
 

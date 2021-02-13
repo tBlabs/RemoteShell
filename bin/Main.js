@@ -29,12 +29,15 @@ let Main = class Main {
         this._config = _config;
     }
     async Run() {
-        // await this.AbortIfAppIsAlreadyRunning();
         var _a, _b;
+        // await this.AbortIfAppIsAlreadyRunning();
+        const tasksQueue = new TasksQueue_1.TasksQueue();
         const server = express();
         server.use(cors({ exposedHeaders: 'Content-Length' }));
         const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Http calls to command line utility")
-            .Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
+            .Status("Waiting tasks count", () => tasksQueue.ListOfLast100Waiting.length.toString())
+            .Status("Consumed tasks so far", () => tasksQueue.TotalCount.toString())
+            //.Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
             .Config("serverPort", this._config.ServerPort.toString(), "3000", "1234", "config.json or command line argument 'serverPort' (ex: --serverPort 1234)")
             .Config("statics", JSON.stringify(this._config.Statics), "[]", '[{"url": "/files", "dir": "./shared_files" }]', "config.json")
@@ -49,7 +52,6 @@ let Main = class Main {
         server.get('/favicon.ico', (req, res) => res.status(204));
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
-        const tasksQueue = new TasksQueue_1.TasksQueue();
         let ind = 0;
         server.get('/queue/waiting', (req, res) => res.send(tasksQueue.ListOfLast100Waiting));
         server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
@@ -62,11 +64,11 @@ let Main = class Main {
                 tasksQueue.Add(ind, command);
                 const shell = IoC_1.IoC.get(Types_1.Types.IShell); // TODO: transform to factory, do not take Shell from constructor!
                 let result = await shell.ExecAsync(command, ind);
+                tasksQueue.Remove(result.id);
                 if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                  {
                     result = this.ConvertToHtml(result.Message);
                 }
-                tasksQueue.Remove(result.id);
                 res.status(result.IsSuccess ? 200 : 500)
                     .send(result.Message);
             });

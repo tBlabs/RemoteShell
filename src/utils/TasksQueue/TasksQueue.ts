@@ -3,16 +3,19 @@ import { Task } from "./Task";
 export class TasksQueue
 {
     private list: Task[] = [];
+    private totalCounter = 0;
 
-    public Add(id: number, cmd: string): void
+    public Add(id: string | number, cmd: string): void
     {
         if (this.list.length > 100)
             this.list.shift();
 
+        this.totalCounter += 1;
+
         this.list.push({ id, cmd, status: "waiting", started: new Date() });
     }
 
-    public Remove(id: number): void
+    public Remove(id: string | number): void
     {
         const e = this.list.find(x => x.id === id);
         if (e === undefined)
@@ -28,5 +31,10 @@ export class TasksQueue
     public get Last100(): Task[]
     {
         return this.list;
+    }
+
+    public get TotalCount(): number
+    {
+        return this.totalCounter;
     }
 }

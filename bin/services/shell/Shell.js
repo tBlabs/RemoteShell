@@ -1,10 +1,4 @@
 "use strict";
-// import 'reflect-metadata';
-// import { IShell } from "./IShell";
-// import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
-// import { inject, injectable } from "inversify";
-// import { IConfig } from "../config/IConfig";
-// import { Types } from "../../IoC/Types";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,40 +12,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Shell = exports.ExecResult = void 0;
+exports.Shell = void 0;
 require("reflect-metadata");
 const inversify_1 = require("inversify");
 const shell = require("shelljs");
 const Types_1 = require("../../IoC/Types");
-class ExecResult {
-    constructor(command, code, stdout, stderr, id, duration) {
-        this.command = command;
-        this.code = code;
-        this.stdout = stdout;
-        this.stderr = stderr;
-        this.id = id;
-        this.duration = duration;
-    }
-    get Command() {
-        return this.command;
-    }
-    get IsSuccess() {
-        return this.code === 0;
-    }
-    get StdOut() {
-        var _a, _b, _c;
-        return (_c = (_b = (_a = this.stdout) === null || _a === void 0 ? void 0 : _a.toString()) === null || _b === void 0 ? void 0 : _b.trim()) !== null && _c !== void 0 ? _c : "";
-    }
-    get StdErr() {
-        var _a, _b, _c;
-        return (_c = (_b = (_a = this.stderr) === null || _a === void 0 ? void 0 : _a.toString()) === null || _b === void 0 ? void 0 : _b.trim()) !== null && _c !== void 0 ? _c : "";
-    }
-    get Message() {
-        var _a;
-        return ((_a = this.StdOut) === null || _a === void 0 ? void 0 : _a.length) ? this.StdOut : this.StdErr;
-    }
-}
-exports.ExecResult = ExecResult;
+const ExecResult_1 = require("./ExecResult");
 let Shell = class Shell {
     constructor(_log) {
         this._log = _log;
@@ -59,12 +25,12 @@ let Shell = class Shell {
     }
     ExecAsync(cmd, id) {
         return new Promise((resolve, reject) => {
-            this._log.Log(`Exec ${id}: ${cmd}`);
+            this._log.Log(`Exec #${id}: ${cmd}`);
             const start = +new Date();
             shell.exec(cmd, (code, stdout, stderr) => {
                 const duration = +new Date() - start;
-                const result = new ExecResult(cmd, code, stdout, stderr, id, duration);
-                this._log.Log(`Result ${id}:`, result.Message, `(took ${result.duration} ms)`);
+                const result = new ExecResult_1.ExecResult(cmd, code, stdout, stderr, id, duration);
+                this._log.Log(`Result #${id}:`, result.Message, `(took ${result.duration} ms)`);
                 resolve(result);
             });
         });

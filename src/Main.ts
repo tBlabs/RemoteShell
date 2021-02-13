@@ -25,12 +25,15 @@ export class Main
     public async Run(): Promise<void>
     {
         // await this.AbortIfAppIsAlreadyRunning();
+        const tasksQueue = new TasksQueue();
 
         const server = express();
         server.use(cors({ exposedHeaders: 'Content-Length' }));
 
         const hb = new HelpBuilder("RemoteShell", "Http calls to command line utility")
-            .Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
+            .Status("Waiting tasks count", () => tasksQueue.ListOfLast100Waiting.length.toString())
+            .Status("Consumed tasks so far", () => tasksQueue.TotalCount.toString())
+            //.Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
             .Config("serverPort", this._config.ServerPort.toString(), "3000", "1234", "config.json or command line argument 'serverPort' (ex: --serverPort 1234)")
             .Config("statics", JSON.stringify(this._config.Statics), "[]", '[{"url": "/files", "dir": "./shared_files" }]', "config.json")
@@ -48,10 +51,11 @@ export class Main
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
 
-        const tasksQueue = new TasksQueue();
         let ind = 0;
         server.get('/queue/waiting', (req, res) => res.send(tasksQueue.ListOfLast100Waiting));
         server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
+
+    //    server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
 
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
@@ -69,13 +73,13 @@ export class Main
                 const shell = IoC.get<IShell>(Types.IShell); // TODO: transform to factory, do not take Shell from constructor!
 
                 let result = await shell.ExecAsync(command, ind);
+                
+                tasksQueue.Remove(result.id);
 
                 if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!
                 {
                     result = this.ConvertToHtml(result.Message);
                 }
-
-                tasksQueue.Remove(result.id);
 
                 res.status(result.IsSuccess ? 200 : 500)
                     .send(result.Message);

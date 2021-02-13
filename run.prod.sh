@@ -1,1 +1,1 @@
-sudo npm start -- --serverPort 3000 --logsLevel 0
+npm start -- --serverPort 3000 --logsLevel 0

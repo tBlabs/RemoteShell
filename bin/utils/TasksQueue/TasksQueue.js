@@ -4,10 +4,12 @@ exports.TasksQueue = void 0;
 class TasksQueue {
     constructor() {
         this.list = [];
+        this.totalCounter = 0;
     }
     Add(id, cmd) {
         if (this.list.length > 100)
             this.list.shift();
+        this.totalCounter += 1;
         this.list.push({ id, cmd, status: "waiting", started: new Date() });
     }
     Remove(id) {
@@ -21,6 +23,9 @@ class TasksQueue {
     }
     get Last100() {
         return this.list;
+    }
+    get TotalCount() {
+        return this.totalCounter;
     }
 }
 exports.TasksQueue = TasksQueue;
