@@ -12,10 +12,10 @@
     },
     "scripts": {
         "xxx_preinstall": "sudo npm i -g typescript jest tslint npm-run-all",
-        "start": "node %npm_package_main%",
+        "start": "node ./bin/src/startup.js",
         "run": "npm run clean && npm run build && clear && npm run start",
         "watch": "tsc --watch",
-        "monitor": "nodemon %npm_package_main%",
+        "monitor": "nodemon ./bin/src/startup.js",
         "serve": "run-p watch monitor",
         "lint": "tslint -c tslint.json './src/**/*.{ts,tsx}' --format msbuild",
         "test": "jest --runInBand",
