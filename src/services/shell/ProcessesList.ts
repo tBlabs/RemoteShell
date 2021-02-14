@@ -31,6 +31,6 @@ export class ProcessesList
     {
         const index = this.processes.findIndex(x => x.Pid === pid);
 
-        this.processes = this.processes.slice(index, 1);
+        this.processes.slice(index, 1);
     }
 }

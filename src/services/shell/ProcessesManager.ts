@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { injectable } from 'inversify';
 import { Process } from './Process';
 import { ProcessArgs } from './ProcessArgs';
@@ -18,7 +19,7 @@ export class ProcessesManager
         {
             if (this._list.IsAlreadyRunning(process)) 
             {
-                return (-2);
+                throw new Error('process already started');
             }
 
             const pid = await this._runner.Start(process);
@@ -29,7 +30,7 @@ export class ProcessesManager
         }
         catch (error)
         {
-            throw new Error(`Could not start process`);
+            throw new Error(`Could not start process: ${error.message}`);
         }
     }
 
