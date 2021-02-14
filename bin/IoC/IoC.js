@@ -21,6 +21,7 @@ try {
     IoC.bind(Types_1.Types.ILoggerOutput).to(ConsoleOutput_1.ConsoleOutput).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.ILogger).to(Logger_1.Logger).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Main_1.Main).toSelf().inSingletonScope().whenTargetIsDefault();
+    IoC.bind(Shell_1.ProcessesManager).toSelf().inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IStartupArgs).to(StartupArgs_1.StartupArgs).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IConfig).to(Config_1.Config).inSingletonScope().whenTargetIsDefault();
     IoC.bind(Types_1.Types.IShell).to(Shell_1.Shell).inTransientScope().whenTargetIsDefault();

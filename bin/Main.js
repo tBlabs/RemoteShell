@@ -23,10 +23,12 @@ const path = require("path");
 const cors = require("cors");
 const IoC_1 = require("./IoC/IoC");
 const TasksQueue_1 = require("./utils/TasksQueue/TasksQueue");
+const Shell_1 = require("./services/shell/Shell");
 let Main = class Main {
-    constructor(_logger, _config) {
+    constructor(_logger, _config, _process) {
         this._logger = _logger;
         this._config = _config;
+        this._process = _process;
     }
     async Run() {
         var _a, _b;
@@ -34,6 +36,7 @@ let Main = class Main {
         const tasksQueue = new TasksQueue_1.TasksQueue();
         const server = express();
         server.use(cors({ exposedHeaders: 'Content-Length' }));
+        server.use(express.text());
         const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Http calls to command line utility")
             .Status("Waiting tasks count", () => tasksQueue.ListOfLast100Waiting.length.toString())
             .Status("Consumed tasks so far", () => tasksQueue.TotalCount.toString())
@@ -55,6 +58,30 @@ let Main = class Main {
         let ind = 0;
         server.get('/queue/waiting', (req, res) => res.send(tasksQueue.ListOfLast100Waiting));
         server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
+        server.all('/process/start', async (req, res) => {
+            try {
+                const cmd = req.headers['command'] || req.body;
+                const wd = req.headers['wd'] || "";
+                console.log('start process', cmd, '@', wd);
+                const pid = await this._process.Start(cmd, wd);
+                // console.log('eeeeeeeee', pid);
+                res.status(200).send(pid.toString());
+            }
+            catch (ex) {
+                console.log(ex.message);
+                res.status(500).send(ex.message);
+            }
+        });
+        server.all('/process/stop/:pid', async (req, res) => {
+            const pid = +req.params.pid;
+            const result = await this._process.Stop(pid);
+            res.status(result.IsSuccess ? 202 : 500).send(result.Message);
+        });
+        server.get('/processes/:name', async (req, res) => {
+            const name = req.params.name;
+            const processes = await this._process.List(name);
+            res.send(processes);
+        });
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
         (_a = this._config.Routes) === null || _a === void 0 ? void 0 : _a.forEach((route) => {
@@ -113,7 +140,7 @@ Main = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(Types_1.Types.ILogger)),
     __param(1, inversify_1.inject(Types_1.Types.IConfig)),
-    __metadata("design:paramtypes", [Object, Object])
+    __metadata("design:paramtypes", [Object, Object, Shell_1.ProcessesManager])
 ], Main);
 exports.Main = Main;
 //# sourceMappingURL=Main.js.map

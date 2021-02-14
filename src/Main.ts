@@ -13,13 +13,15 @@ import * as path from 'path';
 import * as cors from 'cors';
 import { IoC } from './IoC/IoC';
 import { TasksQueue } from './utils/TasksQueue/TasksQueue';
+import { ProcessesManager } from './services/shell/Shell';
 
 @injectable()
 export class Main
 {
     constructor(
         @inject(Types.ILogger) private _logger: ILogger,
-        @inject(Types.IConfig) private _config: IConfig)
+        @inject(Types.IConfig) private _config: IConfig,
+        private _process: ProcessesManager)
     { }
 
     public async Run(): Promise<void>
@@ -29,6 +31,7 @@ export class Main
 
         const server = express();
         server.use(cors({ exposedHeaders: 'Content-Length' }));
+        server.use(express.text());
 
         const hb = new HelpBuilder("RemoteShell", "Http calls to command line utility")
             .Status("Waiting tasks count", () => tasksQueue.ListOfLast100Waiting.length.toString())
@@ -55,7 +58,39 @@ export class Main
         server.get('/queue/waiting', (req, res) => res.send(tasksQueue.ListOfLast100Waiting));
         server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
 
-    //    server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
+        server.all('/process/start', async (req, res) => 
+        {
+            try
+            {
+                const cmd = req.headers['command'] || req.body;
+                const wd = req.headers['wd'] as string || "";
+                console.log('start process', cmd, '@', wd);
+
+                const pid = await this._process.Start(cmd, wd);
+// console.log('eeeeeeeee', pid);
+                res.status(200).send(pid.toString());
+            }
+            catch (ex)
+            {
+                console.log(ex.message); 
+                res.status(500).send(ex.message);
+            }
+        });
+        server.all('/process/stop/:pid', async (req, res) => 
+        {
+            const pid = +req.params.pid;
+            const result  = await this._process.Stop(pid);
+        
+            res.status(result.IsSuccess ? 202 : 500).send(result.Message);
+        });
+        server.get('/processes/:name', async (req, res) =>
+        {
+            const name = req.params.name;
+            
+            const processes = await this._process.List(name);
+
+            res.send(processes);
+        });
 
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));
@@ -73,7 +108,7 @@ export class Main
                 const shell = IoC.get<IShell>(Types.IShell); // TODO: transform to factory, do not take Shell from constructor!
 
                 let result = await shell.ExecAsync(command, ind);
-                
+
                 tasksQueue.Remove(result.id);
 
                 if (req.headers.responsetype === "html") // 'responsetype' must be lower-case!!!

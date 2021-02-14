@@ -12,12 +12,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Shell = void 0;
+exports.ProcessesManager = exports.Shell = void 0;
 require("reflect-metadata");
 const inversify_1 = require("inversify");
 const shell = require("shelljs");
 const Types_1 = require("../../IoC/Types");
 const ExecResult_1 = require("./ExecResult");
+const child_process_1 = require("child_process");
 let Shell = class Shell {
     constructor(_log) {
         this._log = _log;
@@ -35,6 +36,18 @@ let Shell = class Shell {
             });
         });
     }
+    async RunInBackground(cmd, wd) {
+        return new Promise((resolve, reject) => {
+            const s = child_process_1.spawn(cmd[0], [...cmd.slice(1)], { stdio: 'ignore', cwd: wd, detached: true });
+            s.unref();
+            s.on('error', (err) => {
+                reject(err);
+            });
+            s.on('close', () => {
+                resolve(s.pid);
+            });
+        });
+    }
 };
 Shell = __decorate([
     inversify_1.injectable(),
@@ -42,6 +55,34 @@ Shell = __decorate([
     __metadata("design:paramtypes", [Object])
 ], Shell);
 exports.Shell = Shell;
+let ProcessesManager = class ProcessesManager {
+    constructor(_shell) {
+        this._shell = _shell;
+    }
+    async List(name) {
+        return (await this._shell.ExecAsync(`pgrep ${name}`)).Message;
+    }
+    async Stop(pid) {
+        return await this._shell.ExecAsync(`sudo kill ${pid}`);
+    }
+    async Start(args, workingDirectory) {
+        try {
+            const splitted = args === null || args === void 0 ? void 0 : args.split(' ');
+            const pid = await this._shell.RunInBackground(splitted, workingDirectory);
+            // console.log('piddd', pid);
+            return pid;
+        }
+        catch (error) {
+            throw new Error(`Could not start process`);
+        }
+    }
+};
+ProcessesManager = __decorate([
+    inversify_1.injectable(),
+    __param(0, inversify_1.inject(Types_1.Types.IShell)),
+    __metadata("design:paramtypes", [Object])
+], ProcessesManager);
+exports.ProcessesManager = ProcessesManager;
 // @injectable()
 // export class Shell implements IShell
 // {

@@ -5,6 +5,8 @@ import { IShell } from './IShell';
 import { Types } from '../../IoC/Types';
 import { ILogger } from '../logger/ILogger';
 import { ExecResult } from './ExecResult';
+import { spawn } from 'child_process';
+import { resolve } from 'path';
 
 @injectable()
 export class Shell implements IShell
@@ -34,30 +36,57 @@ export class Shell implements IShell
         });
     }
 
-    public RunInBackground(cmd: string, cwd: string)
+    public async RunInBackground(cmd: string[], wd: string): Promise<number>
     {
-        const s = spawn('sudo node', ['App1.js'], { stdio: 'ignore',  cwd: '/home/pi/app1', detached: true });
-        if (0)
-        s.stdout.on('data', (data)=>{
-          console.log(data.toString());
-        });
-        if (0)
-        s.stderr.on('data', (data)=>console.log(data.toString()));
-        
-        console.log('pid', s.pid);
-        s.unref();
-        
+        return new Promise((resolve, reject) =>
+        {
+            const s = spawn(cmd[0], [...cmd.slice(1)], { stdio: 'ignore', cwd: wd, detached: true });
+            s.unref();
+
+            s.on('error', (err) => 
+            {
+                reject(err);
+            
+            });
+            s.on('close', () => 
+            {
+                resolve(s.pid); 
+            });
+        }
     }
 }
 
+@injectable()
 export class ProcessesManager
 {
-    public Start(args: string[], workingDirectory: string)
+    public async List(name: string)
     {
-        _shell.RunInBackground()
+        return (await this._shell.ExecAsync(`pgrep ${name}`)).Message;
+    }
+    constructor(@inject(Types.IShell) private _shell: IShell)
+    { }
+    
+    public async Stop(pid: number)
+    {
+        return await this._shell.ExecAsync(`sudo kill ${pid}`);
+    }
+
+    public async Start(args: string, workingDirectory: string)
+    {
+        try
+        {
+            const splitted = args?.split(' ');
+
+            const pid = await this._shell.RunInBackground(splitted, workingDirectory);
+            // console.log('piddd', pid);
+            return pid;
+        }
+        catch (error)
+        {
+           throw new Error(`Could not start process`);
+        }
     }
 }
-
 // @injectable()
 // export class Shell implements IShell
 // {
