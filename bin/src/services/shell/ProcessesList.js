@@ -27,7 +27,7 @@ let ProcessesList = class ProcessesList {
     }
     Remove(pid) {
         const index = this.processes.findIndex(x => x.Pid === pid);
-        this.processes.slice(index, 1);
+        this.processes.splice(index, 1);
     }
 };
 ProcessesList = __decorate([

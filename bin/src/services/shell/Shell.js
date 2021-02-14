@@ -26,12 +26,16 @@ let Shell = class Shell {
     }
     ExecAsync(cmd, id) {
         return new Promise((resolve, reject) => {
-            this._log.Log(`Exec #${id}: ${cmd}`);
+            if (id === undefined)
+                id = "";
+            else
+                "#" + id;
+            this._log.Log(`Exec${id}: ${cmd}`);
             const start = +new Date();
             shell.exec(cmd, (code, stdout, stderr) => {
                 const duration = +new Date() - start;
                 const result = new ExecResult_1.ExecResult(cmd, code, stdout, stderr, id, duration);
-                this._log.Log(`Result #${id}:`, result.Message, `(took ${result.duration} ms)`);
+                this._log.Log(`Result${id}:`, result.Message, `(took ${result.duration} ms)`);
                 resolve(result);
             });
         });

@@ -7,6 +7,7 @@ import { ILogger } from '../logger/ILogger';
 import { ExecResult } from './ExecResult';
 import { spawn } from 'child_process';
 import { resolve } from 'path';
+import e = require('express');
 
 @injectable()
 export class Shell implements IShell
@@ -20,7 +21,11 @@ export class Shell implements IShell
     {
         return new Promise((resolve, reject) =>
         {
-            this._log.Log(`Exec #${id}: ${cmd}`);
+            if (id === undefined)
+                id = "";
+            else "#" + id;
+
+            this._log.Log(`Exec${id}: ${cmd}`);
             const start = +new Date();
 
             shell.exec(cmd, (code, stdout, stderr) =>
@@ -29,7 +34,7 @@ export class Shell implements IShell
 
                 const result = new ExecResult(cmd, code, stdout, stderr, id, duration);
 
-                this._log.Log(`Result #${id}:`, result.Message, `(took ${result.duration} ms)`);
+                this._log.Log(`Result${id}:`, result.Message, `(took ${result.duration} ms)`);
 
                 resolve(result);
             });
@@ -40,28 +45,28 @@ export class Shell implements IShell
     {
         // return new Promise((resolve, reject) =>
         // {
-            const s = spawn(cmd[0], [...cmd.slice(1)], { stdio: 'ignore', cwd: wd, detached: true });
-           
-            s.on('error', (err) => 
-            {
-                console.log('PROCESS ERROR', err);
-                // reject(err);
-            
-            });
-            s.on('close', (code) => 
-            {
-                console.log(`PROCESS CLOSED`, code, s.pid);
-                // resolve(s.pid); 
-            });
-            s.on('spawn', () => 
-            {
-                console.log(`PROCESS SPAWNED`, s.pid);
-                // resolve(s.pid); 
-            });
+        const s = spawn(cmd[0], [...cmd.slice(1)], { stdio: 'ignore', cwd: wd, detached: true });
 
-            s.unref();
+        s.on('error', (err) => 
+        {
+            console.log('PROCESS ERROR', err);
+            // reject(err);
 
-            return s.pid;
+        });
+        s.on('close', (code) => 
+        {
+            console.log(`PROCESS CLOSED`, code, s.pid);
+            // resolve(s.pid); 
+        });
+        s.on('spawn', () => 
+        {
+            console.log(`PROCESS SPAWNED`, s.pid);
+            // resolve(s.pid); 
+        });
+
+        s.unref();
+
+        return s.pid;
         // });
     }
 }
