@@ -6,8 +6,6 @@ import { Types } from '../../IoC/Types';
 import { ILogger } from '../logger/ILogger';
 import { ExecResult } from './ExecResult';
 import { spawn } from 'child_process';
-import { resolve } from 'path';
-import e = require('express');
 
 @injectable()
 export class Shell implements IShell
@@ -17,13 +15,13 @@ export class Shell implements IShell
         shell.config.silent = true;
     }
 
-    public ExecAsync(cmd: string, id): Promise<ExecResult>
+    public ExecAsync(cmd: string, id: string | number): Promise<ExecResult>
     {
         return new Promise((resolve, reject) =>
         {
             if (id === undefined)
                 id = "";
-            else "#" + id;
+            else " #" + id;
 
             this._log.Log(`Exec${id}: ${cmd}`);
             const start = +new Date();

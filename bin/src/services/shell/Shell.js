@@ -29,7 +29,7 @@ let Shell = class Shell {
             if (id === undefined)
                 id = "";
             else
-                "#" + id;
+                " #" + id;
             this._log.Log(`Exec${id}: ${cmd}`);
             const start = +new Date();
             shell.exec(cmd, (code, stdout, stderr) => {

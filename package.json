@@ -2,8 +2,8 @@
     "name": "node.ts-startup",
     "version": "1.0.0",
     "description": "node.ts boilerplate",
-    "main": "./bin/startup.js",
-    "bin": "./bin/startup.js",
+    "main": "./bin/src/startup.js",
+    "bin": "./bin/src/startup.js",
     "author": "tB",
     "license": "beerware",
     "engines": {

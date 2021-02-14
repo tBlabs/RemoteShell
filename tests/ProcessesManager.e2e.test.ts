@@ -12,7 +12,7 @@ test('should start and stop test App1.js @ Raspbian Lite @ Raspberry Pi Zero', a
         let response = await axios.get(`http://192.168.43.229:3000/processes`);
         expect(response.data).toEqual([]);
 
-
+ 
         // Try to run App1.js
         response = await axios.post(`http://192.168.43.229:3000/process/start`, `node App1.js`, { headers: { 'command': `node App1.js`, 'wd': `/home/pi/app1` } });
         let pid = response.data;

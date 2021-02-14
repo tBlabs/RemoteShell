@@ -3,7 +3,7 @@
 import { IoC } from './IoC/IoC';
 import { Main } from './Main';
 
-(async () =>
+(async () => 
 {
     try
     {
