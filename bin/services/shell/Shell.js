@@ -41,9 +41,15 @@ let Shell = class Shell {
             const s = child_process_1.spawn(cmd[0], [...cmd.slice(1)], { stdio: 'ignore', cwd: wd, detached: true });
             s.unref();
             s.on('error', (err) => {
+                console.log('PROCESS ERROR', err);
                 reject(err);
             });
-            s.on('close', () => {
+            s.on('close', (code) => {
+                console.log(`PROCESS CLOSED`, code, s.pid);
+                resolve(s.pid);
+            });
+            s.on('spawn', () => {
+                console.log(`PROCESS SPAWNED`, s.pid);
                 resolve(s.pid);
             });
         });
