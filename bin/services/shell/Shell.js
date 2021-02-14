@@ -39,7 +39,6 @@ let Shell = class Shell {
     async RunInBackground(cmd, wd) {
         return new Promise((resolve, reject) => {
             const s = child_process_1.spawn(cmd[0], [...cmd.slice(1)], { stdio: 'ignore', cwd: wd, detached: true });
-            s.unref();
             s.on('error', (err) => {
                 console.log('PROCESS ERROR', err);
                 reject(err);
@@ -52,6 +51,7 @@ let Shell = class Shell {
                 console.log(`PROCESS SPAWNED`, s.pid);
                 resolve(s.pid);
             });
+            s.unref();
         });
     }
 };

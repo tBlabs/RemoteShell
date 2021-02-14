@@ -41,8 +41,7 @@ export class Shell implements IShell
         return new Promise((resolve, reject) =>
         {
             const s = spawn(cmd[0], [...cmd.slice(1)], { stdio: 'ignore', cwd: wd, detached: true });
-            s.unref();
-
+           
             s.on('error', (err) => 
             {
                 console.log('PROCESS ERROR', err);
@@ -59,7 +58,9 @@ export class Shell implements IShell
                 console.log(`PROCESS SPAWNED`, s.pid);
                 resolve(s.pid); 
             });
-        }
+
+            s.unref();
+        });
     }
 }
 
