@@ -13,7 +13,8 @@ import * as path from 'path';
 import * as cors from 'cors';
 import { IoC } from './IoC/IoC';
 import { TasksQueue } from './utils/TasksQueue/TasksQueue';
-import { ProcessesManager } from './services/shell/Shell';
+import { ProcessesManager } from "./services/shell/ProcessesManager";
+import { ProcessArgs } from './services/shell/ProcessArgs';
 
 @injectable()
 export class Main
@@ -66,8 +67,8 @@ export class Main
                 const wd = req.headers['wd'] as string || "";
                 console.log('start process', cmd, '@', wd);
 
-                const pid = await this._process.Start(cmd, wd);
-// console.log('eeeeeeeee', pid);
+                const pid = await this._process.Start(new ProcessArgs(cmd, wd));
+
                 res.status(200).send(pid.toString());
             }
             catch (ex)
@@ -81,13 +82,11 @@ export class Main
             const pid = +req.params.pid;
             const result  = await this._process.Stop(pid);
         
-            res.status(result.IsSuccess ? 202 : 500).send(result.Message);
+            res.sendStatus(result ? 202 : 500);
         });
-        server.get('/processes/:name', async (req, res) =>
-        {
-            const name = req.params.name;
-            
-            const processes = await this._process.List(name);
+        server.get('/processes', (req, res) =>
+        {          
+            const processes = this._process.List();
 
             res.send(processes);
         });

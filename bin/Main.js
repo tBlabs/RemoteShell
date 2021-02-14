@@ -23,7 +23,8 @@ const path = require("path");
 const cors = require("cors");
 const IoC_1 = require("./IoC/IoC");
 const TasksQueue_1 = require("./utils/TasksQueue/TasksQueue");
-const Shell_1 = require("./services/shell/Shell");
+const ProcessesManager_1 = require("./services/shell/ProcessesManager");
+const ProcessArgs_1 = require("./services/shell/ProcessArgs");
 let Main = class Main {
     constructor(_logger, _config, _process) {
         this._logger = _logger;
@@ -63,8 +64,7 @@ let Main = class Main {
                 const cmd = req.headers['command'] || req.body;
                 const wd = req.headers['wd'] || "";
                 console.log('start process', cmd, '@', wd);
-                const pid = await this._process.Start(cmd, wd);
-                // console.log('eeeeeeeee', pid);
+                const pid = await this._process.Start(new ProcessArgs_1.ProcessArgs(cmd, wd));
                 res.status(200).send(pid.toString());
             }
             catch (ex) {
@@ -75,11 +75,10 @@ let Main = class Main {
         server.all('/process/stop/:pid', async (req, res) => {
             const pid = +req.params.pid;
             const result = await this._process.Stop(pid);
-            res.status(result.IsSuccess ? 202 : 500).send(result.Message);
+            res.sendStatus(result ? 202 : 500);
         });
-        server.get('/processes/:name', async (req, res) => {
-            const name = req.params.name;
-            const processes = await this._process.List(name);
+        server.get('/processes', (req, res) => {
+            const processes = this._process.List();
             res.send(processes);
         });
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
@@ -140,7 +139,7 @@ Main = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(Types_1.Types.ILogger)),
     __param(1, inversify_1.inject(Types_1.Types.IConfig)),
-    __metadata("design:paramtypes", [Object, Object, Shell_1.ProcessesManager])
+    __metadata("design:paramtypes", [Object, Object, ProcessesManager_1.ProcessesManager])
 ], Main);
 exports.Main = Main;
 //# sourceMappingURL=Main.js.map
