@@ -20,7 +20,7 @@ import { ProcessArgs } from './services/shell/ProcessArgs';
 export class Main
 {
     constructor(
-        @inject(Types.ILogger) private _logger: ILogger,
+        @inject(Types.ILogger) private _log: ILogger,
         @inject(Types.IConfig) private _config: IConfig,
         private _process: ProcessesManager)
     { }
@@ -34,9 +34,10 @@ export class Main
         server.use(cors({ exposedHeaders: 'Content-Length' }));
         server.use(express.text());
 
-        const hb = new HelpBuilder("RemoteShell", "Http calls to command line utility")
+        const hb = new HelpBuilder("RemoteShell", "Command line via http calls")
             .Status("Waiting tasks count", () => tasksQueue.ListOfLast100Waiting.length.toString())
             .Status("Consumed tasks so far", () => tasksQueue.TotalCount.toString())
+            .Status("Running processes count", () => this._process.List.length.toString())
             //.Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
             .Config("serverPort", this._config.ServerPort.toString(), "3000", "1234", "config.json or command line argument 'serverPort' (ex: --serverPort 1234)")
@@ -48,7 +49,11 @@ export class Main
             .Api("/console", "Will redirect /clients/console.html")
             .Api("/clients/console.html", "Simple web client for shell")
             .Api("/{any route}", "Routes and their assigned commands defined in config.json")
-            .Api("responsetype header", "Defines if response should be html-formatted or not. Possible options are: html (or just no header)");
+            .Api("responsetype header", "Defines if response should be html-formatted or not. Possible options are: html (or just no header)")
+            .Api("/process/start", "Starts new background process (regular commands with & will not work). Pass params through headers: cmd (for command), wd (for working directory)")
+            .Api("/process/stop/:pid", "Stops background process")
+            .Api("/process/stop/all", "Stops all background processes")
+            .Api("/processes", "List background processes")
 
         server.get('/favicon.ico', (req, res) => res.status(204));
 
@@ -70,20 +75,21 @@ export class Main
         {
             try
             {
-                const cmd = req.headers['command'] || req.body;
+                const cmd = req.headers['cmd'] || req.body;
                 const wd = req.headers['wd'] as string || "";
 
-                console.log('starting process', cmd, '@', wd);
+                this._log.Log(`Starting process "${cmd}" @ ${wd}`);
 
                 const pid = await this._process.Start(new ProcessArgs(cmd, wd));
 
-                console.log('started @', pid);
+                this._log.Log(`Started @ ${pid}`);
 
                 res.status(200).send(pid.toString());
             }
             catch (ex)
             {
-                console.log(ex.message);
+                this._log.Log(ex.message);
+
                 res.status(500).send(ex.message);
             }
         });
@@ -97,7 +103,7 @@ export class Main
         });
         server.all('/processes/stop/all', async (req, res) =>
         {
-            console.log('Stopping all...');
+            this._log.Log('Stopping all...');
 
             await this._process.StopAll();
 
@@ -146,18 +152,19 @@ export class Main
         });
 
 
-        server.listen(this._config.ServerPort, () => this._logger.Log('Remote Shell started @', this._config.ServerPort));
+        server.listen(this._config.ServerPort, () => this._log.Log('Remote Shell started @', this._config.ServerPort));
     }
 
     public get ClientsDir(): string
     {
         const fullDirBlocks = __dirname.split(path.sep);
         const dir = [
-            fullDirBlocks.slice(0, fullDirBlocks.length - 1).join(path.sep)
+            fullDirBlocks.slice(0, fullDirBlocks.length - 2).join(path.sep)
             ,
             'clients'
         ]
             .join(path.sep);
+            console.log(dir);
         return dir;
     }
 
@@ -165,17 +172,17 @@ export class Main
     {
         try
         {
-            this._logger.Trace('Pinging myself...');
+            this._log.Trace('Pinging myself...');
             const selfPingResponse = await Axios.get('http://localhost:' + this._config.ServerPort + '/ping');
             if (selfPingResponse.data === "pong")
             {
-                this._logger.Trace('App is already running.');
+                this._log.Trace('App is already running.');
                 process.exit(0);
             }
         }
         catch (error)
         {
-            this._logger.Trace('App not started yet.');
+            this._log.Trace('App not started yet.');
         }
     }
 

@@ -13,7 +13,7 @@ test('should start and stop App1.js @ Raspbian Lite @ Raspberry Pi Zero', async 
     const remoteShellAddr = `http://192.168.43.229:3000`;
     const testAppAddr = `http://192.168.43.229:7001`;
     const workingDirectory = `/home/pi/App1`;
-    const command = 'node App1.js';
+    const command = 'node App1.js param1 param2';
     /*
         THIS IS NOT WORKING:
 
@@ -36,7 +36,7 @@ test('should start and stop App1.js @ Raspbian Lite @ Raspberry Pi Zero', async 
     expect(response.data).toEqual([]);
 
     // Try to run App1.js
-    response = await Post(`${remoteShellAddr}/process/start`, '', { 'command': command, 'wd': workingDirectory });
+    response = await Post(`${remoteShellAddr}/process/start`, '', { 'cmd': command, 'wd': workingDirectory });
     /*
         OR 
         

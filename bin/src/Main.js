@@ -26,8 +26,8 @@ const TasksQueue_1 = require("./utils/TasksQueue/TasksQueue");
 const ProcessesManager_1 = require("./services/shell/ProcessesManager");
 const ProcessArgs_1 = require("./services/shell/ProcessArgs");
 let Main = class Main {
-    constructor(_logger, _config, _process) {
-        this._logger = _logger;
+    constructor(_log, _config, _process) {
+        this._log = _log;
         this._config = _config;
         this._process = _process;
     }
@@ -38,9 +38,10 @@ let Main = class Main {
         const server = express();
         server.use(cors({ exposedHeaders: 'Content-Length' }));
         server.use(express.text());
-        const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Http calls to command line utility")
+        const hb = new HelpBuilder_1.HelpBuilder("RemoteShell", "Command line via http calls")
             .Status("Waiting tasks count", () => tasksQueue.ListOfLast100Waiting.length.toString())
             .Status("Consumed tasks so far", () => tasksQueue.TotalCount.toString())
+            .Status("Running processes count", () => this._process.List.length.toString())
             //.Config("shell", this._config.Shell, "sh", "sh (for Linux), powershell (for Windows)", "config.json")
             .Config("routes", JSON.stringify(this._config.Routes), "[]", '[{"url": "/test/:param", "command": "echo test {param}"}]', "config.json")
             .Config("serverPort", this._config.ServerPort.toString(), "3000", "1234", "config.json or command line argument 'serverPort' (ex: --serverPort 1234)")
@@ -52,7 +53,11 @@ let Main = class Main {
             .Api("/console", "Will redirect /clients/console.html")
             .Api("/clients/console.html", "Simple web client for shell")
             .Api("/{any route}", "Routes and their assigned commands defined in config.json")
-            .Api("responsetype header", "Defines if response should be html-formatted or not. Possible options are: html (or just no header)");
+            .Api("responsetype header", "Defines if response should be html-formatted or not. Possible options are: html (or just no header)")
+            .Api("/process/start", "Starts new background process (regular commands with & will not work). Pass params through headers: cmd (for command), wd (for working directory)")
+            .Api("/process/stop/:pid", "Stops background process")
+            .Api("/process/stop/all", "Stops all background processes")
+            .Api("/processes", "List background processes");
         server.get('/favicon.ico', (req, res) => res.status(204));
         server.get('/', (req, res) => res.send(hb.ToString()));
         server.get('/ping', (req, res) => res.send('pong'));
@@ -65,15 +70,15 @@ let Main = class Main {
         });
         server.all('/process/start', async (req, res) => {
             try {
-                const cmd = req.headers['command'] || req.body;
+                const cmd = req.headers['cmd'] || req.body;
                 const wd = req.headers['wd'] || "";
-                console.log('starting process', cmd, '@', wd);
+                this._log.Log(`Starting process "${cmd}" @ ${wd}`);
                 const pid = await this._process.Start(new ProcessArgs_1.ProcessArgs(cmd, wd));
-                console.log('started @', pid);
+                this._log.Log(`Started @ ${pid}`);
                 res.status(200).send(pid.toString());
             }
             catch (ex) {
-                console.log(ex.message);
+                this._log.Log(ex.message);
                 res.status(500).send(ex.message);
             }
         });
@@ -83,7 +88,7 @@ let Main = class Main {
             res.sendStatus(result ? 202 : 500);
         });
         server.all('/processes/stop/all', async (req, res) => {
-            console.log('Stopping all...');
+            this._log.Log('Stopping all...');
             await this._process.StopAll();
             res.sendStatus(200);
         });
@@ -111,28 +116,29 @@ let Main = class Main {
         server.use((req, res, next) => {
             res.sendStatus(404);
         });
-        server.listen(this._config.ServerPort, () => this._logger.Log('Remote Shell started @', this._config.ServerPort));
+        server.listen(this._config.ServerPort, () => this._log.Log('Remote Shell started @', this._config.ServerPort));
     }
     get ClientsDir() {
         const fullDirBlocks = __dirname.split(path.sep);
         const dir = [
-            fullDirBlocks.slice(0, fullDirBlocks.length - 1).join(path.sep),
+            fullDirBlocks.slice(0, fullDirBlocks.length - 2).join(path.sep),
             'clients'
         ]
             .join(path.sep);
+        console.log(dir);
         return dir;
     }
     async AbortIfAppIsAlreadyRunning() {
         try {
-            this._logger.Trace('Pinging myself...');
+            this._log.Trace('Pinging myself...');
             const selfPingResponse = await axios_1.default.get('http://localhost:' + this._config.ServerPort + '/ping');
             if (selfPingResponse.data === "pong") {
-                this._logger.Trace('App is already running.');
+                this._log.Trace('App is already running.');
                 process.exit(0);
             }
         }
         catch (error) {
-            this._logger.Trace('App not started yet.');
+            this._log.Trace('App not started yet.');
         }
     }
     ConvertToHtml(text) {

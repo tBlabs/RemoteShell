@@ -17,10 +17,12 @@
 
         html {
             padding: 0;
+            height: 100%;
         }
 
         body {
             background-color: rgb(58, 58, 58);
+            height: 100%;
         }
 
         input[type=text] {
@@ -44,7 +46,7 @@
 
         textarea {
             width: 99%;
-            height: 600px;
+            height: 90%;
         }
     </style>
 </head>
@@ -53,7 +55,12 @@
     <input type="text" id="InputTextbox" />
     <input type="button" id="RunButton" value="RUN" />
     <p class="status" id="HttpResponseCode"></p>
-    <textarea name="output" id="OutputTextarea" cols="80" rows="60" readonly></textarea>
+    <textarea name="output" id="OutputTextarea" cols="80" rows="60" readonly>
+        Do not use this console for starting background processes (ex. "node Server.js &"), it will not work.
+        For background processes use /process api.
+
+        Use up and down arrows to use used commands. Enter to call Run.
+    </textarea>
 </body>
 
 <script src="/clients/console.js"></script>
