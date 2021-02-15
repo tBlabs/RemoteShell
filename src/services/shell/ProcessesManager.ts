@@ -48,6 +48,11 @@ export class ProcessesManager
         return false;
     }
 
+    public async StopAll(): Promise<void>
+    {
+        this._list.AllRunning.forEach(async p => await this.Stop(p.Pid));
+    }
+
     public List(): Process[]
     {
         return this._list.AllRunning;

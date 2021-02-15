@@ -65,7 +65,7 @@ export class Main
             {
                 const cmd = req.headers['command'] || req.body;
                 const wd = req.headers['wd'] as string || "";
-                
+
                 console.log('starting process', cmd, '@', wd);
 
                 const pid = await this._process.Start(new ProcessArgs(cmd, wd));
@@ -76,22 +76,28 @@ export class Main
             }
             catch (ex)
             {
-                console.log(ex.message); 
+                console.log(ex.message);
                 res.status(500).send(ex.message);
             }
         });
         server.all('/process/stop/:pid', async (req, res) => 
         {
             const pid = +req.params.pid;
-            const result  = await this._process.Stop(pid);
-        
+            const result = await this._process.Stop(pid);
+
             res.sendStatus(result ? 202 : 500);
         });
-        server.get('/processes', (req, res) =>
-        {          
+        server.all('/processes', (req, res) =>
+        {
             const processes = this._process.List();
 
             res.send(processes);
+        });
+        server.all('/processes/kill/all', async (req, res) =>
+        {
+            await this._process.StopAll();
+
+            res.send(200);
         });
 
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));

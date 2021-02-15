@@ -40,6 +40,9 @@ let ProcessesManager = class ProcessesManager {
         }
         return false;
     }
+    async StopAll() {
+        this._list.AllRunning.forEach(async (p) => await this.Stop(p.Pid));
+    }
     List() {
         return this._list.AllRunning;
     }
