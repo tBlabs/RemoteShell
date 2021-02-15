@@ -1,11 +1,19 @@
-# HttpToCli
+### Actual docs
+
+Run the app with `npm start` and visit `http://localhost:3000/` to see full help.
+
+For required config file `config.json` see `config.json.example`.
+
+
+
+# Remote Shell
 
 Daemon for forwarding HTTP REST calls to system shell.
 Easy to config: Just edit `config.json`.
 There is no option to specify http method. Each is taken into account.
 Support for static files in indicated paths.
 
-*Written in Typescript. Prepared for Linux OS.*
+*Written in Typescript. Prepared for Linux OS, may work on Windows*
 
 ## Run
 

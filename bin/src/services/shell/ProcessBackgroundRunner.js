@@ -22,7 +22,7 @@ let ProcessBackgroundRunner = class ProcessBackgroundRunner {
     async Start(process) {
         var _a;
         try {
-            const splitted = (_a = process.Cmd) === null || _a === void 0 ? void 0 : _a.split(' '); // TODO: usuwanie podwójnych spacji? ale poza rzeczami w apostrofach
+            const splitted = (_a = process.Cmd) === null || _a === void 0 ? void 0 : _a.split(' '); // TODO: remove double spaces (but not in things inside apostrophes)
             const pid = await this._shell.RunInBackground(splitted, process.Wd);
             return pid;
         }

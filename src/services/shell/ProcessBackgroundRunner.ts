@@ -3,7 +3,6 @@ import { IShell } from './IShell';
 import { Types } from '../../IoC/Types';
 import { ProcessArgs } from "./ProcessArgs";
 
-
 @injectable()
 export class ProcessBackgroundRunner
 {
@@ -13,7 +12,7 @@ export class ProcessBackgroundRunner
     {
         try
         {
-            const splitted = process.Cmd?.split(' '); // TODO: usuwanie podwójnych spacji? ale poza rzeczami w apostrofach
+            const splitted = process.Cmd?.split(' '); // TODO: remove double spaces (but not in things inside apostrophes)
 
             const pid = await this._shell.RunInBackground(splitted, process.Wd);
 

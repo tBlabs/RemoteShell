@@ -125,7 +125,6 @@ let Main = class Main {
             'clients'
         ]
             .join(path.sep);
-        console.log(dir);
         return dir;
     }
     async AbortIfAppIsAlreadyRunning() {

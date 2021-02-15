@@ -164,7 +164,7 @@ export class Main
             'clients'
         ]
             .join(path.sep);
-            console.log(dir);
+
         return dir;
     }
 

@@ -1,8 +1,7 @@
-
-export function DelayAsync(delayInMs: number): Promise<NodeJS.Timer>
+export function DelayAsync(delayInMs: number): Promise<void>
 {
     return new Promise((resolve) =>
     {
-        return setTimeout(() => resolve(), delayInMs);
+        setTimeout(() => resolve(), delayInMs);
     });
 }

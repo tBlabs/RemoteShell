@@ -12,12 +12,16 @@ test('should start and stop App1.js @ Raspbian Lite @ Raspberry Pi Zero', async 
 {
     const remoteShellAddr = `http://192.168.43.229:3000`;
     const testAppAddr = `http://192.168.43.229:7001`;
-    const workingDirectory = `/home/pi/App1`;
-    const command = 'node App1.js param1 param2';
+    const workingDirectory = `/home/pi/App1`; 
+    const command = 'node App1 param1 param2';
     /*
-        THIS IS NOT WORKING:
+        THIS WILL NOT WORK:
 
-        const cmd = 'npm start'; 
+        const cmd = 'npm start';
+        
+        DO NOT USE ANY WRAPPERS FOR YOUR PROCESS LIKE npm OR bash SCRIPT, 
+        OTHERWISE YOU WILL GET (PROBABLY) WRAPPER PID
+        INSTEAD OF ACTUALLY PROCESS PID (IN SUCH CASE YOU WONT BE ABLE TO KILL THE PROCESS).
     */
     let response;
 
