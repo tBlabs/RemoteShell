@@ -65,7 +65,7 @@ export class Main
 
             res.send(processes);
         });
-        
+
         server.all('/process/start', async (req, res) => 
         {
             try
@@ -101,7 +101,7 @@ export class Main
 
             await this._process.StopAll();
 
-            res.send(200);
+            res.sendStatus(200);
         });
 
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));

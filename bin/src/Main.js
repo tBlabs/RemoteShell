@@ -85,7 +85,7 @@ let Main = class Main {
         server.all('/processes/stop/all', async (req, res) => {
             console.log('Stopping all...');
             await this._process.StopAll();
-            res.send(200);
+            res.sendStatus(200);
         });
         server.get('/console', (req, res) => res.redirect('/clients/console.html'));
         server.use('/clients', express.static(this.ClientsDir));

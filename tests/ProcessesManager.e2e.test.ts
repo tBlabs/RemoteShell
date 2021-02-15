@@ -1,29 +1,7 @@
 import 'reflect-metadata';
-import axios from "axios";
 import { Process } from "../src/services/shell/Process";
 import { DelayAsync } from './DelayAsync';
-
-let calls = 0;
-async function Post<T>(url: string, data?: string, headers?: object): Promise<{ status: number, data: T }>
-{
-    calls++; 
-
-    try
-    {
-        // console.log('POST', url, data, headers);
-        const response = await axios.post(url, data, { headers, timeout: 5 * 1000 });
-
-        // console.log(response.status, response.data);
-
-        return ({ status: response.status, data: response.data as T });
-    }
-    catch (ex)
-    {
-        console.log(`#${calls} EXCEPTION @ ${url}: ${ex.message}`);
-
-        throw new Error(ex.message);
-    }
-}
+import { Post, Get } from './Post';
 
 /*
     THIS TEST NEEDS FEW THINGS TO PASS:
@@ -41,11 +19,20 @@ test('should start and stop App1.js @ Raspbian Lite @ Raspberry Pi Zero', async 
 
         const cmd = 'npm start'; 
     */
+    let response;
 
-    let response = await Post(`${remoteShellAddr}/processes/stop/all`);
-return
+    if (0)
+    {
+        // Clean up
+
+        response = await Get(`${testAppAddr}/app/name`);
+        expect(response.data).toBe('app1');
+
+        response = await Post(`${remoteShellAddr}/processes/stop/all`);
+    }
+
     // Make sure there is processes started   
-    response = await Post(`${remoteShellAddr}/processes`);
+    response = await Get(`${remoteShellAddr}/processes`);
     expect(response.data).toEqual([]);
 
     // Try to run App1.js
@@ -59,16 +46,16 @@ return
     expect(pid).toBeGreaterThan(0);
 
     // Give App1.js time to warm up
-    await DelayAsync(5000);
+    await DelayAsync(8000);
 
     // Something should appear on processes list 
-    response = await Post<Process[]>(`${remoteShellAddr}/processes`);
-    // expect(response.data[0].Args.Cmd).toBe(command);
-    // expect(response.data[0].Args.Wd).toBe(workingDirectory);
-    // expect(response.data[0].Pid).toBeGreaterThan(0);
+    response = await Get<Process[]>(`${remoteShellAddr}/processes`);
+    expect(response.data[0].Args.Cmd).toBe(command);
+    expect(response.data[0].Args.Wd).toBe(workingDirectory);
+    expect(response.data[0].Pid).toBeGreaterThan(0);
 
     // Check if App1.js is alive 
-    response = await Post(`${testAppAddr}/app/name`);
+    response = await Get(`${testAppAddr}/app/name`);
     expect(response.data).toBe('app1');
 
     // Try stop
@@ -76,8 +63,8 @@ return
     expect(response.status).toBe(202);
 
     // Make sure process has been removed from the list
-    response = await Post<Process[]>(`${remoteShellAddr}/processes`);
-    expect(response).toEqual([]);
+    response = await Get<Process[]>(`${remoteShellAddr}/processes`);
+    expect(response.data).toEqual([]);
 
     // Make sure App1.js is dead
     await expect(async () => 
@@ -87,4 +74,3 @@ return
         .rejects.toThrow();
 
 }, 15 * 1000);
- 
