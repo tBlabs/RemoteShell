@@ -59,6 +59,13 @@ export class Main
         server.get('/queue/waiting', (req, res) => res.send(tasksQueue.ListOfLast100Waiting));
         server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
 
+        server.all('/processes', (req, res) =>
+        {
+            const processes = this._process.List();
+
+            res.send(processes);
+        });
+        
         server.all('/process/start', async (req, res) => 
         {
             try
@@ -80,6 +87,7 @@ export class Main
                 res.status(500).send(ex.message);
             }
         });
+
         server.all('/process/stop/:pid', async (req, res) => 
         {
             const pid = +req.params.pid;
@@ -87,14 +95,10 @@ export class Main
 
             res.sendStatus(result ? 202 : 500);
         });
-        server.all('/processes', (req, res) =>
+        server.all('/processes/stop/all', async (req, res) =>
         {
-            const processes = this._process.List();
+            console.log('Stopping all...');
 
-            res.send(processes);
-        });
-        server.all('/processes/kill/all', async (req, res) =>
-        {
             await this._process.StopAll();
 
             res.send(200);

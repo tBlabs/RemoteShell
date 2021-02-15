@@ -59,6 +59,10 @@ let Main = class Main {
         let ind = 0;
         server.get('/queue/waiting', (req, res) => res.send(tasksQueue.ListOfLast100Waiting));
         server.get('/queue/all', (req, res) => res.send(tasksQueue.Last100));
+        server.all('/processes', (req, res) => {
+            const processes = this._process.List();
+            res.send(processes);
+        });
         server.all('/process/start', async (req, res) => {
             try {
                 const cmd = req.headers['command'] || req.body;
@@ -78,11 +82,8 @@ let Main = class Main {
             const result = await this._process.Stop(pid);
             res.sendStatus(result ? 202 : 500);
         });
-        server.all('/processes', (req, res) => {
-            const processes = this._process.List();
-            res.send(processes);
-        });
-        server.all('/processes/kill/all', async (req, res) => {
+        server.all('/processes/stop/all', async (req, res) => {
+            console.log('Stopping all...');
             await this._process.StopAll();
             res.send(200);
         });
